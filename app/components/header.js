@@ -9,7 +9,16 @@ class Header extends Component {
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/about">About</a>
+                    <a href="/description">Description</a>
+                </li>
+                <li>
+                    <a href="/images">Images</a>
+                </li>
+                <li>
+                    <a href="/triul">Triul</a>
+                </li>
+                <li>
+                    <a href="/contact">Contact</a>
                 </li>
             </ul>
         );
