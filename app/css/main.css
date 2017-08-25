@@ -1,0 +1,12 @@
+@import "min/bootstrap.min.css";
+
+body {
+    padding-bottom: 30px;
+    line-height: 1.5;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #555;
+}
+
+img {
+    max-width: 100%;
+}
