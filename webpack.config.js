@@ -18,7 +18,7 @@ var config = {
             { test: /\.js$/, loader: "jsx-loader" },
             { test: /\.png$/, loader: "url-loader" },
             { test: /\.jpg$/, loader: "file-loader" },
-            { test: /\.css$/, loader: "style!css" },
+            { test: /\.css$/, loader: "style-loader!css-loader" },
             {
                 test: /\.js$|\.jsx$/,
                 loader: "babel-loader",
