@@ -26,15 +26,13 @@ class Home extends Component {
                     </div>
 
                     <div className="col-sm-3 col-sm-offset-1 sidebar-module sidebar-module-inset">
+                        <h4>3 générations de Brouzes</h4>
                         <p>
-                            <h4>3 générations de Brouzes</h4>
-                            <p>
-                                Le grand-père : Paul, calculs et brevet<br />
-                                Le père et la mère : Frédéric, construction et tests prototypes, et
-                                Gisèle, soutien logistique<br />
-                                Les enfants : Chloé, webmaster, et Arthur et Félix, participation
-                                aux essais des prototypes
-                            </p>
+                            Le grand-père : Paul, calculs et brevet<br />
+                            Le père et la mère : Frédéric, construction et tests prototypes, et
+                            Gisèle, soutien logistique<br />
+                            Les enfants : Chloé, webmaster, et Arthur et Félix, participation aux
+                            essais des prototypes
                         </p>
                     </div>
                 </div>
