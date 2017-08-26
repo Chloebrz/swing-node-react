@@ -9,13 +9,15 @@ import Description from "./components/description";
 import Images from "./components/images";
 import Triul from "./components/triul";
 import Contact from "./components/contact";
+import Admin from "./components/admin";
 
-import style from "./css/main.css";
+import mainStyle from "./css/main.css";
+import headerStyle from "./css/header.css";
 
 const routes = (
     <BrowserRouter>
-        <div className={style}>
-            <Header />
+        <div className={mainStyle}>
+            <Header className={headerStyle} />
             <div className="container">
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -23,6 +25,7 @@ const routes = (
                     <Route path="/images" component={Images} />
                     <Route path="/triul" component={Triul} />
                     <Route path="/contact" component={Contact} />
+                    <Route path="/admin" component={Admin} />
                 </Switch>
                 <Footer />
             </div>
