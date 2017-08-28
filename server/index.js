@@ -23,6 +23,7 @@ app.use(passport.session());
 
 // Route handlers
 require("./routes/authRoutes")(app);
+require("./routes/adminRoutes")(app);
 require("./routes/reactRoutes")(app);
 
 // Server setup

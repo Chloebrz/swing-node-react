@@ -23,6 +23,7 @@
         "css-loader": "^0.28.5",
         "express": "^4.15.4",
         "file-loader": "^0.11.2",
+        "fs": "0.0.1-security",
         "jsx-loader": "^0.13.2",
         "mongoose": "^4.11.8",
         "passport": "^0.4.0",
