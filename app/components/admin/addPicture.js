@@ -1,5 +1,8 @@
 // Dependencies
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../../actions";
 
 class AddPicture extends Component {
     constructor() {
@@ -13,18 +16,25 @@ class AddPicture extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log("handle submit", this.state);
+        this.props.postPicture({
+            img: this.state.file,
+            legend: this.state.text
+        });
     }
 
     handleImageChange(e) {
         e.preventDefault();
 
-        let reader = new FileReader();
-        let file = e.target.files[0];
+        const reader = new FileReader();
+        const file = e.target.files[0];
 
-        reader.onloadend = () => {
+        reader.onload = upload => {
             this.setState({
-                file: file
+                file: {
+                    data: upload.target.result,
+                    filename: file.name,
+                    filetype: file.type
+                }
             });
         };
         reader.readAsDataURL(file);
@@ -57,4 +67,4 @@ class AddPicture extends Component {
     }
 }
 
-export default AddPicture;
+export default connect(null, actions)(AddPicture);
