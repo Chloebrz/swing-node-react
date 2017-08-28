@@ -1,12 +1,17 @@
 // Dependencies
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+
+import Dashboard from "./admin/dashboard";
+import AddPicture from "./admin/addPicture";
 
 class Admin extends Component {
     render() {
         return (
-            <div>
-                <h1>Admin page</h1>
-            </div>
+            <Switch>
+                <Route exact path="/admin" component={Dashboard} />
+                <Route path="/admin/addpicture" component={AddPicture} />
+            </Switch>
         );
     }
 }
