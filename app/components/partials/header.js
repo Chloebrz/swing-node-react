@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import * as actions from "../../actions";
 import PublicHeader from "./publicHeader";
@@ -25,9 +26,9 @@ class Header extends Component {
     render() {
         return (
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                <a className="navbar-brand" href="/">
+                <Link to={this.props.auth ? "/admin" : "/"} className="navbar-brand">
                     <img id="logo" src={require("../../images/s-wing.png")} />
-                </a>
+                </Link>
                 {this.renderContent()}
             </nav>
         );
