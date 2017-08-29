@@ -14,6 +14,10 @@ class AddPicture extends Component {
         };
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.path.post_success) this.props.history.push("/admin");
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         this.props.postPicture({
@@ -50,7 +54,7 @@ class AddPicture extends Component {
             <div>
                 <h1>Add a picture page</h1>
 
-                <form onSubmit={e => this.handleSubmit(e)}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <input type="file" onChange={this.handleImageChange.bind(this)} />
                     <input
                         type="text"
@@ -68,4 +72,8 @@ class AddPicture extends Component {
     }
 }
 
-export default connect(null, { postPicture })(AddPicture);
+function mapStateToProps({ path }) {
+    return { path };
+}
+
+export default connect(mapStateToProps, { postPicture })(AddPicture);

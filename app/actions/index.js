@@ -1,6 +1,6 @@
 // Dependencies
 import axios from "axios";
-import { FETCH_USER, FETCH_PICTURES } from "./types";
+import { FETCH_USER, FETCH_PICTURES, POST_PICTURE_SUCCESS } from "./types";
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get("/api/current_user");
@@ -12,7 +12,7 @@ export const fetchPictures = () => async dispatch => {
     dispatch({ type: FETCH_PICTURES, payload: res.data });
 };
 
-export const postPicture = (payload, history) => async dispatch => {
+export const postPicture = payload => async dispatch => {
     const res = await axios.post("/api/admin/picture", payload);
-    // TODO: redirect to /admin page
+    dispatch({ type: POST_PICTURE_SUCCESS });
 };
