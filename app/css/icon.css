@@ -2,3 +2,8 @@
     max-height: 50px;
     max-width: 50px;
 }
+
+.icon-big {
+    max-height: 100px;
+    max-width: 100px;
+}

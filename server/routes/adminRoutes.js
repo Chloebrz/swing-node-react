@@ -114,8 +114,13 @@ module.exports = app => {
         const id = req.params.id;
         var body = _.pick(req.body, ["name", "legend", "img"]);
 
-        var buf = new Buffer(req.body.img.data.replace(/^data:image\/\w+;base64,/, ""), "base64");
-        if (body.img) body.img.data = buf;
+        if (body.img) {
+            var buf = new Buffer(
+                req.body.img.data.replace(/^data:image\/\w+;base64,/, ""),
+                "base64"
+            );
+            body.img.data = buf;
+        }
 
         // check if the id is a valid object id
         if (!ObjectID.isValid(id)) return res.status(404).send();

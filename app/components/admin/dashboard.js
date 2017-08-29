@@ -29,10 +29,11 @@ class Dashboard extends Component {
     render() {
         return (
             <div className={style}>
-                <h1>Dashboard</h1>
-                <Link className="btn btn-primary" role="button" to="/admin/addpicture">
-                    Nouveau
-                </Link>
+                <div className="center">
+                    <Link to="/admin/addpicture">
+                        <img className="icon-big" src={require("../../images/icons/add.png")} />
+                    </Link>
+                </div>
 
                 {this.renderPictures()}
             </div>

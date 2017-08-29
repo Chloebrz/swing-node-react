@@ -59,27 +59,57 @@ class AddPicture extends Component {
     render() {
         return (
             <div>
-                <h1>Add a picture page</h1>
+                <h1>Nouvelle image</h1>
+                <p>
+                    Ajouter une nouvelle image avec un titre (5 caractères minimum) et une légende
+                    (10 caractères minimum).
+                </p>
+
+                <hr className="featurette-divider" />
 
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                    <input type="file" onChange={this.handleImageChange.bind(this)} />
-                    <input
-                        type="text"
-                        placeholder="Type a name for the picture"
-                        value={this.state.name}
-                        onChange={this.handleNameChange.bind(this)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Type a legend for the picture"
-                        value={this.state.legend}
-                        onChange={this.handleLegendChange.bind(this)}
-                    />
-                    <button type="submit" onClick={this.handleSubmit.bind(this)}>
-                        Upload Image
-                    </button>
+                    <div className="row">
+                        <div className="col-md-7">
+                            <input type="file" onChange={this.handleImageChange.bind(this)} />
+                            <br />
+                            <br />
+                            <img src={this.state.file ? this.state.file.data : ""} />
+                        </div>
+
+                        <div className="col-md-5">
+                            <h4>Nom:</h4>
+                            <input
+                                type="text"
+                                placeholder="Nom"
+                                value={this.state.name}
+                                onChange={this.handleNameChange.bind(this)}
+                            />
+
+                            <br />
+                            <br />
+
+                            <h4>Légende:</h4>
+                            <textarea
+                                type="text"
+                                rows="5"
+                                placeholder="Légende"
+                                value={this.state.legend}
+                                onChange={this.handleLegendChange.bind(this)}
+                            />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div className="center">
+                        <button
+                            className="btn btn-lg btn-success"
+                            type="submit"
+                            onClick={this.handleSubmit.bind(this)}
+                        >
+                            Ajouter l'image
+                        </button>
+                    </div>
                 </form>
-                <img src={this.state.file ? this.state.file.data : ""} />
             </div>
         );
     }
