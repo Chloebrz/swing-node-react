@@ -10,7 +10,8 @@ class AddPicture extends Component {
 
         this.state = {
             file: null,
-            text: ""
+            name: "",
+            legend: ""
         };
     }
 
@@ -21,8 +22,9 @@ class AddPicture extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.postPicture({
+            name: this.state.name,
             img: this.state.file,
-            legend: this.state.text
+            legend: this.state.legend
         });
     }
 
@@ -44,9 +46,14 @@ class AddPicture extends Component {
         reader.readAsDataURL(file);
     }
 
-    handleTextChange(e) {
+    handleNameChange(e) {
         e.preventDefault();
-        this.setState({ text: e.target.value });
+        this.setState({ name: e.target.value });
+    }
+
+    handleLegendChange(e) {
+        e.preventDefault();
+        this.setState({ legend: e.target.value });
     }
 
     render() {
@@ -58,9 +65,15 @@ class AddPicture extends Component {
                     <input type="file" onChange={this.handleImageChange.bind(this)} />
                     <input
                         type="text"
+                        placeholder="Type a name for the picture"
+                        value={this.state.name}
+                        onChange={this.handleNameChange.bind(this)}
+                    />
+                    <input
+                        type="text"
                         placeholder="Type a legend for the picture"
-                        value={this.state.text}
-                        onChange={this.handleTextChange.bind(this)}
+                        value={this.state.legend}
+                        onChange={this.handleLegendChange.bind(this)}
                     />
                     <button type="submit" onClick={this.handleSubmit.bind(this)}>
                         Upload Image

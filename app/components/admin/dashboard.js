@@ -2,7 +2,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { fetchPictures } from "../../actions";
+import PictureBox from "./pictureBox";
+import style from "../../css/dashboard.css";
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -12,19 +15,20 @@ class Dashboard extends Component {
     renderPictures() {
         return this.props.pictures.map(picture => {
             return (
-                <div key={picture._id}>
-                    <img src={`data:${picture.img.contentType};base64,${picture.img.res}`} />
-                    <p>
-                        {picture.legend}
-                    </p>
-                </div>
+                <PictureBox
+                    id={picture._id}
+                    name={picture.name}
+                    type={picture.img.contentType}
+                    res={picture.img.res}
+                    legend={picture.legend}
+                />
             );
         });
     }
 
     render() {
         return (
-            <div>
+            <div className={style}>
                 <h1>Dashboard</h1>
                 <Link className="btn btn-primary" role="button" to="/admin/addpicture">
                     Nouveau

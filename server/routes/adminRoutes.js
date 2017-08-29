@@ -17,6 +17,7 @@ module.exports = app => {
         var buf = new Buffer(req.body.img.data.replace(/^data:image\/\w+;base64,/, ""), "base64");
 
         const picture = new Picture({
+            name: req.body.name,
             img: {
                 name: req.body.img.filename,
                 data: buf,

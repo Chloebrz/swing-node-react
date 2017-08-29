@@ -2,6 +2,12 @@
 const mongoose = require("mongoose");
 
 var PictureSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 5
+    },
     img: {
         name: String,
         data: Buffer,
@@ -12,7 +18,7 @@ var PictureSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 5
+        minlength: 15
     }
 });
 
