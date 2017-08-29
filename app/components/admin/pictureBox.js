@@ -1,7 +1,14 @@
 // Dependencies
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { deletePicture } from "../../actions";
 
 class PictureBox extends Component {
+    handleDeleteClick() {
+        this.props.deletePicture({ id: this.props.id });
+    }
+
     render() {
         return (
             <div key={this.props.id}>
@@ -14,7 +21,11 @@ class PictureBox extends Component {
                         <p className="lead">
                             {this.props.legend}
                         </p>
-                        <img className="icon" src={require("../../images/icons/delete.png")} />
+                        <img
+                            className="icon"
+                            src={require("../../images/icons/delete.png")}
+                            onClick={this.handleDeleteClick.bind(this)}
+                        />
                         <img className="icon" src={require("../../images/icons/edit.png")} />
                     </div>
                     <div className="col-md-7 order-md-1">
@@ -29,4 +40,4 @@ class PictureBox extends Component {
     }
 }
 
-export default PictureBox;
+export default connect(null, { deletePicture })(PictureBox);
