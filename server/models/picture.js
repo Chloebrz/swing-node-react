@@ -5,7 +5,8 @@ var PictureSchema = new mongoose.Schema({
     img: {
         name: String,
         data: Buffer,
-        contentType: String
+        contentType: String,
+        res: String
     },
     legend: {
         type: String,

@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../../actions";
+import { postPicture } from "../../actions";
 
 class AddPicture extends Component {
     constructor() {
@@ -62,9 +62,10 @@ class AddPicture extends Component {
                         Upload Image
                     </button>
                 </form>
+                <img src={this.state.file ? this.state.file.data : ""} />
             </div>
         );
     }
 }
 
-export default connect(null, actions)(AddPicture);
+export default connect(null, { postPicture })(AddPicture);

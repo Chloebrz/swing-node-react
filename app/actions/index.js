@@ -1,6 +1,7 @@
 // Dependencies
 import axios from "axios";
-import { FETCH_USER, POST_PICTURE } from "./types";
+import { browserHistory } from "react-router-dom";
+import { FETCH_USER, FETCH_PICTURES, POST_PICTURE } from "./types";
 
 export const fetchUser = () => dispatch => {
     axios.get("/api/current_user").then(res => {
@@ -8,8 +9,14 @@ export const fetchUser = () => dispatch => {
     });
 };
 
-export const postPicture = payload => {
-    return function(dispatch) {
-        axios.post("/admin/picture", payload).then(res => {});
-    };
+export const fetchPictures = () => dispatch => {
+    axios.get("/api/admin/pictures").then(res => {
+        dispatch({ type: FETCH_PICTURES, payload: res.data });
+    });
+};
+
+export const postPicture = (payload, history) => dispatch => {
+    axios.post("/api/admin/picture", payload).then(res => {
+        // TODO: redirect to /admin page
+    });
 };

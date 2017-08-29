@@ -6,13 +6,16 @@ var imgPath = __dirname + "/a.png";
 const Picture = mongoose.model("Picture");
 
 module.exports = app => {
-    app.get("/admin/pictures", (req, res) => {
+    app.get("/api/admin/pictures", (req, res) => {
         Picture.find().then(pictures => {
-            res.contentType(pictures[1].img.contentType).send(pictures[1].img.data);
+            pictures.forEach(picture => {
+                picture.img.res = new Buffer(picture.img.data).toString("base64");
+            });
+            res.send(pictures);
         });
     });
 
-    app.post("/admin/picture", (req, res) => {
+    app.post("/api/admin/picture", (req, res) => {
         var buf = new Buffer(req.body.img.data.replace(/^data:image\/\w+;base64,/, ""), "base64");
 
         var picture = new Picture({
@@ -25,7 +28,7 @@ module.exports = app => {
         });
 
         picture.save().then(pct => {
-            console.log("Picture and legend saved", pct);
+            res.send(pct);
         });
     });
 };
