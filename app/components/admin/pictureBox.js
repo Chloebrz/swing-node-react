@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { deletePicture } from "../../actions";
 
@@ -26,7 +27,9 @@ class PictureBox extends Component {
                             src={require("../../images/icons/delete.png")}
                             onClick={this.handleDeleteClick.bind(this)}
                         />
-                        <img className="icon" src={require("../../images/icons/edit.png")} />
+                        <Link to={`/admin/updatepicture/${this.props.id}`}>
+                            <img className="icon" src={require("../../images/icons/edit.png")} />
+                        </Link>
                     </div>
                     <div className="col-md-7 order-md-1">
                         <img
