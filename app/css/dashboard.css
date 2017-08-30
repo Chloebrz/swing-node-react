@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.right {
+    float: right;
+}
+
 .featurette-divider {
     margin: 5rem 0;
 }
