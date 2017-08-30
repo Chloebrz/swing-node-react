@@ -13,6 +13,14 @@ class Images extends Component {
     }
 
     renderPictures() {
+        if (this.props.pictures.length === 0)
+            return (
+                <img
+                    className="icon icon-xl icon-loading"
+                    src={require("../../images/icons/loading.gif")}
+                />
+            );
+
         return this.props.pictures.map(picture => {
             return (
                 <PictureBox
