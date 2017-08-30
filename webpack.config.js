@@ -26,6 +26,14 @@ var config = {
                     presets: ["es2015", "react"]
                 },
                 exclude: path.join(__dirname, "..", "node_modules")
+            },
+            {
+                test: /\.html$/,
+                loader: "html-loader?attrs[]=video:src"
+            },
+            {
+                test: /\.(webm|mp4)$/,
+                loader: "file-loader?limit=10000&mimetype=video/mp4"
             }
         ]
     }

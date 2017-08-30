@@ -32,9 +32,19 @@ class Triul extends Component {
                 </p>
 
                 <h1>Le Triul : démonstration en vidéo</h1>
-                <div>
-                    <p>Add video</p>
-                </div>
+                <p className="center">
+                    <video width="600" controls>
+                        <source
+                            src={require("../../images/triul/video_triul.mp4")}
+                            type="video/mp4"
+                        />
+                        <source
+                            src={require("../../images/triul/video_triul.webm")}
+                            type="video/webm"
+                        />
+                        Votre navigateur ne supporte pas ces types de vidéos.
+                    </video>
+                </p>
 
                 <h1>Le Triul : publications</h1>
 
