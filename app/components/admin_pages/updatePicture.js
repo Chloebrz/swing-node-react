@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { fetchPicture, updatePicture } from "../../actions";
 import PictureForm from "../admin_partials/pictureForm";
@@ -54,6 +55,7 @@ class UpdatePicture extends Component {
                 legend={this.state.legend}
                 res={this.state.res}
                 handleSubmit={this.handleSubmit.bind(this)}
+                history={this.props.history}
             />
         );
     }
@@ -72,6 +74,12 @@ class UpdatePicture extends Component {
         );
     }
 }
+
+UpdatePicture.propTypes = {
+    success: PropTypes.object,
+    picture: PropTypes.object,
+    updatePicture: PropTypes.func
+};
 
 function mapStateToProps({ success, pictures }) {
     return { success, picture: pictures[0] };

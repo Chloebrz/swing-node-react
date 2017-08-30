@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import * as actions from "../../actions";
 import PublicHeader from "./publicHeader";
@@ -34,6 +35,11 @@ class Header extends Component {
         );
     }
 }
+
+Header.propTypes = {
+    fetchUser: PropTypes.func,
+    auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+};
 
 function mapStateToProps({ auth }) {
     return { auth };

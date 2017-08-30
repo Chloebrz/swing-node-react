@@ -1,5 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class ContactBox extends Component {
     render() {
@@ -20,5 +21,13 @@ class ContactBox extends Component {
         );
     }
 }
+
+ContactBox.propTypes = {
+    name: PropTypes.string,
+    desc: PropTypes.string,
+    children: PropTypes.array,
+    emailDesc: PropTypes.string,
+    emailAddress: PropTypes.string
+};
 
 export default ContactBox;

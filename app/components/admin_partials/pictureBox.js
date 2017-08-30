@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { deletePicture } from "../../actions";
 
@@ -43,5 +44,14 @@ class PictureBox extends Component {
         );
     }
 }
+
+PictureBox.propTypes = {
+    deletePicture: PropTypes.func,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    legend: PropTypes.string,
+    type: PropTypes.string,
+    res: PropTypes.string
+};
 
 export default connect(null, { deletePicture })(PictureBox);

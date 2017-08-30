@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { fetchPictures } from "../../actions";
 import style from "../../css/images.css";
@@ -57,6 +58,10 @@ class Images extends Component {
         );
     }
 }
+
+Images.propTypes = {
+    pictures: PropTypes.arrayOf(PropTypes.object)
+};
 
 function mapStateToProps({ pictures }) {
     return { pictures };

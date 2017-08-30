@@ -1,5 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class PictureForm extends Component {
     constructor(props) {
@@ -131,7 +132,6 @@ class PictureForm extends Component {
                         </button>
                         <button
                             className="btn btn-secondary right"
-                            type="submit"
                             onClick={() => this.props.history.push("/admin")}
                         >
                             Annuler
@@ -142,5 +142,12 @@ class PictureForm extends Component {
         );
     }
 }
+
+PictureForm.propTypes = {
+    name: PropTypes.string,
+    legend: PropTypes.string,
+    res: PropTypes.string,
+    handleSubmit: PropTypes.func
+};
 
 export default PictureForm;

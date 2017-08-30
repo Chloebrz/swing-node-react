@@ -1,5 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class PictureBox extends Component {
     render() {
@@ -17,5 +18,12 @@ class PictureBox extends Component {
         );
     }
 }
+
+PictureBox.propTypes = {
+    name: PropTypes.string,
+    type: PropTypes.string,
+    res: PropTypes.string,
+    legend: PropTypes.string
+};
 
 export default PictureBox;

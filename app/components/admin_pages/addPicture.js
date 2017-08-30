@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { postPicture } from "../../actions";
 import PictureForm from "../admin_partials/pictureForm";
@@ -27,11 +28,18 @@ class AddPicture extends Component {
                     (10 caractères minimum).
                 </p>
 
-                <PictureForm handleSubmit={this.handleSubmit.bind(this)} />
+                <PictureForm
+                    handleSubmit={this.handleSubmit.bind(this)}
+                    history={this.props.history}
+                />
             </div>
         );
     }
 }
+
+AddPicture.propTypes = {
+    success: PropTypes.object
+};
 
 function mapStateToProps({ success }) {
     return { success };

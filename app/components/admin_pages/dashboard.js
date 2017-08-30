@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { fetchPictures } from "../../actions";
 import PictureBox from "../admin_partials/pictureBox";
@@ -41,6 +42,11 @@ class Dashboard extends Component {
         );
     }
 }
+
+Dashboard.propTypes = {
+    fetchPictures: PropTypes.func,
+    pictures: PropTypes.arrayOf(PropTypes.object)
+};
 
 function mapStateToProps({ pictures }) {
     return { pictures };
