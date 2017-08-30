@@ -5,6 +5,7 @@ const { ObjectID } = require("mongodb");
 const _ = require("lodash");
 
 const Picture = mongoose.model("Picture");
+const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = app => {
     /**
@@ -32,7 +33,7 @@ module.exports = app => {
      * GET /api/admin/picture/:id
      * Gets a picture item from the pictures database given its id
      */
-    app.get("/api/admin/picture/:id", async (req, res) => {
+    app.get("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to retrieve
         const id = req.params.id;
 
@@ -53,9 +54,8 @@ module.exports = app => {
     /**
      * POST /api/admin/picture
      * Adds a new picture item to the pictures database
-     * TODO: only admin (logged in users) can access this route
      */
-    app.post("/api/admin/picture", async (req, res) => {
+    app.post("/api/admin/picture", requireLogin, async (req, res) => {
         // create buffer for the image data
         var buf = new Buffer(req.body.img.data.replace(/^data:image\/\w+;base64,/, ""), "base64");
 
@@ -82,9 +82,8 @@ module.exports = app => {
     /**
      * DELETE /api/admin/picture/:id
      * Deletes a picture item from the pictures database given its id
-     * TODO: only admin (logged in users) can access this route
      */
-    app.delete("/api/admin/picture/:id", async (req, res) => {
+    app.delete("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to delete
         const id = req.params.id;
 
@@ -107,9 +106,8 @@ module.exports = app => {
     /**
      * PATCH /api/admin/picture/:id
      * Updates a picture item from the pictures database given its id and the properties to update
-     * TODO: only admin (logged in users) can access this route
      */
-    app.patch("/api/admin/picture/:id", async (req, res) => {
+    app.patch("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to update and the properties to update
         const id = req.params.id;
         var body = _.pick(req.body, ["name", "legend", "img"]);
