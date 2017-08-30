@@ -35,6 +35,7 @@ class PictureBox extends Component {
                         <img
                             className="featurette-image img-fluid mx-auto"
                             src={`data:${this.props.type};base64,${this.props.res}`}
+                            alt={this.props.name}
                         />
                     </div>
                 </div>

@@ -1,10 +1,33 @@
 // Dependencies
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { fetchPictures } from "../../actions";
+import style from "../../css/images.css";
+import PictureBox from "../partials/pictureBox";
 
 class Images extends Component {
+    componentDidMount() {
+        this.props.fetchPictures();
+    }
+
+    renderPictures() {
+        return this.props.pictures.map(picture => {
+            return (
+                <PictureBox
+                    key={picture._id}
+                    name={picture.name}
+                    type={picture.img.contentType}
+                    res={picture.img.res}
+                    legend={picture.legend}
+                />
+            );
+        });
+    }
+
     render() {
         return (
-            <div>
+            <div className={style} className="album">
                 <h1>Vidéos</h1>
 
                 <p>
@@ -27,12 +50,16 @@ class Images extends Component {
                 </p>
                 <br />
 
-                <div>
-                    <p>Add carousel</p>
+                <div className="row">
+                    {this.renderPictures()}
                 </div>
             </div>
         );
     }
 }
 
-export default Images;
+function mapStateToProps({ pictures }) {
+    return { pictures };
+}
+
+export default connect(mapStateToProps, { fetchPictures })(Images);
