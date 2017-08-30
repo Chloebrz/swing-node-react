@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchPictures } from "../../actions";
-import PictureBox from "./pictureBox";
+import PictureBox from "../admin_partials/pictureBox";
 import style from "../../css/dashboard.css";
 
 class Dashboard extends Component {

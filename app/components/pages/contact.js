@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
-import ContactBox from "./partials/contactBox";
+import ContactBox from "../partials/contactBox";
 
 class Contact extends Component {
     render() {

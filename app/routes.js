@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
-import Home from "./components/home";
-import Description from "./components/description";
-import Images from "./components/images";
-import Triul from "./components/triul";
-import Contact from "./components/contact";
-import Admin from "./components/admin";
+import Home from "./components/pages/home";
+import Description from "./components/pages/description";
+import Images from "./components/pages/images";
+import Triul from "./components/pages/triul";
+import Contact from "./components/pages/contact";
+import Admin from "./components/admin_pages/admin";
 
 import mainStyle from "./css/main.css";
 import headerStyle from "./css/header.css";

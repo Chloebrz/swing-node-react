@@ -84,7 +84,7 @@ class Description extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/theorie/page3.jpg")}
+                        src={require("../../images/theorie/page3.jpg")}
                         alt="Schéma S'Wing applications"
                     />
                 </p>
@@ -260,14 +260,14 @@ class Description extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/theorie/p_111205_1_x.png")}
+                        src={require("../../images/theorie/p_111205_1_x.png")}
                         alt="Schéma S'Wing sur structure à flotteurs annexes"
                     />
                 </p>
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/theorie/110927_2_pav_skipper.jpg")}
+                        src={require("../../images/theorie/110927_2_pav_skipper.jpg")}
                         alt="Schéma S'Wing version aérienne"
                     />
                 </p>
@@ -276,7 +276,7 @@ class Description extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/theorie/120215_$_empan.png")}
+                        src={require("../../images/theorie/120215_$_empan.png")}
                         alt="Schéma empannage"
                     />
                 </p>

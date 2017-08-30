@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
-import style from "../css/home.css";
+import style from "../../css/home.css";
 
 class Home extends Component {
     render() {
@@ -8,7 +8,7 @@ class Home extends Component {
             <div className={style}>
                 <img
                     className="img-responsive img-radius"
-                    src={require("../images/home/home.jpg")}
+                    src={require("../../images/home/home.jpg")}
                     alt="S'Wing"
                 />
 

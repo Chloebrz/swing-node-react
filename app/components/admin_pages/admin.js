@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Dashboard from "./admin/dashboard";
-import AddPicture from "./admin/addPicture";
-import UpdatePicture from "./admin/updatePicture";
+import Dashboard from "./dashboard";
+import AddPicture from "./addPicture";
+import UpdatePicture from "./updatePicture";
 
 class Admin extends Component {
     render() {

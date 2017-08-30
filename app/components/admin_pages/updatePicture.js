@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchPicture, updatePicture } from "../../actions";
-import PictureForm from "./pictureForm";
+import PictureForm from "../admin_partials/pictureForm";
 
 class UpdatePicture extends Component {
     constructor() {

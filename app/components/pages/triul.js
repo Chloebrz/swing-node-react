@@ -26,7 +26,7 @@ class Triul extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/triul/Sit_Triul.png")}
+                        src={require("../../images/triul/Sit_Triul.png")}
                         alt="Théorie et prototype du Triul"
                     />
                 </p>
@@ -41,7 +41,7 @@ class Triul extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/triul/Sit_publications.png")}
+                        src={require("../../images/triul/Sit_publications.png")}
                         alt="Publications Triul"
                     />
                 </p>
@@ -51,15 +51,15 @@ class Triul extends Component {
                 <p>
                     <img
                         className="img-responsive"
-                        src={require("../images/triul/Sit_Brev.png")}
+                        src={require("../../images/triul/Sit_Brev.png")}
                         alt="Brevet Triul"
                     />
                 </p>
                 <p>
                     Ce projet a fait l'objet d'un dépôt de brevet, le 29 octobre 1992.<br />
                     Pour accéder à ces documents, cliquez{" "}
-                    <a href={require("../images/triul/Triul_7_(S._Geneve).jpg")}>ici</a> ou{" "}
-                    <a href={require("../images/triul/Triul_6_Pct.jpg")}>là</a>.
+                    <a href={require("../../images/triul/Triul_7_(S._Geneve).jpg")}>ici</a> ou{" "}
+                    <a href={require("../../images/triul/Triul_6_Pct.jpg")}>là</a>.
                 </p>
             </div>
         );

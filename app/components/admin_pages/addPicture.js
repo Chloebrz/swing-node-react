@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { postPicture } from "../../actions";
-import PictureForm from "./pictureForm";
+import PictureForm from "../admin_partials/pictureForm";
 
 class AddPicture extends Component {
     componentWillReceiveProps(newProps) {
