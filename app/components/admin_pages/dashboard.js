@@ -17,7 +17,7 @@ class Dashboard extends Component {
         if (this.props.pictures.length === 0)
             return (
                 <img
-                    className="icon icon-xl icon-loading"
+                    className="icon-xl icon-loading"
                     src={require("../../images/icons/loading.gif")}
                 />
             );
@@ -41,7 +41,10 @@ class Dashboard extends Component {
             <div className={style}>
                 <div className="center">
                     <Link to="/admin/addpicture">
-                        <img className="icon center" src={require("../../images/icons/add.png")} />
+                        <img
+                            className="icon-md center"
+                            src={require("../../images/icons/add.png")}
+                        />
                     </Link>
                 </div>
 

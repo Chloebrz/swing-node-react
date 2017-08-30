@@ -36,6 +36,7 @@
         "react": "^15.6.1",
         "react-dom": "^15.6.1",
         "react-image-file": "^0.1.0",
+        "react-modal": "^2.2.4",
         "react-redux": "^5.0.6",
         "react-router-dom": "^4.2.0",
         "redux": "^3.7.2",
@@ -44,6 +45,7 @@
         "url-loader": "^0.5.9"
     },
     "devDependencies": {
+        "babel-preset-stage-2": "^6.24.1",
         "webpack": "^3.5.5"
     }
 }
