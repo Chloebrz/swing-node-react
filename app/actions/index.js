@@ -25,6 +25,7 @@ export const fetchPicture = payload => async dispatch => {
 };
 
 export const postPicture = payload => async dispatch => {
+    console.log("ACTIONS - post picture", payload);
     await axios.post("/api/admin/picture", payload);
     dispatch({ type: POST_PICTURE_SUCCESS });
 };

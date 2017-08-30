@@ -16,6 +16,7 @@ class Dashboard extends Component {
         return this.props.pictures.map(picture => {
             return (
                 <PictureBox
+                    key={picture._id}
                     id={picture._id}
                     name={picture.name}
                     type={picture.img.contentType}

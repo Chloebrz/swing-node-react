@@ -12,7 +12,7 @@ class PictureBox extends Component {
 
     render() {
         return (
-            <div key={this.props.id}>
+            <div>
                 <hr className="featurette-divider" />
                 <div className="row featurette">
                     <div className="col-md-5 order-md-2">

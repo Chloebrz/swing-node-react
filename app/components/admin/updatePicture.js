@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchPicture, updatePicture } from "../../actions";
+import PictureForm from "./pictureForm";
 
 class UpdatePicture extends Component {
     constructor() {
@@ -12,7 +13,8 @@ class UpdatePicture extends Component {
             file: null,
             name: "",
             legend: "",
-            res: ""
+            res: "",
+            loaded: false
         };
     }
 
@@ -21,55 +23,39 @@ class UpdatePicture extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.path.update_success) this.props.history.push("/admin");
+        if (newProps.success.update_success) this.props.history.push("/admin");
 
         if (newProps.picture)
             this.state = {
                 res: `data:${newProps.picture.img.contentType};base64,${newProps.picture.img.res}`,
                 name: newProps.picture.name,
-                legend: newProps.picture.legend
+                legend: newProps.picture.legend,
+                loaded: true
             };
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-
+    handleSubmit(payload) {
         var picture = {
             id: this.props.match.params.id,
-            name: this.state.name,
-            legend: this.state.legend
+            name: payload.name,
+            legend: payload.legend
         };
 
-        if (this.state.file) picture.img = this.state.file;
+        if (payload.img) picture.img = payload.img;
         this.props.updatePicture(picture);
     }
 
-    handleImageChange(e) {
-        e.preventDefault();
+    renderPictureForm() {
+        if (!this.state.loaded) return <div />;
 
-        const reader = new FileReader();
-        const file = e.target.files[0];
-
-        reader.onload = upload => {
-            this.setState({
-                file: {
-                    data: upload.target.result,
-                    filename: file.name,
-                    filetype: file.type
-                }
-            });
-        };
-        reader.readAsDataURL(file);
-    }
-
-    handleNameChange(e) {
-        e.preventDefault();
-        this.setState({ name: e.target.value });
-    }
-
-    handleLegendChange(e) {
-        e.preventDefault();
-        this.setState({ legend: e.target.value });
+        return (
+            <PictureForm
+                name={this.state.name}
+                legend={this.state.legend}
+                res={this.state.res}
+                handleSubmit={this.handleSubmit.bind(this)}
+            />
+        );
     }
 
     render() {
@@ -81,58 +67,14 @@ class UpdatePicture extends Component {
                     légende (10 caractères minimum).
                 </p>
 
-                <hr className="featurette-divider" />
-
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="row">
-                        <div className="col-md-7">
-                            <input type="file" onChange={this.handleImageChange.bind(this)} />
-                            <br />
-                            <br />
-                            <img src={this.state.file ? this.state.file.data : this.state.res} />
-                        </div>
-
-                        <div className="col-md-5">
-                            <h4>Nom:</h4>
-                            <input
-                                type="text"
-                                placeholder="Nom"
-                                value={this.state.name}
-                                onChange={this.handleNameChange.bind(this)}
-                            />
-
-                            <br />
-                            <br />
-
-                            <h4>Légende:</h4>
-                            <textarea
-                                type="text"
-                                rows="5"
-                                placeholder="Légende"
-                                value={this.state.legend}
-                                onChange={this.handleLegendChange.bind(this)}
-                            />
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div className="center">
-                        <button
-                            className="btn btn-lg btn-success"
-                            type="submit"
-                            onClick={this.handleSubmit.bind(this)}
-                        >
-                            Sauvegarder
-                        </button>
-                    </div>
-                </form>
+                {this.renderPictureForm()}
             </div>
         );
     }
 }
 
-function mapStateToProps({ path, pictures }) {
-    return { path, picture: pictures[0] };
+function mapStateToProps({ success, pictures }) {
+    return { success, picture: pictures[0] };
 }
 
 export default connect(mapStateToProps, { fetchPicture, updatePicture })(UpdatePicture);
