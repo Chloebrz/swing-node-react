@@ -26,7 +26,7 @@ class PictureForm extends Component {
             {
                 errorName: this.state.name.trim().length < 5,
                 errorLegend: this.state.legend.trim().length < 15,
-                errorFile: !this.state.file
+                errorFile: !this.state.file && !this.state.res
             },
             function() {
                 if (!this.state.errorName && !this.state.errorLegend && !this.state.errorFile)

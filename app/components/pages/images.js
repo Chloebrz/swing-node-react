@@ -8,21 +8,22 @@ moment.locale("fr");
 import { fetchPictures } from "../../actions";
 import style from "../../css/images.css";
 import PictureBox from "../partials/pictureBox";
+import PicturesCarousel from "../partials/picturesCarousel";
 
 class Images extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            album: true
+        };
+    }
+
     componentDidMount() {
         this.props.fetchPictures();
     }
 
-    renderPictures() {
-        if (this.props.pictures.length === 0)
-            return (
-                <img
-                    className="icon icon-xl icon-loading"
-                    src={require("../../images/icons/loading.gif")}
-                />
-            );
-
+    renderAlbum() {
         return this.props.pictures.map(picture => {
             return (
                 <PictureBox
@@ -35,6 +36,23 @@ class Images extends Component {
                 />
             );
         });
+    }
+
+    renderCarousel() {
+        return <PicturesCarousel pictures={this.props.pictures} />;
+    }
+
+    renderPictures() {
+        if (this.props.pictures.length === 0)
+            return (
+                <img
+                    className="icon icon-xl icon-loading"
+                    src={require("../../images/icons/loading.gif")}
+                />
+            );
+
+        if (this.state.album) return this.renderAlbum();
+        return this.renderCarousel();
     }
 
     render() {
@@ -59,6 +77,27 @@ class Images extends Component {
                 <p>
                     La série de photos suivante présente différentes versions du gréément et des
                     flotteurs réalisés.
+                </p>
+
+                <p>
+                    Mode de visionnage :{" "}
+                    <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => {
+                            this.setState({ album: true });
+                        }}
+                    >
+                        Album
+                    </button>{" "}
+                    ou{" "}
+                    <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => {
+                            this.setState({ album: false });
+                        }}
+                    >
+                        Carousel
+                    </button>
                 </p>
                 <br />
 

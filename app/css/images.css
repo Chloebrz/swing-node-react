@@ -1,3 +1,5 @@
+@import "min/carousel.min.css";
+
 .card-image {
     max-width: 280px;
     max-height: 280px;
@@ -23,4 +25,12 @@
 
 .card-text {
     font-size: 85%;
+}
+
+.legend-text {
+    font-size: 200%;
+}
+
+.legend-date {
+    font-size: 125%;
 }
