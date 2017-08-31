@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import moment from "moment";
+moment.locale("fr");
 
 import { fetchPictures } from "../../actions";
 import PictureBox from "../admin_partials/pictureBox";
@@ -31,6 +33,7 @@ class Dashboard extends Component {
                     type={picture.img.contentType}
                     res={picture.img.res}
                     legend={picture.legend}
+                    date={moment(picture.createdAt).format("D MMMM YY")}
                 />
             );
         });

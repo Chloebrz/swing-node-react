@@ -52,6 +52,9 @@ class PictureBox extends Component {
                         <p className="lead">
                             {this.props.legend}
                         </p>
+                        <p className="card-text">
+                            Ajouté le : {this.props.date}
+                        </p>
 
                         <img
                             className="icon icon-clickable"

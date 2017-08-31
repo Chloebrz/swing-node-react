@@ -19,6 +19,10 @@ var PictureSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 15
+    },
+    createdAt: {
+        type: Number,
+        default: null
     }
 });
 

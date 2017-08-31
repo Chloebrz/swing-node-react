@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import moment from "moment";
+moment.locale("fr");
 
 import { fetchPictures } from "../../actions";
 import style from "../../css/images.css";
@@ -29,6 +31,7 @@ class Images extends Component {
                     type={picture.img.contentType}
                     res={picture.img.res}
                     legend={picture.legend}
+                    date={moment(picture.createdAt).format("D MMMM YY")}
                 />
             );
         });

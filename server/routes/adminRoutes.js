@@ -67,7 +67,8 @@ module.exports = app => {
                 data: buf,
                 contentType: req.body.img.filetype
             },
-            legend: req.body.legend
+            legend: req.body.legend,
+            createdAt: new Date().getTime()
         });
 
         try {

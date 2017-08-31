@@ -28,6 +28,7 @@
         "html-loader": "^0.5.1",
         "jsx-loader": "^0.13.2",
         "lodash": "^4.17.4",
+        "moment": "^2.18.1",
         "mongodb": "^2.2.31",
         "mongoose": "^4.11.8",
         "passport": "^0.4.0",
