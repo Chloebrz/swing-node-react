@@ -47,7 +47,13 @@ class UpdatePicture extends Component {
     }
 
     renderPictureForm() {
-        if (!this.state.loaded) return <div />;
+        if (!this.state.loaded)
+            return (
+                <img
+                    className="icon-xl icon-loading"
+                    src={require("../../images/icons/loading.gif")}
+                />
+            );
 
         return (
             <PictureForm

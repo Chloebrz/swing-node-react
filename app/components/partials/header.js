@@ -28,7 +28,7 @@ class Header extends Component {
         return (
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <Link to={this.props.auth ? "/admin" : "/"} className="navbar-brand">
-                    <img id="logo" src={require("../../images/s-wing.png")} />
+                    <img id="logo" src={require("../../images/s-wing.png")} alt="SWING" />
                 </Link>
                 {this.renderContent()}
             </nav>

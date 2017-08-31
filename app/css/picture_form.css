@@ -1,0 +1,7 @@
+.image-upload > input {
+    display: none;
+}
+
+.image-upload img {
+    cursor: pointer;
+}

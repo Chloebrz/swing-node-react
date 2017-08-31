@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import style from "../../css/picture_form.css";
+
 class PictureForm extends Component {
     constructor(props) {
         super();
@@ -10,7 +12,7 @@ class PictureForm extends Component {
             file: null,
             name: props.name || "",
             legend: props.legend || "",
-            res: props.res || "",
+            res: props.res || require("../../images/icons/placeholder.png"),
             errorName: false,
             errorLegend: false,
             errorFile: false
@@ -83,17 +85,23 @@ class PictureForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className={style}>
                 <hr className="featurette-divider" />
 
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
-                        <div className="col-md-7">
-                            <input type="file" onChange={this.handleImageChange.bind(this)} />
+                        <div className="col-md-7 image-upload">
+                            <label htmlFor="file-input">
+                                <img
+                                    src={this.state.file ? this.state.file.data : this.state.res}
+                                />
+                            </label>
+                            <input
+                                id="file-input"
+                                type="file"
+                                onChange={this.handleImageChange.bind(this)}
+                            />
                             {this.renderErrorImg()}
-                            <br />
-                            <br />
-                            <img src={this.state.file ? this.state.file.data : this.state.res} />
                         </div>
 
                         <div className="col-md-5">

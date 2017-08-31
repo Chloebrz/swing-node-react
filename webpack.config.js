@@ -16,6 +16,8 @@ var config = {
     module: {
         loaders: [
             { test: /\.js$/, loader: "jsx-loader" },
+            { test: /\.png$/, loader: "url-loader" },
+            { test: /\.jpg$/, loader: "file-loader" },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             {
                 test: /\.js$|\.jsx$/,
@@ -34,7 +36,7 @@ var config = {
                 loader: "file-loader?limit=10000&mimetype=video/mp4"
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(gif|svg)$/i,
                 loader: "file-loader?name=/public/icons/[name].[ext]"
             }
         ]

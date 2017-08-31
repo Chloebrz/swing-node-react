@@ -54,7 +54,7 @@ class PictureBox extends Component {
                         </p>
 
                         <img
-                            className="icon"
+                            className="icon icon-clickable"
                             src={require("../../images/icons/delete.png")}
                             onClick={this.openModal}
                         />
@@ -85,7 +85,10 @@ class PictureBox extends Component {
                         </Modal>
 
                         <Link to={`/admin/updatepicture/${this.props.id}`}>
-                            <img className="icon" src={require("../../images/icons/edit.png")} />
+                            <img
+                                className="icon icon-clickable"
+                                src={require("../../images/icons/edit.png")}
+                            />
                         </Link>
                     </div>
                     <div className="col-md-7 order-md-1">
