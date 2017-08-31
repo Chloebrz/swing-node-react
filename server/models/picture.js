@@ -23,6 +23,10 @@ var PictureSchema = new mongoose.Schema({
     createdAt: {
         type: Number,
         default: null
+    },
+    creatorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 });
 

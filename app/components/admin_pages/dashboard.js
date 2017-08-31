@@ -34,6 +34,7 @@ class Dashboard extends Component {
                     res={picture.img.res}
                     legend={picture.legend}
                     date={moment(picture.createdAt).format("D MMMM YY")}
+                    creator={this.props.auth._id === picture.creatorId}
                 />
             );
         });
@@ -62,8 +63,8 @@ Dashboard.propTypes = {
     pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
-function mapStateToProps({ pictures }) {
-    return { pictures };
+function mapStateToProps({ auth, pictures }) {
+    return { auth, pictures };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Dashboard);

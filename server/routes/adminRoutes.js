@@ -32,6 +32,7 @@ module.exports = app => {
     /**
      * GET /api/admin/picture/:id
      * Gets a picture item from the pictures database given its id
+     * User can only get the pictures he created
      */
     app.get("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to retrieve
@@ -39,7 +40,12 @@ module.exports = app => {
 
         try {
             // retrieve the picture item
-            const picture = await Picture.findById(id);
+            const picture = await Picture.findOne({ _id: id, creatorId: req.user._id });
+
+            if (!picture)
+                res.send({
+                    error: "Vous ne pouvez pas accéder à cette image car vous ne l'avez pas ajoutée"
+                });
 
             // add the base64 data
             picture.img.res = new Buffer(picture.img.data).toString("base64");
@@ -68,7 +74,8 @@ module.exports = app => {
                 contentType: req.body.img.filetype
             },
             legend: req.body.legend,
-            createdAt: new Date().getTime()
+            createdAt: new Date().getTime(),
+            creatorId: req.user._id
         });
 
         try {
@@ -83,6 +90,7 @@ module.exports = app => {
     /**
      * DELETE /api/admin/picture/:id
      * Deletes a picture item from the pictures database given its id
+     * User can only delete the pictures he created
      */
     app.delete("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to delete
@@ -94,7 +102,8 @@ module.exports = app => {
         try {
             // remove the picture from the database
             const picture = await Picture.findOneAndRemove({
-                _id: id
+                _id: id,
+                creatorId: req.user._id
             });
 
             if (!picture) return res.status(400).send();
@@ -107,6 +116,7 @@ module.exports = app => {
     /**
      * PATCH /api/admin/picture/:id
      * Updates a picture item from the pictures database given its id and the properties to update
+     * User can only update the pictures he created
      */
     app.patch("/api/admin/picture/:id", requireLogin, async (req, res) => {
         // get the id of the picture to update and the properties to update
@@ -127,7 +137,7 @@ module.exports = app => {
         try {
             // update the picture
             const picture = await Picture.findOneAndUpdate(
-                { _id: id },
+                { _id: id, creatorId: req.user._id },
                 { $set: body },
                 { new: true }
             );
