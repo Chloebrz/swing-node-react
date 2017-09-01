@@ -43,13 +43,15 @@ class Images extends Component {
     }
 
     renderPictures() {
-        if (this.props.pictures.length === 0)
+        if (!this.props.success.fetch_success)
             return (
                 <img
                     className="icon icon-xl icon-loading"
                     src={require("../../images/icons/loading.gif")}
                 />
             );
+
+        if (this.props.pictures.length === 0) return <div>Pas d'images</div>;
 
         if (this.state.album) return this.renderAlbum();
         return this.renderCarousel();
@@ -113,8 +115,8 @@ Images.propTypes = {
     pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
-function mapStateToProps({ pictures }) {
-    return { pictures };
+function mapStateToProps({ pictures, success }) {
+    return { pictures, success };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Images);

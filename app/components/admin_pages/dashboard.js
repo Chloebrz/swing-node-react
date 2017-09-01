@@ -16,13 +16,15 @@ class Dashboard extends Component {
     }
 
     renderPictures() {
-        if (this.props.pictures.length === 0)
+        if (!this.props.success.fetch_success)
             return (
                 <img
                     className="icon-xl icon-loading"
                     src={require("../../images/icons/loading.gif")}
                 />
             );
+
+        if (this.props.pictures.length === 0) return <div>Pas d'images</div>;
 
         return this.props.pictures.map(picture => {
             return (
@@ -63,8 +65,8 @@ Dashboard.propTypes = {
     pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
-function mapStateToProps({ auth, pictures }) {
-    return { auth, pictures };
+function mapStateToProps({ auth, pictures, success }) {
+    return { auth, pictures, success };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Dashboard);
