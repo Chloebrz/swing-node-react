@@ -5,7 +5,7 @@ const { ObjectID } = require("mongodb");
 const _ = require("lodash");
 
 const Picture = mongoose.model("Picture");
-const requireLogin = require("../middlewares/requireLogin");
+const auth = require("../middlewares/auth");
 
 module.exports = app => {
     /**
@@ -34,16 +34,19 @@ module.exports = app => {
      * Gets a picture item from the pictures database given its id
      * User can only get the pictures he created
      */
-    app.get("/api/admin/picture/:id", requireLogin, async (req, res) => {
+    app.get("/api/admin/picture/:id", auth.requireLogin, async (req, res) => {
         // get the id of the picture to retrieve
         const id = req.params.id;
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
 
         try {
             // retrieve the picture item
             const picture = await Picture.findOne({ _id: id, creatorId: req.user._id });
 
             if (!picture)
-                res.send({
+                res.status(404).send({
                     error: "Vous ne pouvez pas accéder à cette image car vous ne l'avez pas ajoutée"
                 });
 
@@ -61,7 +64,7 @@ module.exports = app => {
      * POST /api/admin/picture
      * Adds a new picture item to the pictures database
      */
-    app.post("/api/admin/picture", requireLogin, async (req, res) => {
+    app.post("/api/admin/picture", auth.requireLogin, async (req, res) => {
         // create buffer for the image data
         var buf = new Buffer(req.body.img.data.replace(/^data:image\/\w+;base64,/, ""), "base64");
 
@@ -92,7 +95,7 @@ module.exports = app => {
      * Deletes a picture item from the pictures database given its id
      * User can only delete the pictures he created
      */
-    app.delete("/api/admin/picture/:id", requireLogin, async (req, res) => {
+    app.delete("/api/admin/picture/:id", auth.requireLogin, async (req, res) => {
         // get the id of the picture to delete
         const id = req.params.id;
 
@@ -106,7 +109,7 @@ module.exports = app => {
                 creatorId: req.user._id
             });
 
-            if (!picture) return res.status(400).send();
+            if (!picture) return res.status(404).send();
             res.send(picture);
         } catch (err) {
             res.status(400).send(err);
@@ -118,7 +121,7 @@ module.exports = app => {
      * Updates a picture item from the pictures database given its id and the properties to update
      * User can only update the pictures he created
      */
-    app.patch("/api/admin/picture/:id", requireLogin, async (req, res) => {
+    app.patch("/api/admin/picture/:id", auth.requireLogin, async (req, res) => {
         // get the id of the picture to update and the properties to update
         const id = req.params.id;
         var body = _.pick(req.body, ["name", "legend", "img"]);
