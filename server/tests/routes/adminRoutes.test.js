@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 require("../../db/mongoose");
 const Picture = mongoose.model("Picture");
 
-const { userOneId, pictures, populatePictures } = require("../seed");
+const { userOneId, pictures, populatePictures } = require("../seed/pictures-seed");
 beforeEach(populatePictures);
 
 var app;
