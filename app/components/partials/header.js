@@ -35,8 +35,8 @@ class Header extends Component {
                 return;
             default:
                 return (
-                    <li className="nav-item active">
-                        <a className="nav-link" href="/api/logout">
+                    <li className="nav-item">
+                        <a className="nav-link active" href="/api/logout">
                             Logout
                         </a>
                     </li>
@@ -66,30 +66,30 @@ class Header extends Component {
 
                     <div className="collapse navbar-collapse" id="navbar-menu">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/">
                                     Accueil
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/description">
+                                <Link className="nav-link" to="/description">
                                     Description
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/images">
+                                <Link className="nav-link" to="/images">
                                     Images
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/triul">
+                                <Link className="nav-link" to="/triul">
                                     Triul
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/contact">
+                                <Link className="nav-link" to="/contact">
                                     Contact
-                                </a>
+                                </Link>
                             </li>
                             {this.renderLogout()}
                         </ul>
