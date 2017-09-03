@@ -7,7 +7,6 @@ class PictureBox extends Component {
         return (
             <div className="card">
                 <img
-                    className="card-image"
                     src={`data:${this.props.type};base64,${this.props.res}`}
                     alt={this.props.name}
                 />

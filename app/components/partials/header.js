@@ -24,7 +24,12 @@ class Header extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
-        console.log("here", this.state.isOpen);
+    }
+
+    closeToogle() {
+        this.setState({
+            isOpen: false
+        });
     }
 
     renderLogout() {
@@ -50,50 +55,51 @@ class Header extends Component {
                 <Link to={this.props.auth ? "/admin" : "/"} className="navbar-brand">
                     <img id="logo" src={require("../../images/s-wing.png")} alt="SWING" />
                 </Link>
-                <div>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbar-menu"
-                        aria-controls="navbar-menu"
-                        aria-expanded={this.state.isOpen}
-                        aria-label="Toggle navigation"
-                        onClick={this.toggle}
-                    >
-                        <span className="navbar-toggler-icon" />
-                    </button>
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbar-menu"
+                    aria-controls="navbar-menu"
+                    aria-expanded={this.state.isOpen}
+                    aria-label="Toggle navigation"
+                    onClick={this.toggle}
+                >
+                    <span className="navbar-toggler-icon" />
+                </button>
 
-                    <div className="collapse navbar-collapse" id="navbar-menu">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">
-                                    Accueil
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/description">
-                                    Description
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/images">
-                                    Images
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/triul">
-                                    Triul
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/contact">
-                                    Contact
-                                </Link>
-                            </li>
-                            {this.renderLogout()}
-                        </ul>
-                    </div>
+                <div
+                    className={`collapse navbar-collapse ${this.state.isOpen ? "show" : ""}`}
+                    id="navbar-menu"
+                >
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                            <Link className="nav-link" to="/">
+                                Accueil
+                            </Link>
+                        </li>
+                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                            <Link className="nav-link" to="/description">
+                                Description
+                            </Link>
+                        </li>
+                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                            <Link className="nav-link" to="/images">
+                                Images
+                            </Link>
+                        </li>
+                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                            <Link className="nav-link" to="/triul">
+                                Triul
+                            </Link>
+                        </li>
+                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                            <Link className="nav-link" to="/contact">
+                                Contact
+                            </Link>
+                        </li>
+                        {this.renderLogout()}
+                    </ul>
                 </div>
             </nav>
         );

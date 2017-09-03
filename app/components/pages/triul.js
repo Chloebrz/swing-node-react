@@ -11,8 +11,8 @@ class Triul extends Component {
                     réduire les inconvénients des voiliers actuels grâce à l'auto-orientation de la
                     voilure. Le concept utilisé sur le Triul, projet précédent, était dérivé de
                     l'équilibre aérodynamique des avions et planeurs tel que défini par Voisin :
-                    \"Centre de gravité en avant du centre de voilure, et empennage horizontal
-                    arrière inversé\", (transposé à 90 degrés pour le Triul).
+                    "Centre de gravité en avant du centre de voilure, et empennage horizontal
+                    arrière inversé", (transposé à 90 degrés pour le Triul).
                 </p>
                 <p>
                     La S'Wing utilise les conditions d'équilibre aérodynamique du parapente,
