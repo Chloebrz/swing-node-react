@@ -11,16 +11,20 @@ const Picture = mongoose.model("Picture");
 const { userOneId, pictures, populatePictures } = require("../seed/pictures-seed");
 beforeEach(populatePictures);
 
-var app;
+var app, stub;
 const auth = require("../../middlewares/auth");
 
 before(function() {
-    var stub = sinon.stub(auth, "requireLogin");
+    stub = sinon.stub(auth, "requireLogin");
     stub.callsFake(function(req, res, next) {
         req.user = { _id: userOneId };
         next();
     });
     app = require("../../index").app;
+});
+
+after(function() {
+    stub.restore();
 });
 
 describe("GET /api/admin/pictures", () => {
