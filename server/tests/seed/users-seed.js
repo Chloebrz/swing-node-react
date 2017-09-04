@@ -10,11 +10,21 @@ const userTwoGoogleId = new ObjectID();
 const users = [
     {
         _id: new ObjectID(),
-        googleId: userOneGoogleId
+        name: {
+            firstname: "John",
+            lastname: "Doe"
+        },
+        googleId: userOneGoogleId,
+        email: "john@test.com"
     },
     {
         _id: new ObjectID(),
-        googleId: userTwoGoogleId
+        name: {
+            firstname: "Jane",
+            lastname: "Doe"
+        },
+        googleId: userTwoGoogleId,
+        email: "jane@test.com"
     }
 ];
 
