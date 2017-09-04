@@ -50,22 +50,6 @@ describe("User model", function() {
     });
 
     describe("googleId", () => {
-        it("should return error if googleId is missing", done => {
-            const user = new User({
-                name: {
-                    firstname: "firstname",
-                    lastname: "lastname"
-                },
-                email: "test@test.com"
-            });
-
-            user.save().catch(err => {
-                expect(err.errors.googleId).toExist();
-                expect(err.errors.googleId.message).toBe("Path `googleId` is required.");
-                done();
-            });
-        });
-
         it("should return error if googleId is not a string", done => {
             const user = new User({
                 name: {
@@ -136,6 +120,26 @@ describe("User model", function() {
                 expect(err.errors.email).toExist();
                 expect(err.errors.email.message).toBe(
                     'Cast to String failed for value "{ id: 123 }" at path "email"'
+                );
+                done();
+            });
+        });
+
+        it("should return error if email already in use", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                googleId: "123",
+                email: users[0].email
+            });
+
+            user.save().catch(err => {
+                expect(err).toExist();
+                expect(err.message).toBe(
+                    `E11000 duplicate key error collection: swingtest.users index: email_1 dup key: { : "${users[0]
+                        .email}" }`
                 );
                 done();
             });

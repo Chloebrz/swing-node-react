@@ -22,8 +22,32 @@ module.exports = app => {
     });
 
     /**
+     * POST /auth/signup
+     * Logs a user in with email and password
+     */
+    app.post(
+        "/auth/signup",
+        passport.authenticate("local-signup", {
+            successRedirect: "/admin",
+            failureRedirect: "/login"
+        })
+    );
+
+    /**
+     * POST /auth/login
+     * Logs a user in with email and password
+     */
+    app.post(
+        "/auth/login",
+        passport.authenticate("local-login", {
+            successRedirect: "/admin",
+            failureRedirect: "/login"
+        })
+    );
+
+    /**
      * GET /api/logout
-     * Logs a user out with Google OAuth
+     * Logs a user out
      */
     app.get("/api/logout", (req, res) => {
         req.logout();

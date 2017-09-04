@@ -32,6 +32,23 @@ class Header extends Component {
         });
     }
 
+    renderLogin() {
+        switch (this.props.auth) {
+            case null:
+                return;
+            case false:
+                return (
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/login">
+                            Login
+                        </Link>
+                    </li>
+                );
+            default:
+                return;
+        }
+    }
+
     renderLogout() {
         switch (this.props.auth) {
             case null:
@@ -98,6 +115,7 @@ class Header extends Component {
                                 Contact
                             </Link>
                         </li>
+                        {this.renderLogin()}
                         {this.renderLogout()}
                     </ul>
                 </div>
