@@ -60,3 +60,4 @@ Then, run: `npm run test-server`.
 ### App
 The ReactJS side of the application (actions and reducers) is tested with **Jest**.
 To run the tests: `npm run test-app`.
+To check the test coverage: `npm run test-app-coverage`

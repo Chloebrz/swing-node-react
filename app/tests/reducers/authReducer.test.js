@@ -7,6 +7,10 @@ describe("Auth Reducer", () => {
         expect(authReducer(undefined, {})).toEqual(null);
     });
 
+    it("should return false if no payload", () => {
+        expect(authReducer(null, { type: FETCH_USER })).toEqual(false);
+    });
+
     it("should handle FETCH_USER", () => {
         const payload = "payload";
 

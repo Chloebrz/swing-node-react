@@ -10,7 +10,9 @@
     "scripts": {
         "start": "node server/index.js",
         "test-app": "jest",
-        "test-server": "export NODE_ENV=test && mocha server/**/*.test.js"
+        "test-app-coverage": "npm run test-app -- --coverage",
+        "test-server": "export NODE_ENV=test && mocha server/**/*.test.js",
+        "test-server-coverage": "nyc --reporter=html --reporter=text npm run test-server"
     },
     "author": "Chloe Brz",
     "license": "ISC",
@@ -35,6 +37,7 @@
         "passport": "^0.4.0",
         "passport-google-oauth20": "^1.0.0",
         "prop-types": "^15.5.10",
+        "proxyquire": "^1.8.0",
         "react": "^15.6.1",
         "react-dom": "^15.6.1",
         "react-image-file": "^0.1.0",
@@ -57,9 +60,16 @@
         "jest": "^20.0.4",
         "mocha": "^3.5.0",
         "nock": "^9.0.14",
+        "nyc": "^11.1.0",
         "redux-mock-store": "^1.2.3",
         "sinon": "^3.2.1",
         "supertest": "^3.0.0",
         "webpack": "^3.5.5"
+    },
+    "jest": {
+        "roots": [
+            "<rootDir>/app"
+        ],
+        "coverageDirectory": "coverage-app"
     }
 }

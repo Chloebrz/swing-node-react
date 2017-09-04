@@ -1,4 +1,6 @@
 node_modules
 public
+coverage-app
+coverage
 dev.js
 test.js

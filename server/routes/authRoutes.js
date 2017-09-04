@@ -35,6 +35,7 @@ module.exports = app => {
      * Gets the current user info
      */
     app.get("/api/current_user", (req, res) => {
+        console.log(req.user);
         res.send(req.user);
     });
 };
