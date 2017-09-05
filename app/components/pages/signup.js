@@ -10,6 +10,7 @@ class Signup extends Component {
             <RegisterLogin
                 title="S'inscrire"
                 confirmPassword={true}
+                actionLink="/auth/signup"
                 question="Déjà inscrit ?"
                 redirectLink="/login"
                 redirectTitle="Se connecter"

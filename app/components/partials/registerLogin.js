@@ -23,7 +23,7 @@ class RegisterLogin extends Component {
 
                 <p className="divider">ou</p>
 
-                <form action="/auth/login" method="post">
+                <form action={this.props.actionLink} method="post">
                     <input type="text" name="email" placeholder="* Adresse mail" />
                     <input type="password" name="password" placeholder="* Mot de passe" />
                     {this.props.confirmPassword &&
@@ -32,7 +32,7 @@ class RegisterLogin extends Component {
                             name="password-conf"
                             placeholder="* Confirmation mot de passe"
                         />}
-                    <input type="submit" className="btn btn-success" value="Log In" />
+                    <input type="submit" className="btn btn-success" value={this.props.title} />
                 </form>
 
                 <div className="hint">
@@ -49,6 +49,7 @@ class RegisterLogin extends Component {
 RegisterLogin.propTypes = {
     title: PropTypes.string,
     confirmPassword: PropTypes.bool,
+    actionLink: PropTypes.string,
     question: PropTypes.string,
     redirectLink: PropTypes.string,
     redirectTitle: PropTypes.string

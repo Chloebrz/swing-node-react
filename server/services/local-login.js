@@ -6,9 +6,10 @@ const User = mongoose.model("User");
 module.exports = new LocalStrategy(
     {
         usernameField: "email",
-        passwordField: "password"
+        passwordField: "password",
+        passReqToCallback: true
     },
-    (email, password, done) => {
+    (req, email, password, done) => {
         User.findByCredentials(email, password).then(user => {
             done(null, user);
         });

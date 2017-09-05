@@ -9,6 +9,7 @@ class Login extends Component {
         return (
             <RegisterLogin
                 title="Se connecter"
+                actionLink="/auth/login"
                 question="Pas encore inscrit ?"
                 redirectLink="/signup"
                 redirectTitle="S'inscrire"
