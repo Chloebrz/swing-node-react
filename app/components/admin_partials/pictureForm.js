@@ -9,13 +9,17 @@ class PictureForm extends Component {
         super();
 
         this.state = {
-            file: null,
-            name: props.name || "",
-            legend: props.legend || "",
-            res: props.res || require("../../images/icons/placeholder.png"),
-            errorName: false,
-            errorLegend: false,
-            errorFile: false
+            picture: {
+                name: props.name || "",
+                legend: props.legend || "",
+                file: null,
+                res: props.res || require("../../images/icons/placeholder.png")
+            },
+            errors: {
+                name: false,
+                legend: false,
+                file: false
+            }
         };
     }
 
@@ -24,17 +28,23 @@ class PictureForm extends Component {
 
         this.setState(
             {
-                errorName: this.state.name.trim().length < 5,
-                errorLegend: this.state.legend.trim().length < 15,
-                errorFile: !this.state.file && !this.state.res
+                errors: {
+                    name: this.state.picture.name.trim().length < 5,
+                    legend: this.state.picture.legend.trim().length < 15,
+                    file:
+                        !this.state.picture.file &&
+                        this.state.picture.res === require("../../images/icons/placeholder.png")
+                }
             },
             function() {
-                if (!this.state.errorName && !this.state.errorLegend && !this.state.errorFile)
-                    this.props.handleSubmit({
-                        name: this.state.name,
-                        img: this.state.file,
-                        legend: this.state.legend
-                    });
+                if (this.state.errors.name || this.state.errors.legend || this.state.errors.file)
+                    return;
+
+                this.props.handleSubmit({
+                    name: this.state.picture.name,
+                    img: this.state.picture.file,
+                    legend: this.state.picture.legend
+                });
             }
         );
     }
@@ -46,41 +56,42 @@ class PictureForm extends Component {
         const file = e.target.files[0];
 
         reader.onload = upload => {
-            this.setState({
-                file: {
-                    data: upload.target.result,
-                    filename: file.name,
-                    filetype: file.type
-                },
-                errorFile: false
-            });
+            let picture = this.state.picture;
+            picture.file = {
+                data: upload.target.result,
+                filename: file.name,
+                filetype: file.type
+            };
+
+            let errors = this.state.errors;
+            errors.file = false;
+            this.setState({ picture, errors });
         };
         reader.readAsDataURL(file);
     }
 
     handleNameChange(e) {
         e.preventDefault();
-        this.setState({ name: e.target.value, errorName: false });
+
+        let picture = this.state.picture;
+        picture.name = e.target.value;
+
+        let errors = this.state.errors;
+        errors.name = false;
+
+        this.setState({ picture, errors });
     }
 
     handleLegendChange(e) {
         e.preventDefault();
-        this.setState({ legend: e.target.value, errorLegend: false });
-    }
 
-    renderErrorName() {
-        if (!this.state.errorName) return;
-        return <div className="error">5 caractères minimum</div>;
-    }
+        let picture = this.state.picture;
+        picture.legend = e.target.value;
 
-    renderErrorLegend() {
-        if (!this.state.errorLegend) return;
-        return <div className="error">15 caractères minimum</div>;
-    }
+        let errors = this.state.errors;
+        errors.legend = false;
 
-    renderErrorImg() {
-        if (!this.state.errorFile) return;
-        return <div className="error">Sélectionner une image</div>;
+        this.setState({ picture, errors });
     }
 
     render() {
@@ -93,7 +104,11 @@ class PictureForm extends Component {
                         <div className="col-md-7 image-upload">
                             <label htmlFor="file-input">
                                 <img
-                                    src={this.state.file ? this.state.file.data : this.state.res}
+                                    src={
+                                        this.state.picture.file
+                                            ? this.state.picture.file.data
+                                            : this.state.picture.res
+                                    }
                                 />
                             </label>
                             <input
@@ -101,7 +116,8 @@ class PictureForm extends Component {
                                 type="file"
                                 onChange={this.handleImageChange.bind(this)}
                             />
-                            {this.renderErrorImg()}
+                            {this.state.errors.file &&
+                                <div className="error">Sélectionner une image</div>}
                         </div>
 
                         <div className="col-md-5">
@@ -109,10 +125,11 @@ class PictureForm extends Component {
                             <input
                                 type="text"
                                 placeholder="Nom"
-                                value={this.state.name}
+                                value={this.state.picture.name}
                                 onChange={this.handleNameChange.bind(this)}
                             />
-                            {this.renderErrorName()}
+                            {this.state.errors.name &&
+                                <div className="error">5 caractères minimum</div>}
 
                             <br />
                             <br />
@@ -122,10 +139,11 @@ class PictureForm extends Component {
                                 type="text"
                                 rows="5"
                                 placeholder="Légende"
-                                value={this.state.legend}
+                                value={this.state.picture.legend}
                                 onChange={this.handleLegendChange.bind(this)}
                             />
-                            {this.renderErrorLegend()}
+                            {this.state.errors.legend &&
+                                <div className="error">15 caractères minimum</div>}
                         </div>
                     </div>
                     <br />
