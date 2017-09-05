@@ -45,16 +45,14 @@ UserSchema.statics.findByCredentials = async function(email, password) {
 UserSchema.pre("save", function(next) {
     var user = this;
 
-    if (user.isModified("password")) {
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(user.password, salt, (err, hash) => {
-                user.password = hash;
-                next();
-            });
+    if (!user.isModified("password")) return next();
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            user.password = hash;
+            next();
         });
-    } else {
-        next();
-    }
+    });
 });
 
 mongoose.model("User", UserSchema);
