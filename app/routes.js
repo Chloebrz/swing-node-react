@@ -11,6 +11,7 @@ import Triul from "./components/pages/triul";
 import Contact from "./components/pages/contact";
 import Admin from "./components/admin_pages/admin";
 import Login from "./components/pages/login";
+import Signup from "./components/pages/signup";
 
 import mainStyle from "./css/main.css";
 import headerStyle from "./css/header.css";
@@ -28,6 +29,7 @@ const routes = (
                     <Route path="/contact" component={Contact} />
                     <Route path="/admin" component={Admin} />
                     <Route path="/login" component={Login} />
+                    <Route path="/signup" component={Signup} />
                 </Switch>
                 <Footer />
             </div>

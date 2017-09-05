@@ -40,7 +40,7 @@ class Header extends Component {
                 return (
                     <li className="nav-item">
                         <Link className="nav-link" to="/login">
-                            Login
+                            Se connecter
                         </Link>
                     </li>
                 );

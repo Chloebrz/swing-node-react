@@ -105,7 +105,7 @@ class PictureForm extends Component {
                         </div>
 
                         <div className="col-md-5">
-                            <h4>Nom:</h4>
+                            <h4>Nom :</h4>
                             <input
                                 type="text"
                                 placeholder="Nom"
@@ -117,7 +117,7 @@ class PictureForm extends Component {
                             <br />
                             <br />
 
-                            <h4>Légende:</h4>
+                            <h4>Légende :</h4>
                             <textarea
                                 type="text"
                                 rows="5"
