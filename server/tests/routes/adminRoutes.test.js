@@ -218,7 +218,12 @@ describe("PATCH /api/admin/picture", () => {
     it("should update a picture doc", done => {
         const picture = {
             name: "picture",
-            legend: "legendLegendLegend"
+            legend: "legendLegendLegend",
+            img: {
+                name: "name",
+                data: "serfvrgbvrtbdrbdr",
+                contentType: "type"
+            }
         };
 
         request(app)

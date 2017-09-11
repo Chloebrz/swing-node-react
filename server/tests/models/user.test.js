@@ -68,25 +68,6 @@ describe("User model", function() {
                 done();
             });
         });
-
-        it("should return error if googleId already in use", done => {
-            const user = new User({
-                name: {
-                    firstname: "firstname",
-                    lastname: "lastname"
-                },
-                googleId: userOneGoogleId,
-                email: "test@test.com"
-            });
-
-            user.save().catch(err => {
-                expect(err).toExist();
-                expect(err.message).toBe(
-                    `E11000 duplicate key error collection: swingtest.users index: googleId_1 dup key: { : "${userOneGoogleId}" }`
-                );
-                done();
-            });
-        });
     });
 
     describe("email", () => {
@@ -157,6 +138,46 @@ describe("User model", function() {
 
             user.save().then(u => {
                 expect(u.email).toBe("test@test.com");
+                done();
+            });
+        });
+    });
+
+    describe("password", () => {
+        it("should return error if password is not a string", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                email: "test@test.com",
+                password: { id: 123 }
+            });
+
+            user.save().catch(err => {
+                expect(err.errors.password).toExist();
+                expect(err.errors.password.message).toBe(
+                    'Cast to String failed for value "{ id: 123 }" at path "password"'
+                );
+                done();
+            });
+        });
+
+        it("should return error if password length < 5", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                email: "test@test.com",
+                password: "123"
+            });
+
+            user.save().catch(err => {
+                expect(err.errors.password).toExist();
+                expect(err.errors.password.message).toBe(
+                    "Path `password` (`123`) is shorter than the minimum allowed length (5)."
+                );
                 done();
             });
         });

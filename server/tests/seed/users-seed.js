@@ -25,19 +25,31 @@ const users = [
         },
         googleId: userTwoGoogleId,
         email: "jane@test.com"
+    },
+    {
+        _id: new ObjectID(),
+        name: {
+            firstname: "Jim",
+            lastname: "Doe"
+        },
+        email: "jim@test.com",
+        password: "jim123"
     }
 ];
 
 const populateUsers = done => {
     User.remove({})
         .then(() => {
-            User.insertMany(users);
+            const promises = users.map(user => {
+                return new User(user).save();
+            });
+
+            Promise.all(promises);
         })
         .then(() => done());
 };
 
 module.exports = {
-    userOneGoogleId,
     users,
     populateUsers
 };
