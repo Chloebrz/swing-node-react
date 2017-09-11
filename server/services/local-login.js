@@ -6,21 +6,20 @@ const User = mongoose.model("User");
 module.exports = new LocalStrategy(
     {
         usernameField: "email",
-        passwordField: "password"
+        passwordField: "password",
+        session: true
     },
     (email, password, done) => {
+        var user;
         User.findOne({ email })
-            .then(user => {
-                if (!user)
-                    return done(null, false, {
-                        message: "Adresse mail incorrecte."
-                    });
-
-                return !user.validPassword(password, isMatch => {
-                    if (!isMatch) return done(null, false, { message: "Mot de passe incorrect." });
-
-                    return done(null, user);
-                });
+            .then(existingUser => {
+                user = existingUser;
+                if (!user) return done({ email: "Adresse mail incorrecte" });
+                return user.comparePassword(password);
+            })
+            .then(isMatch => {
+                if (!isMatch) return done({ password: "Mot de passe incorrect" });
+                return done(null, user);
             })
             .catch(err => {
                 done(err);

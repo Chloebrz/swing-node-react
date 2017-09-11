@@ -1,5 +1,6 @@
 // Dependencies
 const passport = require("passport");
+const validator = require("validator");
 
 module.exports = app => {
     /**
@@ -25,27 +26,42 @@ module.exports = app => {
      * POST /auth/signup
      * Logs a user in with email and password
      */
-    app.post(
-        "/auth/signup",
-        passport.authenticate("local-signup", {
-            successRedirect: "/admin",
-            failureRedirect: "/signup",
-            failureFlash: true
-        })
-    );
+    app.post("/auth/signup", (req, res, next) => {
+        return passport.authenticate("local-signup", (err, user) => {
+            if (err)
+                return res.json({
+                    success: false,
+                    errors: err
+                });
+
+            if (!user) return res.send({ success: false, message: "authentication failed" });
+
+            req.logIn(user, loginErr => {
+                if (loginErr) return next(loginErr);
+                return res.status(200).json({ success: true });
+            });
+        })(req, res, next);
+    });
 
     /**
      * POST /auth/login
      * Logs a user in with email and password
      */
-    app.post(
-        "/auth/login",
-        passport.authenticate("local-login", {
-            successRedirect: "/admin",
-            failureRedirect: "/login",
-            failureFlash: true
-        })
-    );
+    app.post("/auth/login", (req, res, next) => {
+        return passport.authenticate("local-login", (err, user) => {
+            if (err)
+                return res.json({
+                    success: false,
+                    errors: err
+                });
+            if (!user) return res.send({ success: false, message: "authentication failed" });
+
+            req.logIn(user, loginErr => {
+                if (loginErr) return next(loginErr);
+                return res.status(200).json({ success: true });
+            });
+        })(req, res, next);
+    });
 
     /**
      * GET /api/logout
@@ -62,10 +78,5 @@ module.exports = app => {
      */
     app.get("/api/current_user", (req, res) => {
         res.send(req.user);
-    });
-
-    app.get("/api/flash_error", (req, res) => {
-        const error = req.flash("error")[0];
-        res.send(error);
     });
 };

@@ -7,7 +7,8 @@ import {
     DELETE_PICTURE,
     POST_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS,
-    FETCH_ERRORS
+    SIGNUP_LOGIN_SUCCESS,
+    SIGNUP_LOGIN_ERROR
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -40,7 +41,14 @@ export const updatePicture = payload => async dispatch => {
     dispatch({ type: UPDATE_PICTURE_SUCCESS });
 };
 
-export const fetchErrors = () => async dispatch => {
-    const res = await axios.get("/api/flash_error");
-    dispatch({ type: FETCH_ERRORS, payload: res.data });
+export const signupUser = payload => async dispatch => {
+    const res = await axios.post("/auth/signup", payload);
+    if (res.data.success) dispatch({ type: SIGNUP_LOGIN_SUCCESS });
+    else dispatch({ type: SIGNUP_LOGIN_ERROR, payload: res.data.errors });
+};
+
+export const loginUser = payload => async dispatch => {
+    const res = await axios.post("/auth/login", payload);
+    if (res.data.success) dispatch({ type: SIGNUP_LOGIN_SUCCESS });
+    else dispatch({ type: SIGNUP_LOGIN_ERROR, payload: res.data.errors });
 };

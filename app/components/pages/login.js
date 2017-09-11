@@ -1,31 +1,47 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
+import { loginUser, fetchUser } from "../../actions";
 import RegisterLogin from "../partials/registerLogin";
-import { fetchErrors } from "../../actions";
 
 class Login extends Component {
-    componentDidMount() {
-        this.props.fetchErrors();
+    componentWillReceiveProps(newProps) {
+        if (newProps.success.signup_login_success) {
+            this.props.fetchUser();
+            this.props.history.push("/admin");
+        }
+    }
+
+    handleSubmit(payload) {
+        this.props.loginUser({
+            email: payload.email,
+            password: payload.password
+        });
     }
 
     render() {
         return (
             <RegisterLogin
                 title="Se connecter"
-                actionLink="/auth/login"
                 question="Pas encore inscrit ?"
                 redirectLink="/signup"
                 redirectTitle="S'inscrire"
-                error={this.props.errors.login_error}
+                handleSubmit={this.handleSubmit.bind(this)}
+                errors={this.props.errors}
             />
         );
     }
 }
 
-function mapStateToProps({ errors }) {
-    return { errors };
+Login.propTypes = {
+    success: PropTypes.object,
+    errors: PropTypes.object
+};
+
+function mapStateToProps({ success, errors }) {
+    return { success, errors };
 }
 
-export default connect(mapStateToProps, { fetchErrors })(Login);
+export default connect(mapStateToProps, { loginUser, fetchUser })(Login);

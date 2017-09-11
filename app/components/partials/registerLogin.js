@@ -6,18 +6,60 @@ import PropTypes from "prop-types";
 import style from "../../css/signup-login.css";
 
 class RegisterLogin extends Component {
-    constructor(props) {
+    constructor() {
         super();
 
-        this.state = { error: props.error || false };
+        this.state = {
+            user: { email: "", password: "", confirmPassword: "" },
+            errors: { email: false, password: false, confirmPassword: false }
+        };
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.error) this.setState({ error: newProps.error });
+        if (newProps.errors) this.setState({ errors: newProps.errors });
     }
 
-    onDismissError() {
-        this.setState({ error: false });
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.setState(
+            {
+                errors: {
+                    password:
+                        this.state.user.password.trim().length < 5 ? "5 caractères minimum" : false,
+                    confirmPassword:
+                        this.props.confirmPassword &&
+                        this.state.user.password !== this.state.user.confirmPassword
+                            ? "Mots de passe non identiques"
+                            : false
+                }
+            },
+            function() {
+                if (
+                    this.state.errors.email ||
+                    this.state.errors.password ||
+                    this.state.errors.confirmPassword
+                )
+                    return;
+
+                this.props.handleSubmit({
+                    email: this.state.user.email,
+                    password: this.state.user.password
+                });
+            }
+        );
+    }
+
+    handleChange(e, field) {
+        e.preventDefault();
+
+        let user = this.state.user;
+        user[field] = e.target.value;
+
+        let errors = this.state.errors;
+        errors[field] = false;
+
+        this.setState({ user, errors });
     }
 
     render() {
@@ -37,35 +79,51 @@ class RegisterLogin extends Component {
 
                 <p className="divider">ou</p>
 
-                <form action={this.props.actionLink} method="post">
-                    <input
-                        type="text"
-                        name="email"
-                        placeholder="* Adresse mail"
-                        onChange={this.onDismissError.bind(this)}
-                    />
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <div className="input">
+                        <input
+                            type="text"
+                            name="email"
+                            placeholder="* Adresse mail"
+                            value={this.state.user.email}
+                            onChange={e => this.handleChange(e, "email")}
+                        />
+                        {this.state.errors.email &&
+                            <div className="error">
+                                {this.state.errors.email}
+                            </div>}
+                    </div>
 
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="* Mot de passe"
-                        onChange={this.onDismissError.bind(this)}
-                    />
-
-                    {this.props.confirmPassword &&
+                    <div className="input">
                         <input
                             type="password"
-                            name="password-conf"
-                            placeholder="* Confirmation mot de passe"
-                            onChange={this.onDismissError.bind(this)}
-                        />}
+                            placeholder="* Mot de passe"
+                            value={this.state.user.password}
+                            onChange={e => this.handleChange(e, "password")}
+                        />
+                        {this.state.errors.password &&
+                            <div className="error">
+                                {this.state.errors.password}
+                            </div>}
+                    </div>
 
-                    {this.state.error &&
-                        <div className="alert alert-danger">
-                            <strong>Erreur</strong> - {this.state.error}
-                        </div>}
+                    <div className="input">
+                        {this.props.confirmPassword &&
+                            <input
+                                type="password"
+                                placeholder="* Confirmation mot de passe"
+                                value={this.state.user.confirmPassword}
+                                onChange={e => this.handleChange(e, "confirmPassword")}
+                            />}
+                        {this.state.errors.confirmPassword &&
+                            <div className="error">
+                                {this.state.errors.confirmPassword}
+                            </div>}
+                    </div>
 
-                    <input type="submit" className="btn btn-success" value={this.props.title} />
+                    <div className="input">
+                        <input type="submit" className="btn btn-success" value={this.props.title} />
+                    </div>
                 </form>
 
                 <div className="hint">
@@ -82,11 +140,10 @@ class RegisterLogin extends Component {
 RegisterLogin.propTypes = {
     title: PropTypes.string,
     confirmPassword: PropTypes.bool,
-    actionLink: PropTypes.string,
     question: PropTypes.string,
     redirectLink: PropTypes.string,
     redirectTitle: PropTypes.string,
-    error: PropTypes.string
+    handleSubmit: PropTypes.func
 };
 
 export default RegisterLogin;
