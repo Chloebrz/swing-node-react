@@ -6,13 +6,12 @@ const User = mongoose.model("User");
 module.exports = new LocalStrategy(
     {
         usernameField: "email",
-        passwordField: "password",
-        passReqToCallback: true
+        passwordField: "password"
     },
-    (req, email, password, done) => {
+    (email, password, done) => {
         User.findOne({ email })
             .then(user => {
-                if (user) return done(null, false, { message: "That email is already taken." });
+                if (user) return done(null, false, { message: "Adresse mail déjà utilisée." });
 
                 new User({
                     email,
@@ -24,7 +23,6 @@ module.exports = new LocalStrategy(
                     });
             })
             .catch(err => {
-                console.log("ERR", err);
                 done(err);
             });
     }

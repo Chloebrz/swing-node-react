@@ -6,12 +6,24 @@ const User = mongoose.model("User");
 module.exports = new LocalStrategy(
     {
         usernameField: "email",
-        passwordField: "password",
-        passReqToCallback: true
+        passwordField: "password"
     },
-    (req, email, password, done) => {
-        User.findByCredentials(email, password).then(user => {
-            done(null, user);
-        });
+    (email, password, done) => {
+        User.findOne({ email })
+            .then(user => {
+                if (!user)
+                    return done(null, false, {
+                        message: "Adresse mail incorrecte."
+                    });
+
+                return !user.validPassword(password, isMatch => {
+                    if (!isMatch) return done(null, false, { message: "Mot de passe incorrect." });
+
+                    return done(null, user);
+                });
+            })
+            .catch(err => {
+                done(err);
+            });
     }
 );

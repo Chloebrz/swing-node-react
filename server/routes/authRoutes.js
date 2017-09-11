@@ -29,7 +29,8 @@ module.exports = app => {
         "/auth/signup",
         passport.authenticate("local-signup", {
             successRedirect: "/admin",
-            failureRedirect: "/signup"
+            failureRedirect: "/signup",
+            failureFlash: true
         })
     );
 
@@ -41,7 +42,8 @@ module.exports = app => {
         "/auth/login",
         passport.authenticate("local-login", {
             successRedirect: "/admin",
-            failureRedirect: "/login"
+            failureRedirect: "/login",
+            failureFlash: true
         })
     );
 
@@ -60,5 +62,10 @@ module.exports = app => {
      */
     app.get("/api/current_user", (req, res) => {
         res.send(req.user);
+    });
+
+    app.get("/api/flash_error", (req, res) => {
+        const error = req.flash("error")[0];
+        res.send(error);
     });
 };

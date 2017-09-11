@@ -70,26 +70,14 @@ class PictureForm extends Component {
         reader.readAsDataURL(file);
     }
 
-    handleNameChange(e) {
+    handleChange(e, field) {
         e.preventDefault();
 
         let picture = this.state.picture;
-        picture.name = e.target.value;
+        picture[field] = e.target.value;
 
         let errors = this.state.errors;
-        errors.name = false;
-
-        this.setState({ picture, errors });
-    }
-
-    handleLegendChange(e) {
-        e.preventDefault();
-
-        let picture = this.state.picture;
-        picture.legend = e.target.value;
-
-        let errors = this.state.errors;
-        errors.legend = false;
+        errors[field] = false;
 
         this.setState({ picture, errors });
     }
@@ -126,7 +114,7 @@ class PictureForm extends Component {
                                 type="text"
                                 placeholder="Nom"
                                 value={this.state.picture.name}
-                                onChange={this.handleNameChange.bind(this)}
+                                onChange={e => this.handleChange(e, "name")}
                             />
                             {this.state.errors.name &&
                                 <div className="error">5 caractères minimum</div>}
@@ -140,7 +128,7 @@ class PictureForm extends Component {
                                 rows="5"
                                 placeholder="Légende"
                                 value={this.state.picture.legend}
-                                onChange={this.handleLegendChange.bind(this)}
+                                onChange={e => this.handleChange(e, "legend")}
                             />
                             {this.state.errors.legend &&
                                 <div className="error">15 caractères minimum</div>}

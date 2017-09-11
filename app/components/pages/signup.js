@@ -1,10 +1,15 @@
 // Dependencies
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import RegisterLogin from "../partials/registerLogin";
+import { fetchErrors } from "../../actions";
 
 class Signup extends Component {
+    componentDidMount() {
+        this.props.fetchErrors();
+    }
+
     render() {
         return (
             <RegisterLogin
@@ -14,9 +19,14 @@ class Signup extends Component {
                 question="Déjà inscrit ?"
                 redirectLink="/login"
                 redirectTitle="Se connecter"
+                error={this.props.errors.login_error}
             />
         );
     }
 }
 
-export default Signup;
+function mapStateToProps({ errors }) {
+    return { errors };
+}
+
+export default connect(mapStateToProps, { fetchErrors })(Signup);

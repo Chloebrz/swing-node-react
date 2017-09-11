@@ -6,7 +6,8 @@ import {
     FETCH_PICTURE,
     DELETE_PICTURE,
     POST_PICTURE_SUCCESS,
-    UPDATE_PICTURE_SUCCESS
+    UPDATE_PICTURE_SUCCESS,
+    FETCH_ERRORS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -37,4 +38,9 @@ export const deletePicture = payload => async dispatch => {
 export const updatePicture = payload => async dispatch => {
     await axios.patch(`/api/admin/picture/${payload.id}`, payload);
     dispatch({ type: UPDATE_PICTURE_SUCCESS });
+};
+
+export const fetchErrors = () => async dispatch => {
+    const res = await axios.get("/api/flash_error");
+    dispatch({ type: FETCH_ERRORS, payload: res.data });
 };
