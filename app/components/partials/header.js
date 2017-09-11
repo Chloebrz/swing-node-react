@@ -38,7 +38,7 @@ class Header extends Component {
                 return;
             case false:
                 return (
-                    <li className="nav-item">
+                    <li className="nav-item" key="login">
                         <Link className="nav-link" to="/login">
                             Se connecter
                         </Link>
@@ -56,13 +56,18 @@ class Header extends Component {
             case false:
                 return;
             default:
-                return (
-                    <li className="nav-item">
+                return [
+                    <li className="nav-item" key="profile">
+                        <a className="nav-link" href="/admin/profile">
+                            Mon profil
+                        </a>
+                    </li>,
+                    <li className="nav-item" key="logout">
                         <a className="nav-link active" href="/api/logout">
                             Logout
                         </a>
                     </li>
-                );
+                ];
         }
     }
 

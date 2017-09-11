@@ -10,3 +10,5 @@ export const SIGNUP_LOGIN_ERROR = "signup_login_error";
 
 export const POST_PICTURE_SUCCESS = "post_picture_success";
 export const UPDATE_PICTURE_SUCCESS = "update_picture_success";
+
+export const UPDATE_PROFILE_SUCCESS = "update_profile_success";

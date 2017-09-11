@@ -4,7 +4,8 @@ import {
     POST_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS,
     FETCH_PICTURES,
-    SIGNUP_LOGIN_SUCCESS
+    SIGNUP_LOGIN_SUCCESS,
+    UPDATE_PROFILE_SUCCESS
 } from "../../actions/types";
 
 describe("Success Reducer", () => {
@@ -50,5 +51,15 @@ describe("Success Reducer", () => {
                 type: SIGNUP_LOGIN_SUCCESS
             })
         ).toEqual({ a_success: false, signup_login_success: true });
+    });
+
+    it("should handle UPDATE_PROFILE_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            successReducer(state, {
+                type: UPDATE_PROFILE_SUCCESS
+            })
+        ).toEqual({ a_success: false, profile_success: true });
     });
 });

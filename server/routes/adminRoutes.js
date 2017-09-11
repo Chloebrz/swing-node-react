@@ -5,6 +5,7 @@ const { ObjectID } = require("mongodb");
 const _ = require("lodash");
 
 const Picture = mongoose.model("Picture");
+const User = mongoose.model("User");
 const auth = require("../middlewares/auth");
 
 module.exports = app => {
@@ -147,6 +148,33 @@ module.exports = app => {
 
             if (!picture) return res.status(404).send();
             res.send(picture);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    });
+
+    /**
+     * PATCH /api/admin/profile/:id
+     * Updates the user object in the database given its id and the properties to update
+     * User can only update his own profile
+     */
+    app.patch("/api/admin/profile/:id", auth.requireLogin, async (req, res) => {
+        // get the id of the profile to update and the properties to update
+        const id = req.params.id;
+        var body = _.pick(req.body, ["name", "bio"]);
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        // check if the id of the profile to update if the user id
+        if (!req.user._id.equals(id)) return res.status(401).send();
+
+        try {
+            // update the user object
+            const user = await User.findOneAndUpdate({ _id: id }, { $set: body }, { new: true });
+
+            if (!user) return res.status(404).send();
+            res.send(user);
         } catch (err) {
             res.status(400).send(err);
         }

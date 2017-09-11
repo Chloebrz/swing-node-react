@@ -5,6 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import Dashboard from "./dashboard";
 import AddPicture from "./addPicture";
 import UpdatePicture from "./updatePicture";
+import MyProfile from "./myProfile";
+import UpdateProfile from "./updateProfile";
 
 class Admin extends Component {
     render() {
@@ -13,6 +15,8 @@ class Admin extends Component {
                 <Route exact path="/admin" component={Dashboard} />
                 <Route path="/admin/addpicture" component={AddPicture} />
                 <Route path="/admin/updatepicture/:id" component={UpdatePicture} />
+                <Route path="/admin/profile" component={MyProfile} />
+                <Route path="/admin/update_profile" component={UpdateProfile} />
             </Switch>
         );
     }

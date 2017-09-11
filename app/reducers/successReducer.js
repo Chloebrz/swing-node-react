@@ -3,7 +3,8 @@ import {
     POST_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS,
     FETCH_PICTURES,
-    SIGNUP_LOGIN_SUCCESS
+    SIGNUP_LOGIN_SUCCESS,
+    UPDATE_PROFILE_SUCCESS
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -19,6 +20,9 @@ export default function(state = {}, action) {
 
         case SIGNUP_LOGIN_SUCCESS:
             return Object.assign({}, state, { signup_login_success: true });
+
+        case UPDATE_PROFILE_SUCCESS:
+            return Object.assign({}, state, { profile_success: true });
 
         default:
             return state;

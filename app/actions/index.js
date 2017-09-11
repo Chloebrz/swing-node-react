@@ -8,7 +8,8 @@ import {
     POST_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS,
     SIGNUP_LOGIN_SUCCESS,
-    SIGNUP_LOGIN_ERROR
+    SIGNUP_LOGIN_ERROR,
+    UPDATE_PROFILE_SUCCESS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -51,4 +52,9 @@ export const loginUser = payload => async dispatch => {
     const res = await axios.post("/auth/login", payload);
     if (res.data.success) dispatch({ type: SIGNUP_LOGIN_SUCCESS });
     else dispatch({ type: SIGNUP_LOGIN_ERROR, payload: res.data.errors });
+};
+
+export const updateProfile = payload => async dispatch => {
+    const res = await axios.patch(`/api/admin/profile/${payload.id}`, payload);
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: res.data });
 };

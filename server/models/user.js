@@ -24,6 +24,10 @@ var UserSchema = new mongoose.Schema({
     password: {
         type: String,
         minlength: 5
+    },
+    bio: {
+        type: String,
+        trim: true
     }
 });
 
