@@ -22,7 +22,8 @@ var UserSchema = new mongoose.Schema({
         unique: true
     },
     password: {
-        type: String
+        type: String,
+        minlength: 5
     }
 });
 

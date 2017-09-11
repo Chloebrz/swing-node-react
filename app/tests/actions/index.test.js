@@ -99,4 +99,60 @@ describe("Actions", () => {
             expect(store.getActions()).toEqual(expectedAction);
         });
     });
+
+    it("should create SIGNUP_LOGIN_SUCCESS when signing up user has been successfully done", () => {
+        const payload = { id: 123 };
+        const data = { success: true };
+
+        nock(host).post("/auth/signup", payload).reply(200, data);
+
+        const expectedAction = [{ type: types.SIGNUP_LOGIN_SUCCESS }];
+        const store = mockStore({ success: {} });
+
+        return store.dispatch(actions.signupUser(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+
+    it("should create SIGNUP_LOGIN_ERROR when signing up user has not been successfully done", () => {
+        const payload = { id: 123 };
+        const data = { success: false, errors: "errors" };
+
+        nock(host).post("/auth/signup", payload).reply(200, data);
+
+        const expectedAction = [{ type: types.SIGNUP_LOGIN_ERROR, payload: data.errors }];
+        const store = mockStore({ errors: {} });
+
+        return store.dispatch(actions.signupUser(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+
+    it("should create SIGNUP_LOGIN_SUCCESS when logging in user has been successfully done", () => {
+        const payload = { id: 123 };
+        const data = { success: true };
+
+        nock(host).post("/auth/login", payload).reply(200, data);
+
+        const expectedAction = [{ type: types.SIGNUP_LOGIN_SUCCESS }];
+        const store = mockStore({ success: {} });
+
+        return store.dispatch(actions.loginUser(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+
+    it("should create SIGNUP_LOGIN_ERROR when logging up user has not been successfully done", () => {
+        const payload = { id: 123 };
+        const data = { success: false, errors: "errors" };
+
+        nock(host).post("/auth/login", payload).reply(200, data);
+
+        const expectedAction = [{ type: types.SIGNUP_LOGIN_ERROR, payload: data.errors }];
+        const store = mockStore({ errors: {} });
+
+        return store.dispatch(actions.loginUser(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
 });

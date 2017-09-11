@@ -1,6 +1,11 @@
 // Dependencies
 import successReducer from "../../reducers/successReducer";
-import { POST_PICTURE_SUCCESS, UPDATE_PICTURE_SUCCESS, FETCH_PICTURES } from "../../actions/types";
+import {
+    POST_PICTURE_SUCCESS,
+    UPDATE_PICTURE_SUCCESS,
+    FETCH_PICTURES,
+    SIGNUP_LOGIN_SUCCESS
+} from "../../actions/types";
 
 describe("Success Reducer", () => {
     it("should return the initial state", () => {
@@ -35,5 +40,15 @@ describe("Success Reducer", () => {
                 type: FETCH_PICTURES
             })
         ).toEqual({ a_success: false, fetch_success: true });
+    });
+
+    it("should handle SIGNUP_LOGIN_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            successReducer(state, {
+                type: SIGNUP_LOGIN_SUCCESS
+            })
+        ).toEqual({ a_success: false, signup_login_success: true });
     });
 });
