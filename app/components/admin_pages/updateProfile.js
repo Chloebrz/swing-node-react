@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 import { updateProfile } from "../../actions/profiles";
 import ProfileForm from "../admin_partials/profileForm";
+import styles from "../../css/profile.css";
 
 class UpdateProfile extends Component {
     componentWillReceiveProps(newProps) {
@@ -22,16 +23,26 @@ class UpdateProfile extends Component {
         });
     }
 
-    render() {
+    renderProfileForm() {
+        if (!this.props.auth) return;
+
         return (
             <ProfileForm
                 handleSubmit={this.handleSubmit.bind(this)}
-                firstname={this.props.auth.name ? this.props.auth.name.firstname : ""}
-                lastname={this.props.auth.name ? this.props.auth.name.lastname : ""}
+                firstname={this.props.auth.name.firstname}
+                lastname={this.props.auth.name.lastname}
                 bio={this.props.auth.bio}
-                email={this.props.auth.email}
                 history={this.props.history}
             />
+        );
+    }
+
+    render() {
+        return (
+            <div className={styles}>
+                <h1>Modifier mon profil</h1>
+                {this.renderProfileForm()}
+            </div>
         );
     }
 }

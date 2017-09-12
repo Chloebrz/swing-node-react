@@ -1,0 +1,11 @@
+.margin-center {
+    margin: auto;
+}
+
+.profile-form input {
+    margin-bottom: 20px;
+}
+
+.profile-form textarea {
+    margin-bottom: 20px;
+}

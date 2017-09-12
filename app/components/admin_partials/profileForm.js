@@ -34,7 +34,7 @@ class ProfileForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="profile-form">
                 <h4>Prénom :</h4>
                 <input
                     type="text"
@@ -51,28 +51,14 @@ class ProfileForm extends Component {
                     onChange={e => this.handleChange(e, "lastname")}
                 />
 
-                <br />
-                <br />
-
                 <h4>Bio :</h4>
                 <textarea
                     type="text"
                     rows="5"
-                    placeholder="Bio"
+                    placeholder="Quisque sollicitudin tellus non ipsum consectetur tincidunt."
                     value={this.state.bio}
                     onChange={e => this.handleChange(e, "bio")}
                 />
-
-                <br />
-                <br />
-
-                <h4>Adresse mail :</h4>
-                <p>
-                    {this.props.email}
-                </p>
-
-                <br />
-                <br />
 
                 <div className="center">
                     <button
@@ -96,7 +82,9 @@ class ProfileForm extends Component {
 
 ProfileForm.propTypes = {
     handleSubmit: PropTypes.func,
-    email: PropTypes.string
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    bio: PropTypes.string
 };
 
 export default ProfileForm;
