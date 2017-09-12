@@ -50,6 +50,7 @@ const pictures = [
 const users = [
     {
         _id: userOneId,
+        name: { firstname: "Harry", lastname: "Doe" },
         email: "harry@test.com"
     }
 ];

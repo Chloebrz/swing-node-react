@@ -12,6 +12,15 @@ export const fetchUser = () => async dispatch => {
 };
 
 /**
+ * Fetch one profile of the database given its id
+ * Send a GET request to /api/admin/profile/:id and dispatch the result as payload of a FETCH_PROFILE action
+ */
+export const fetchProfile = payload => async dispatch => {
+    const res = await axios.get(`/api/admin/profile/${payload.id}`);
+    dispatch({ type: types.FETCH_PROFILE, payload: res.data });
+};
+
+/**
  * Sign up a new user (add the user info to the database)
  * Send a POST request to /auth/signup and dispatch a SIGNUP_LOGIN_SUCCESS action when succeedded
  * If error while creating the new user object dispatch the error data as payload of a SIGNUP_LOGIN_ERROR action

@@ -239,6 +239,32 @@ describe("PATCH /api/admin/picture/:id", () => {
     });
 });
 
+describe("GET /api/admin/profile/:id", () => {
+    it("should return 404 for non-object ids", done => {
+        request(app).get("/api/admin/profile/123").expect(404).end(done);
+    });
+
+    it("should return 404 if profile not found", done => {
+        request(app)
+            .get(`/api/admin/picture/${new ObjectID().toHexString()}`)
+            .expect(404)
+            .end(done);
+    });
+
+    it("should return a profile doc", done => {
+        request(app)
+            .get(`/api/admin/profile/${users[0]._id}`)
+            .expect(200)
+            .expect(res => {
+                const p = res.body;
+                expect(p.name.firstname).toBe(users[0].name.firstname);
+                expect(p.name.lastname).toBe(users[0].name.lastname);
+                expect(p.email).toBe(users[0].email);
+            })
+            .end(done);
+    });
+});
+
 describe("PATCH /api/admin/profile/:id", () => {
     it("should return 404 for non-object ids", done => {
         request(app).patch("/api/admin/profile/123").expect(404).end(done);

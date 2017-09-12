@@ -34,6 +34,18 @@ describe("PROFILES ACTIONS", () => {
         });
     });
 
+    it("should create FETCH_PROFILE when fetching a profile has been done", () => {
+        const payload = { id: 123 };
+        const data = { id: 123, name: "test" };
+        const expectedAction = [{ type: types.FETCH_PROFILE, payload: data }];
+
+        nock(host).get("/api/admin/profile/123").reply(200, data);
+
+        return store.dispatch(actions.fetchProfile(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+
     it("should create SIGNUP_LOGIN_SUCCESS when signing up user has been successfully done", () => {
         const payload = { id: 123 };
         const data = { success: true };

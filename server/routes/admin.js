@@ -47,7 +47,7 @@ module.exports = app => {
             const picture = await Picture.findOne({ _id: id, creatorId: req.user._id });
 
             if (!picture)
-                res.status(404).send({
+                return res.status(404).send({
                     error: "Vous ne pouvez pas accéder à cette image car vous ne l'avez pas ajoutée"
                 });
 
@@ -148,6 +148,30 @@ module.exports = app => {
 
             if (!picture) return res.status(404).send();
             res.send(picture);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    });
+
+    /**
+     * GET /api/admin/profile/:id
+     * Gets a profile item from the users database given its id
+     */
+    app.get("/api/admin/profile/:id", async (req, res) => {
+        // get the id of the profile to retrieve
+        const id = req.params.id;
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            // retrieve the profile item
+            const profile = await User.findOne({ _id: id });
+
+            if (!profile) return res.status(404).send();
+
+            // send the result
+            res.send(profile);
         } catch (err) {
             res.status(400).send(err);
         }
