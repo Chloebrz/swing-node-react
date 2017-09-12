@@ -9,30 +9,21 @@ class ProfileBox extends Component {
     renderBio() {
         if (!this.props.profile.bio && !this.props.admin) return;
 
-        if (this.props.admin && !this.props.bio)
+        if (!this.props.profile.bio && this.props.admin)
             return (
                 <p>
                     <Link to="/admin/update_profile">Ajouter une bio</Link>
                 </p>
             );
 
-        if (this.props.admin && this.props.bio)
-            return (
-                <div>
-                    <h2>Bio :</h2>
-                    <p>
-                        {this.props.auth.bio}
-                    </p>
-                </div>
-            );
-
-        return;
-        <div>
-            <h2>Bio :</h2>
-            <p>
-                {this.props.profile.bio}
-            </p>
-        </div>;
+        return (
+            <div>
+                <h2>Bio :</h2>
+                <p>
+                    {this.props.profile.bio}
+                </p>
+            </div>
+        );
     }
 
     renderUpdateLink() {
@@ -66,14 +57,7 @@ class ProfileBox extends Component {
                 <br />
                 <br />
 
-                {this.props.profile.bio &&
-                    <div>
-                        <h2>Bio :</h2>
-                        <p>
-                            {this.props.profile.bio}
-                        </p>
-                    </div>}
-
+                {this.renderBio()}
                 {this.renderUpdateLink()}
             </div>
         );
