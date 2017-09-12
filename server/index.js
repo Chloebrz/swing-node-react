@@ -27,9 +27,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Route handlers
-require("./routes/authRoutes")(app);
-require("./routes/adminRoutes")(app);
-require("./routes/reactRoutes")(app);
+require("./routes/auth")(app);
+require("./routes/admin")(app);
+require("./routes/react")(app);
 
 // Server setup
 const port = process.env.PORT || 3000;

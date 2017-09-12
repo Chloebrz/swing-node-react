@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const { ObjectID } = require("mongodb");
 
 const Picture = mongoose.model("Picture");
+const User = mongoose.model("User");
 
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
@@ -46,10 +47,27 @@ const pictures = [
     }
 ];
 
+const users = [
+    {
+        _id: userOneId,
+        email: "harry@test.com"
+    }
+];
+
 const populatePictures = done => {
     Picture.remove({})
         .then(() => {
             Picture.insertMany(pictures);
+        })
+        .then(() => {
+            User.remove({});
+        })
+        .then(() => {
+            const promises = users.map(user => {
+                return new User(user).save();
+            });
+
+            Promise.all(promises);
         })
         .then(() => done());
 };
@@ -57,5 +75,6 @@ const populatePictures = done => {
 module.exports = {
     userOneId,
     pictures,
+    users,
     populatePictures
 };

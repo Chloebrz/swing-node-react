@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 require("../../db/mongoose");
 const Picture = mongoose.model("Picture");
 
-const { userOneId, pictures, populatePictures } = require("../seed/pictures-seed");
+const { userOneId, pictures, users, populatePictures } = require("../seed/pictures-seed");
 beforeEach(populatePictures);
 
 var app, stub;
@@ -184,7 +184,7 @@ describe("DELETE /api/admin/picture/:id", () => {
     });
 });
 
-describe("PATCH /api/admin/picture", () => {
+describe("PATCH /api/admin/picture/:id", () => {
     it("should return 404 for non-object ids", done => {
         request(app).patch("/api/admin/picture/123").expect(404).end(done);
     });
@@ -234,6 +234,45 @@ describe("PATCH /api/admin/picture", () => {
                 const pic = res.body;
                 expect(pic.name).toBe(picture.name);
                 expect(pic.legend).toBe(picture.legend);
+            })
+            .end(done);
+    });
+});
+
+describe("PATCH /api/admin/profile/:id", () => {
+    it("should return 404 for non-object ids", done => {
+        request(app).patch("/api/admin/profile/123").expect(404).end(done);
+    });
+
+    it("should return 401 if profile id not user id", done => {
+        const profile = {
+            name: { firstname: "firstname", lastname: "lastname" },
+            bio: "bio bio bio"
+        };
+
+        request(app)
+            .patch(`/api/admin/profile/${new ObjectID().toHexString()}`)
+            .send(profile)
+            .expect(401)
+            .end(done);
+    });
+
+    it("should update a profile doc", done => {
+        const profile = {
+            id: users[0]._id,
+            name: { firstname: "firstname", lastname: "lastname" },
+            bio: "bio bio bio"
+        };
+
+        request(app)
+            .patch(`/api/admin/profile/${users[0]._id}`)
+            .send(profile)
+            .expect(200)
+            .expect(res => {
+                const p = res.body;
+                expect(p.name.firstname).toBe(profile.name.firstname);
+                expect(p.name.lastname).toBe(profile.name.lastname);
+                expect(p.bio).toBe(p.bio);
             })
             .end(done);
     });
