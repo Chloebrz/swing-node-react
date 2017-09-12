@@ -1,9 +1,9 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import { updateProfile } from "../../actions";
+import { updateProfile } from "../../actions/profiles";
 import ProfileForm from "../admin_partials/profileForm";
 
 class UpdateProfile extends Component {
@@ -30,10 +30,17 @@ class UpdateProfile extends Component {
                 lastname={this.props.auth.name ? this.props.auth.name.lastname : ""}
                 bio={this.props.auth.bio}
                 email={this.props.auth.email}
+                history={this.props.history}
             />
         );
     }
 }
+
+UpdateProfile.propTypes = {
+    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    success: PropTypes.object,
+    updateProfile: PropTypes.func
+};
 
 function mapStateToProps({ auth, success }) {
     return { auth, success };

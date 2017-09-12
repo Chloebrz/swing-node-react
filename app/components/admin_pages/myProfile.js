@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class MyProfile extends Component {
     renderProfile() {
@@ -32,6 +33,10 @@ class MyProfile extends Component {
         );
     }
 }
+
+MyProfile.propTypes = {
+    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
+};
 
 function mapStateToProps({ auth }) {
     return { auth };

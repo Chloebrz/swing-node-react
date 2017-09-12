@@ -13,8 +13,8 @@ class Admin extends Component {
         return (
             <Switch>
                 <Route exact path="/admin" component={Dashboard} />
-                <Route path="/admin/addpicture" component={AddPicture} />
-                <Route path="/admin/updatepicture/:id" component={UpdatePicture} />
+                <Route path="/admin/add_picture" component={AddPicture} />
+                <Route path="/admin/update_picture/:id" component={UpdatePicture} />
                 <Route path="/admin/profile" component={MyProfile} />
                 <Route path="/admin/update_profile" component={UpdateProfile} />
             </Switch>

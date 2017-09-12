@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 moment.locale("fr");
 
-import { fetchPictures } from "../../actions";
+import { fetchPictures } from "../../actions/pictures";
 import PictureBox from "../admin_partials/pictureBox";
 import style from "../../css/dashboard.css";
 
@@ -46,7 +46,7 @@ class Dashboard extends Component {
         return (
             <div className={style}>
                 <div className="center">
-                    <Link to="/admin/addpicture">
+                    <Link to="/admin/add_picture">
                         <img
                             className="icon-md center"
                             src={require("../../images/icons/add.png")}
@@ -62,7 +62,9 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     fetchPictures: PropTypes.func,
-    pictures: PropTypes.arrayOf(PropTypes.object)
+    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    pictures: PropTypes.arrayOf(PropTypes.object),
+    success: PropTypes.object
 };
 
 function mapStateToProps({ auth, pictures, success }) {

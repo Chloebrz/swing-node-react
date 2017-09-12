@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import * as actions from "../../actions";
+import { fetchUser } from "../../actions/profiles";
 
 class Header extends Component {
     constructor(props) {
@@ -138,4 +138,4 @@ function mapStateToProps({ auth }) {
     return { auth };
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, { fetchUser })(Header);

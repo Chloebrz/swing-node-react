@@ -1,6 +1,5 @@
 // Dependencies
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ProfileForm extends Component {
@@ -94,5 +93,10 @@ class ProfileForm extends Component {
         );
     }
 }
+
+ProfileForm.propTypes = {
+    handleSubmit: PropTypes.func,
+    email: PropTypes.string
+};
 
 export default ProfileForm;

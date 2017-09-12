@@ -1,13 +1,13 @@
 // Dependencies
 import { combineReducers } from "redux";
-import authReducer from "./authReducer";
-import picturesReducer from "./picturesReducer";
-import successReducer from "./successReducer";
-import errorsReducer from "./errorsReducer";
+import auth from "./auth";
+import pictures from "./pictures";
+import success from "./success";
+import errors from "./errors";
 
 export default combineReducers({
-    auth: authReducer,
-    pictures: picturesReducer,
-    success: successReducer,
-    errors: errorsReducer
+    auth,
+    pictures,
+    success,
+    errors
 });

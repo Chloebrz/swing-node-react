@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 
-import { deletePicture } from "../../actions";
+import { deletePicture } from "../../actions/pictures";
 
 const customStyles = {
     content: {
@@ -41,45 +41,46 @@ class PictureBox extends Component {
     }
 
     renderIcons() {
-        if (this.props.creator)
-            return (
-                <div>
+        if (!this.props.creator) return;
+
+        return (
+            <div>
+                <img
+                    className="icon icon-clickable"
+                    src={require("../../images/icons/delete.png")}
+                    onClick={this.openModal}
+                />
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Modal"
+                >
+                    <h2 ref={subtitle => (this.subtitle = subtitle)}>Supprimer</h2>
+                    <p>
+                        Voulez-vous vraiment supprimer l'image : "{this.props.name}" ?
+                    </p>
+                    <form>
+                        <button
+                            className="btn btn-success"
+                            onClick={this.handleDeleteClick.bind(this)}
+                        >
+                            Supprimer
+                        </button>
+                        <button className="btn btn-secondary right" onClick={this.closeModal}>
+                            Annuler
+                        </button>
+                    </form>
+                </Modal>
+
+                <Link to={`/admin/update_picture/${this.props.id}`}>
                     <img
                         className="icon icon-clickable"
-                        src={require("../../images/icons/delete.png")}
-                        onClick={this.openModal}
+                        src={require("../../images/icons/edit.png")}
                     />
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onRequestClose={this.closeModal}
-                        style={customStyles}
-                        contentLabel="Modal"
-                    >
-                        <h2 ref={subtitle => (this.subtitle = subtitle)}>Supprimer</h2>
-                        <p>
-                            Voulez-vous vraiment supprimer l'image : "{this.props.name}" ?
-                        </p>
-                        <form>
-                            <button
-                                className="btn btn-success"
-                                onClick={this.handleDeleteClick.bind(this)}
-                            >
-                                Supprimer
-                            </button>
-                            <button className="btn btn-secondary right" onClick={this.closeModal}>
-                                Annuler
-                            </button>
-                        </form>
-                    </Modal>
-
-                    <Link to={`/admin/updatepicture/${this.props.id}`}>
-                        <img
-                            className="icon icon-clickable"
-                            src={require("../../images/icons/edit.png")}
-                        />
-                    </Link>
-                </div>
-            );
+                </Link>
+            </div>
+        );
     }
 
     render() {

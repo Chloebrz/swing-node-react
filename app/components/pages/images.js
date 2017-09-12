@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 moment.locale("fr");
 
-import { fetchPictures } from "../../actions";
+import { fetchPictures } from "../../actions/pictures";
 import style from "../../css/images.css";
 import PictureBox from "../partials/pictureBox";
 import PicturesCarousel from "../partials/picturesCarousel";
@@ -112,7 +112,9 @@ class Images extends Component {
 }
 
 Images.propTypes = {
-    pictures: PropTypes.arrayOf(PropTypes.object)
+    fetchPictures: PropTypes.func,
+    pictures: PropTypes.arrayOf(PropTypes.object),
+    success: PropTypes.object
 };
 
 function mapStateToProps({ pictures, success }) {

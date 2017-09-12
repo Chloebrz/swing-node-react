@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { fetchPicture, updatePicture } from "../../actions";
+import { fetchPicture, updatePicture } from "../../actions/pictures";
 import PictureForm from "../admin_partials/pictureForm";
 
 class UpdatePicture extends Component {
@@ -84,6 +84,7 @@ class UpdatePicture extends Component {
 UpdatePicture.propTypes = {
     success: PropTypes.object,
     picture: PropTypes.object,
+    fetchPicture: PropTypes.func,
     updatePicture: PropTypes.func
 };
 

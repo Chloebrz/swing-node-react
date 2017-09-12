@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { loginUser, fetchUser } from "../../actions";
+import { loginUser, fetchUser } from "../../actions/profiles";
 import RegisterLogin from "../partials/registerLogin";
 
 class Login extends Component {
@@ -36,6 +36,8 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+    loginUser: PropTypes.func,
+    fetchUser: PropTypes.func,
     success: PropTypes.object,
     errors: PropTypes.object
 };

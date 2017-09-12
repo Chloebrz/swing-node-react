@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { postPicture } from "../../actions";
+import { postPicture } from "../../actions/pictures";
 import PictureForm from "../admin_partials/pictureForm";
 
 class AddPicture extends Component {
@@ -38,7 +38,8 @@ class AddPicture extends Component {
 }
 
 AddPicture.propTypes = {
-    success: PropTypes.object
+    success: PropTypes.object,
+    postPicture: PropTypes.func
 };
 
 function mapStateToProps({ success }) {
