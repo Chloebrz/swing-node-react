@@ -13,7 +13,7 @@ class PictureForm extends Component {
                 name: props.name || "",
                 legend: props.legend || "",
                 file: null,
-                res: props.res || require("../../images/icons/placeholder.png")
+                res: props.res || require("../../images/placeholders/picture.png")
             },
             errors: {
                 name: false,
@@ -33,7 +33,7 @@ class PictureForm extends Component {
                     legend: this.state.picture.legend.trim().length < 15,
                     file:
                         !this.state.picture.file &&
-                        this.state.picture.res === require("../../images/icons/placeholder.png")
+                        this.state.picture.res === require("../../images/placeholders/picture.png")
                 }
             },
             function() {

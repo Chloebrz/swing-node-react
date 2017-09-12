@@ -68,8 +68,13 @@ class Triul extends Component {
                 <p>
                     Ce projet a fait l'objet d'un dépôt de brevet, le 29 octobre 1992.<br />
                     Pour accéder à ces documents, cliquez{" "}
-                    <a href={require("../../images/triul/Triul_7_(S._Geneve).jpg")}>ici</a> ou{" "}
-                    <a href={require("../../images/triul/Triul_6_Pct.jpg")}>là</a>.
+                    <a href={require("../../images/triul/Triul_7_(S._Geneve).jpg")} target="_blank">
+                        ici
+                    </a>{" "}
+                    ou{" "}
+                    <a href={require("../../images/triul/Triul_6_Pct.jpg")} target="_blank">
+                        là
+                    </a>.
                 </p>
             </div>
         );

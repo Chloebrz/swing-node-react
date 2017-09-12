@@ -12,6 +12,7 @@ import Contact from "./components/pages/contact";
 import Admin from "./components/admin_pages/admin";
 import Login from "./components/pages/login";
 import Signup from "./components/pages/signup";
+import NoMatch from "./components/pages/noMatch";
 
 import mainStyle from "./css/main.css";
 import headerStyle from "./css/header.css";
@@ -30,6 +31,7 @@ const routes = (
                     <Route path="/admin" component={Admin} />
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
+                    <Route component={NoMatch} />
                 </Switch>
                 <Footer />
             </div>

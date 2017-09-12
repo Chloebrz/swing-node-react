@@ -14,7 +14,7 @@ class MyProfile extends Component {
             <div>
                 <div className="row">
                     <div className="col-lg-3 col-md-4 col-sm-5">
-                        <img src={require("../../images/icons/profile_placeholder.png")} />
+                        <img src={require("../../images/placeholders/profile.png")} />
                     </div>
                     <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
                         <h2>

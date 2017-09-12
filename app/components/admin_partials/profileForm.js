@@ -35,21 +35,31 @@ class ProfileForm extends Component {
     render() {
         return (
             <div className="profile-form">
-                <h4>Prénom :</h4>
-                <input
-                    type="text"
-                    placeholder="Prénom"
-                    value={this.state.firstname}
-                    onChange={e => this.handleChange(e, "firstname")}
-                />
+                <div className="row">
+                    <div className="col-lg-3 col-md-4 col-sm-5">
+                        <img src={require("../../images/placeholders/profile.png")} />
+                    </div>
+                    <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
+                        <h4>Prénom :</h4>
+                        <input
+                            type="text"
+                            placeholder="Prénom"
+                            value={this.state.firstname}
+                            onChange={e => this.handleChange(e, "firstname")}
+                        />
 
-                <h4>Nom :</h4>
-                <input
-                    type="text"
-                    placeholder="Nom"
-                    value={this.state.lastname}
-                    onChange={e => this.handleChange(e, "lastname")}
-                />
+                        <h4>Nom :</h4>
+                        <input
+                            type="text"
+                            placeholder="Nom"
+                            value={this.state.lastname}
+                            onChange={e => this.handleChange(e, "lastname")}
+                        />
+                    </div>
+                </div>
+
+                <br />
+                <br />
 
                 <h4>Bio :</h4>
                 <textarea
