@@ -12,6 +12,15 @@ export const fetchPictures = () => async dispatch => {
 };
 
 /**
+ * Fetch the pictures of the database created by a user given his id
+ * Send a GET request to /api/admin/pictures/:id and dispatch the result as payload of a FETCH_PICTURES action
+ */
+export const fetchUserPictures = payload => async dispatch => {
+    const res = await axios.get(`/api/admin/pictures/${payload.id}`);
+    dispatch({ type: types.FETCH_PICTURES, payload: res.data });
+};
+
+/**
  * Fetch one picture of the database given its id
  * Send a GET request to /api/admin/picture/:id and dispatch the result as payload of a FETCH_PICTURE action
  */

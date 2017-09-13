@@ -2,8 +2,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import moment from "moment";
+moment.locale("fr");
 
 import styles from "../../css/profile.css";
+import PictureBox from "../partials/pictureBox";
 
 class ProfileBox extends Component {
     renderBio() {
@@ -63,10 +66,30 @@ class ProfileBox extends Component {
         );
     }
 
+    renderPictures() {
+        if (this.props.pictures.length < 1) return;
+
+        return this.props.pictures.map(picture => {
+            return (
+                <PictureBox
+                    key={picture._id}
+                    name={picture.name}
+                    type={picture.img.contentType}
+                    res={picture.img.res}
+                    legend={picture.legend}
+                    date={moment(picture.createdAt).format("D MMMM YY")}
+                />
+            );
+        });
+    }
+
     render() {
+        console.log(this.props.pictures);
         return (
             <div className={styles}>
                 {this.renderProfile()}
+
+                {this.renderPictures()}
             </div>
         );
     }
@@ -74,7 +97,8 @@ class ProfileBox extends Component {
 
 ProfileBox.propTypes = {
     profile: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    admin: PropTypes.bool
+    admin: PropTypes.bool,
+    pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default ProfileBox;

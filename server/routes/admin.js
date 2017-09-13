@@ -31,6 +31,35 @@ module.exports = app => {
     });
 
     /**
+     * GET /api/admin/pictures/:id
+     * Gets the picture items from the pictures database created by a user given its id
+     */
+    app.get("/api/admin/pictures/:id", async (req, res) => {
+        // get the id of the user to retrieve the pictures of
+        const id = req.params.id;
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            // retrieve the picture items
+            const pictures = await Picture.find({ creatorId: id });
+
+            if (!pictures) return res.status(404).send();
+
+            // add the base64 data to each item
+            pictures.forEach(picture => {
+                picture.img.res = new Buffer(picture.img.data).toString("base64");
+            });
+
+            // send the result
+            res.send(pictures);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    });
+
+    /**
      * GET /api/admin/picture/:id
      * Gets a picture item from the pictures database given its id
      * User can only get the pictures he created

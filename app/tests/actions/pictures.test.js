@@ -34,6 +34,18 @@ describe("PICTURES ACTIONS", () => {
         });
     });
 
+    it("should create FETCH_PICTURES when fetching pictures of a given user has been done", () => {
+        const payload = { id: 123 };
+        const data = ["t", "e", "s", "t", "s"];
+        const expectedAction = [{ type: types.FETCH_PICTURES, payload: data }];
+
+        nock(host).get("/api/admin/pictures/123").reply(200, data);
+
+        return store.dispatch(actions.fetchUserPictures(payload)).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
+
     it("should create FETCH_PICTURE when fetching picture has been done", () => {
         const payload = { id: 123 };
         const data = { id: 123, name: "abc" };

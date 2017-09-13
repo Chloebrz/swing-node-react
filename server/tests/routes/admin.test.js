@@ -56,6 +56,22 @@ describe("GET /api/admin/pictures", () => {
     });
 });
 
+describe("GET /api/admin/pictures/:id", () => {
+    it("should return 404 for non-object ids", done => {
+        request(app).get("/api/admin/pictures/123").expect(404).end(done);
+    });
+
+    it("should return all the pictures created by the user", done => {
+        request(app)
+            .get(`/api/admin/pictures/${userOneId}`)
+            .expect(200)
+            .expect(res => {
+                expect(res.body.length).toBe(2);
+            })
+            .end(done);
+    });
+});
+
 describe("GET /api/admin/picture/:id", () => {
     it("should return 404 for non-object ids", done => {
         request(app).get("/api/admin/picture/123").expect(404).end(done);
