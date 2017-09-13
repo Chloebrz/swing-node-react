@@ -3,13 +3,16 @@ const mongoose = require("mongoose");
 const { ObjectID } = require("mongodb");
 
 const User = mongoose.model("User");
+const Token = mongoose.model("Token");
 
 const userOneGoogleId = new ObjectID();
 const userTwoGoogleId = new ObjectID();
+const userOneId = new ObjectID();
+const userTwoId = new ObjectID();
 
 const users = [
     {
-        _id: new ObjectID(),
+        _id: userOneId,
         name: {
             firstname: "John",
             lastname: "Doe"
@@ -18,7 +21,7 @@ const users = [
         email: "john@test.com"
     },
     {
-        _id: new ObjectID(),
+        _id: userTwoId,
         name: {
             firstname: "Jane",
             lastname: "Doe"
@@ -37,19 +40,35 @@ const users = [
     }
 ];
 
+const tokens = [
+    {
+        userId: userOneId,
+        token: "token123"
+    }
+];
+
 const populateUsers = done => {
-    User.remove({})
+    const pt = Token.remove({});
+    const pu = User.remove({});
+
+    Promise.all([pt, pu])
         .then(() => {
-            const promises = users.map(user => {
+            const pu = users.map(user => {
                 return new User(user).save();
             });
 
-            Promise.all(promises);
+            Promise.all(pu);
+        })
+        .then(() => {
+            new Token(tokens[0]).save();
         })
         .then(() => done());
 };
 
 module.exports = {
     users,
+    userOneId,
+    userTwoId,
+    tokens,
     populateUsers
 };

@@ -9,6 +9,28 @@ const { userOneGoogleId, users, populateUsers } = require("../seed/users-seed");
 before(populateUsers);
 
 describe("User model", function() {
+    it("should create a new user object", done => {
+        const user = new User({
+            name: {
+                firstname: "firstname",
+                lastname: "lastname"
+            },
+            email: "test@test.com",
+            password: "pwd123",
+            bio: "this is a small test bio"
+        });
+
+        user.save().then(u => {
+            expect(u.name.firstname).toBe(user.name.firstname);
+            expect(u.name.lastname).toBe(user.name.lastname);
+            expect(u.email).toBe(user.email);
+            expect(u.password).toExist();
+            expect(u.bio).toBe(user.bio);
+            expect(u.isVerified).toBe(false);
+            done();
+        });
+    });
+
     describe("name", () => {
         it("should return error firstname is not a String", done => {
             const user = new User({
@@ -44,6 +66,19 @@ describe("User model", function() {
                 expect(err.errors["name.lastname"].message).toBe(
                     'Cast to String failed for value "{ id: 123 }" at path "name.lastname"'
                 );
+                done();
+            });
+        });
+
+        it("should default firstname and lastname if not given", done => {
+            const user = new User({
+                googleId: "123",
+                email: "test@test.com"
+            });
+
+            user.save().then(u => {
+                expect(u.name.firstname).toBe("John");
+                expect(u.name.lastname).toBe("Doe");
                 done();
             });
         });
@@ -141,6 +176,22 @@ describe("User model", function() {
                 done();
             });
         });
+
+        it("should lowercase the email", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                googleId: "123",
+                email: "TEST@test.com"
+            });
+
+            user.save().then(u => {
+                expect(u.email).toBe("test@test.com");
+                done();
+            });
+        });
     });
 
     describe("password", () => {
@@ -178,6 +229,63 @@ describe("User model", function() {
                 expect(err.errors.password.message).toBe(
                     "Path `password` (`123`) is shorter than the minimum allowed length (5)."
                 );
+                done();
+            });
+        });
+    });
+
+    describe("bio", () => {
+        it("should return error if bio is not a string", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                email: "test@test.com",
+                password: "pwd123",
+                bio: { id: 123 }
+            });
+
+            user.save().catch(err => {
+                expect(err.errors.bio).toExist();
+                expect(err.errors.bio.message).toBe(
+                    'Cast to String failed for value "{ id: 123 }" at path "bio"'
+                );
+                done();
+            });
+        });
+
+        it("should trim the bio", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                googleId: "123",
+                email: "test@test.com",
+                bio: "    bio bio bio     "
+            });
+
+            user.save().then(u => {
+                expect(u.bio).toBe("bio bio bio");
+                done();
+            });
+        });
+    });
+
+    describe("isVerified", () => {
+        it("should default isVerified if not given", done => {
+            const user = new User({
+                name: {
+                    firstname: "firstname",
+                    lastname: "lastname"
+                },
+                email: "test@test.com",
+                password: "test123"
+            });
+
+            user.save().then(u => {
+                expect(u.isVerified).toBe(false);
                 done();
             });
         });

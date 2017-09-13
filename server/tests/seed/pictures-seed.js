@@ -56,12 +56,12 @@ const users = [
 ];
 
 const populatePictures = done => {
-    Picture.remove({})
+    const pp = Picture.remove({});
+    const pu = User.remove({});
+
+    Promise.all([pp, pu])
         .then(() => {
             Picture.insertMany(pictures);
-        })
-        .then(() => {
-            User.remove({});
         })
         .then(() => {
             const promises = users.map(user => {
