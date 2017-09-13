@@ -1,6 +1,5 @@
 // Dependencies
 const mongoose = require("mongoose");
-const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 var UserSchema = new mongoose.Schema({
@@ -15,10 +14,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        validate: {
-            validator: value => validator.isEmail(value),
-            message: "{VALUE} is not a valid email"
-        },
+        lowercase: true,
         unique: true
     },
     password: {
@@ -28,7 +24,8 @@ var UserSchema = new mongoose.Schema({
     bio: {
         type: String,
         trim: true
-    }
+    },
+    isVerified: { type: Boolean, default: false }
 });
 
 UserSchema.methods.comparePassword = function comparePassword(password) {

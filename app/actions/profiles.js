@@ -50,3 +50,12 @@ export const updateProfile = payload => async dispatch => {
     const res = await axios.patch(`/api/admin/profile/${payload.id}`, payload);
     dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data });
 };
+
+/**
+ * Send an email with a link to verify the email adress of the user
+ * Send a GET request to /api/token/send and TODO dispatch a TOKEN_SENT action when succeedded
+ */
+export const sendVerifyToken = () => async dispatch => {
+    await axios.get("/api/token/send");
+    console.log("here");
+};

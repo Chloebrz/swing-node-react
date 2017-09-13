@@ -43,7 +43,7 @@ class RegisterLogin extends Component {
                     return;
 
                 this.props.handleSubmit({
-                    email: this.state.user.email,
+                    email: this.state.user.email.toLowerCase(),
                     password: this.state.user.password
                 });
             }

@@ -4,6 +4,7 @@ const keys = require("../config/keys");
 
 require("../models/user");
 require("../models/picture");
+require("../models/token");
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
