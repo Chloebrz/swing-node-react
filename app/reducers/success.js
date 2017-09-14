@@ -4,7 +4,8 @@ import {
     UPDATE_PICTURE_SUCCESS,
     FETCH_PICTURES,
     SIGNUP_LOGIN_SUCCESS,
-    UPDATE_PROFILE_SUCCESS
+    UPDATE_PROFILE_SUCCESS,
+    SEND_TOKEN_SUCCESS
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -23,6 +24,9 @@ export default function(state = {}, action) {
 
         case UPDATE_PROFILE_SUCCESS:
             return Object.assign({}, state, { profile_success: true });
+
+        case SEND_TOKEN_SUCCESS:
+            return Object.assign({}, state, { send_token_success: true });
 
         default:
             return state;

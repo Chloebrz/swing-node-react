@@ -57,5 +57,5 @@ export const updateProfile = payload => async dispatch => {
  */
 export const sendVerifyToken = () => async dispatch => {
     await axios.get("/api/token/send");
-    console.log("here");
+    dispatch({ type: types.SEND_TOKEN_SUCCESS });
 };

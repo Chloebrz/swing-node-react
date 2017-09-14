@@ -7,6 +7,7 @@ export const SIGNUP_LOGIN_SUCCESS = "signup_login_success";
 export const SIGNUP_LOGIN_ERROR = "signup_login_error";
 
 export const UPDATE_PROFILE_SUCCESS = "update_profile_success";
+export const SEND_TOKEN_SUCCESS = "send_token_success";
 
 export const FETCH_PICTURES = "fetch_pictures";
 export const FETCH_PICTURE = "fetch_picture";

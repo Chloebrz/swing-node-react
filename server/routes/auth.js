@@ -124,7 +124,7 @@ module.exports = app => {
             };
 
             await transporter.sendMail(mailOptions);
-            res.status(200).send("A verification email has been sent to " + req.user.email + ".");
+            res.status(200).send();
         } catch (err) {
             res.status(400).send(err);
         }
