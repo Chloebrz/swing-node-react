@@ -1,45 +1,21 @@
 // Dependencies
 const expect = require("expect");
-const sinon = require("sinon");
 const request = require("supertest");
 const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
-const proxyquire = require("proxyquire");
 
 require("../../db/mongoose");
 const Picture = mongoose.model("Picture");
-
 const { userOneId, pictures, users, populatePictures } = require("../seed/pictures-seed");
-beforeEach(populatePictures);
-
-// TODO: move outside admin.test.js
-var app, stub;
-var nodemailer;
-var nodemailerStub;
-const auth = require("../../middlewares/auth");
-
-before(function() {
-    stub = sinon.stub(auth, "requireLogin");
-    stub.callsFake(function(req, res, next) {
-        req.user = { _id: userOneId, email: "test@test.com" };
-        next();
-    });
-
-    nodemailerStub = {
-        createTransport: function() {
-            return {
-                sendMail: function() {
-                    console.log("sendmail");
-                }
-            };
-        }
-    };
-    nodemailer = proxyquire("../../routes/auth", { nodemailer: nodemailerStub });
-
-    app = require("../../index").app;
-});
 
 describe("ADMIN ROUTES", () => {
+    var app;
+    before(function() {
+        app = require("../../index").app;
+    });
+
+    beforeEach(populatePictures);
+
     describe("GET /api/admin/pictures", () => {
         it("should get all pictures", done => {
             request(app)

@@ -6,7 +6,7 @@ const { ObjectID } = require("mongodb");
 require("../../db/mongoose");
 const Picture = mongoose.model("Picture");
 
-describe("Picture model", function() {
+describe("PICTURE MODEL", function() {
     it("should create a correct picture", done => {
         const picture = new Picture({
             name: "test name   ",

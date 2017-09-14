@@ -5,27 +5,16 @@ const mongoose = require("mongoose");
 
 require("../../db/mongoose");
 const User = mongoose.model("User");
-
-const { users, userOneId, userTwoId, tokens, populateUsers } = require("../seed/users-seed");
-beforeEach(populateUsers);
-
-var app;
-
-before(function() {
-    app = require("../../index").app;
-});
-
-// var app, stub;
-// before(function() {
-//     stub = sinon.stub(passport, "authenticate");
-//     stub.callsFake(function(req, res, next) {
-//         console.log("HERE AUTHENTICATE");
-//         next();
-//     });
-//     app = require("../../index").app;
-// });
+const { users, userOneId, tokens, populateUsers } = require("../seed/users-seed");
 
 describe("AUTH ROUTES", () => {
+    var app;
+    before(function() {
+        app = require("../../index").app;
+    });
+
+    beforeEach(populateUsers);
+
     describe("GET /auth/google", () => {
         it.skip("should call authenticate() from passport", done => {});
     });
@@ -146,17 +135,37 @@ describe("AUTH ROUTES", () => {
 
     describe("GET /api/token/send", () => {
         it("should create a token doc", done => {
+            const user = require("./abefore.test").user;
+
             request(app)
                 .get("/api/token/send")
                 .send()
                 .expect(200)
                 .expect(res => {
-                    expect(res.text).toBe(`A verification email has been sent to test@test.com.`);
+                    expect(res.text).toBe(`A verification email has been sent to ${user.email}.`);
                 })
                 .end(done);
         });
 
-        it.skip("should call createTransport and sendMail of nodemailer", done => {});
+        it("should call sendMail of nodemailer", done => {
+            const sendMailSpy = require("./abefore.test").sendMailSpy;
+            const user = require("./abefore.test").user;
+
+            request(app)
+                .get("/api/token/send")
+                .send()
+                .expect(200)
+                .expect(() => {
+                    expect(sendMailSpy.called).toBe(true);
+                    expect(sendMailSpy.getCall(0).args[0].from).toBe("sunshai_sun971@hotmail.com");
+                    expect(sendMailSpy.getCall(0).args[0].to).toBe(user.email);
+                    expect(sendMailSpy.getCall(0).args[0].subject).toBe(
+                        "Swing App - Vérifiez votre adresse mail"
+                    );
+                    expect(sendMailSpy.getCall(0).args[0].text).toExist();
+                })
+                .end(done);
+        });
     });
 
     describe("GET /api/token/confirmation/:token", () => {

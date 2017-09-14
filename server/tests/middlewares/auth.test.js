@@ -4,7 +4,7 @@ const sinon = require("sinon");
 
 const { requireLogin } = require("../../middlewares/auth");
 
-describe("Auth Middleware", () => {
+describe("AUTH MIDDLEWARE", () => {
     describe("requireLogin", () => {
         it("should return a function", () => {
             expect(requireLogin).toBeA("function");

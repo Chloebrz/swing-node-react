@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 
 require("../../db/mongoose");
 const User = mongoose.model("User");
+const { users, populateUsers } = require("../seed/users-seed");
 
-const { userOneGoogleId, users, populateUsers } = require("../seed/users-seed");
-before(populateUsers);
+describe("USER MODEL", function() {
+    beforeEach(populateUsers);
 
-describe("User model", function() {
     it("should create a new user object", done => {
         const user = new User({
             name: {

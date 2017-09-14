@@ -2,13 +2,12 @@
 const expect = require("expect");
 const request = require("supertest");
 
-var app;
-
-before(function() {
-    app = require("../../index").app;
-});
-
 describe("REACT ROUTES", () => {
+    var app;
+    before(function() {
+        app = require("../../index").app;
+    });
+
     describe("GET /admin", () => {
         it("should redirect to / if user not authenticated", done => {
             request(app)
