@@ -33,6 +33,11 @@ class Images extends Component {
                     res={picture.img.res}
                     legend={picture.legend}
                     date={moment(picture.createdAt).format("D MMMM YY")}
+                    creatorId={picture.creatorId}
+                    creator={
+                        picture.user_doc &&
+                        `${picture.user_doc[0].name.firstname} ${picture.user_doc[0].name.lastname}`
+                    }
                 />
             );
         });

@@ -36,7 +36,12 @@ class Dashboard extends Component {
                     res={picture.img.res}
                     legend={picture.legend}
                     date={moment(picture.createdAt).format("D MMMM YY")}
-                    creator={this.props.auth._id === picture.creatorId}
+                    creatorId={picture.creatorId}
+                    creator={
+                        picture.user_doc &&
+                        `${picture.user_doc[0].name.firstname} ${picture.user_doc[0].name.lastname}`
+                    }
+                    isCreator={this.props.auth._id === picture.creatorId}
                 />
             );
         });

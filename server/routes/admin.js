@@ -1,5 +1,4 @@
 // Dependencies
-const fs = require("fs");
 const mongoose = require("mongoose");
 const { ObjectID } = require("mongodb");
 const _ = require("lodash");
@@ -16,11 +15,18 @@ module.exports = app => {
     app.get("/api/admin/pictures", async (req, res) => {
         try {
             // retrieve the picture items
-            const pictures = await Picture.find();
+            const pictures = await Picture.aggregate({
+                $lookup: {
+                    from: "users",
+                    localField: "creatorId",
+                    foreignField: "_id",
+                    as: "user_doc"
+                }
+            });
 
             // add the base64 data to each item
             pictures.forEach(picture => {
-                picture.img.res = new Buffer(picture.img.data).toString("base64");
+                picture.img.res = new Buffer(picture.img.data.buffer).toString("base64");
             });
 
             // send the result

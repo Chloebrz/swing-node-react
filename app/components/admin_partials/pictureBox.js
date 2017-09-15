@@ -40,8 +40,18 @@ class PictureBox extends Component {
         this.props.deletePicture({ id: this.props.id });
     }
 
+    renderCreatorLink() {
+        if (this.props.isCreator) return <Link to={"/admin/profile"}>Moi</Link>;
+
+        return (
+            <Link to={`/profile/${this.props.creatorId}`}>
+                {this.props.creator}
+            </Link>
+        );
+    }
+
     renderIcons() {
-        if (!this.props.creator) return;
+        if (!this.props.isCreator) return;
 
         return (
             <div>
@@ -96,7 +106,7 @@ class PictureBox extends Component {
                             {this.props.legend}
                         </p>
                         <p className="card-text">
-                            Ajouté le : {this.props.date}
+                            Ajouté le : {this.props.date} par {this.renderCreatorLink()}
                         </p>
 
                         {this.renderIcons()}
@@ -121,7 +131,9 @@ PictureBox.propTypes = {
     legend: PropTypes.string,
     type: PropTypes.string,
     res: PropTypes.string,
-    creator: PropTypes.bool
+    isCreator: PropTypes.bool,
+    creator: PropTypes.string,
+    creatorId: PropTypes.string
 };
 
 export default connect(null, { deletePicture })(PictureBox);
