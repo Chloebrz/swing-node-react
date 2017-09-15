@@ -16,8 +16,7 @@ var config = {
     module: {
         loaders: [
             { test: /\.js$/, loader: "jsx-loader" },
-            { test: /\.png$/, loader: "url-loader" },
-            { test: /\.jpg$/, loader: "file-loader" },
+            { test: /\.png$|\.jpg$/, loader: "url-loader" },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             {
                 test: /\.js$|\.jsx$/,
@@ -37,7 +36,7 @@ var config = {
             },
             {
                 test: /\.(gif|svg)$/i,
-                loader: "file-loader?name=/public/icons/[name].[ext]"
+                loader: "url-loader?name=/public/icons/[name].[ext]"
             }
         ]
     }
