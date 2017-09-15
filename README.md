@@ -11,7 +11,9 @@ Technologies
 
 ### Node.js & Express
 The server is implemented using **Node.js** and **Express**.
-Authentication is handled with **PassportJS** (Google OAuth strategy): admin can log in/sign up with Google account.
+Authentication is handled with **PassportJS**.
+ - Google OAuth strategy: admin can log in/sign up with Google account
+ - Local strategy: admin can log in/sign up with an email address and a password
 
 ### MongoDB
 We use a **MongoDB** database to store the picture documents and the users information.
@@ -31,7 +33,10 @@ To run the app in development, you need a `dev.js` file in the `server/config` f
 	    googleClientID: "yourGoogleClientID",
 	    googleClientSecret: "yourGoogleClientSecret",
 	    mongoURI: "mongodb://localhost:swing/swingtest",
-	    cookieKey: "aCookieKey"
+	    cookieKey: "aCookieKey",
+        emailService: "anEmailService",
+        emailUser: "anEmailUser",
+        emailPassword: "anEmailPassword"
 	};
 
 Then, simply run `node server/index.js`.
@@ -51,7 +56,10 @@ To run the tests, a `test.js` file must be created in the `server/config` folder
 	    googleClientID: "yourGoogleClientID",
 	    googleClientSecret: "yourGoogleClientSecret",
 	    mongoURI: "mongodb://localhost:swing/swingtest",
-	    cookieKey: "aCookieKey"
+	    cookieKey: "aCookieKey",
+        emailService: "anEmailService",
+        emailUser: "anEmailUser",
+        emailPassword: "anEmailPassword"
 	};
 
 

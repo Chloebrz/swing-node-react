@@ -32,7 +32,7 @@ var config = {
             },
             {
                 test: /\.(webm|mp4)$/,
-                loader: "file-loader?limit=10000&mimetype=video/mp4"
+                loader: "url-loader?limit=10000&mimetype=video/mp4"
             },
             {
                 test: /\.(gif|svg)$/i,
