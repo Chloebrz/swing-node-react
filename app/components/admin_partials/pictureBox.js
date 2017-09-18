@@ -129,6 +129,7 @@ PictureBox.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
     legend: PropTypes.string,
+    date: PropTypes.string,
     type: PropTypes.string,
     res: PropTypes.string,
     isCreator: PropTypes.bool,

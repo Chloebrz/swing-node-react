@@ -8,7 +8,7 @@ import PictureForm from "../admin_partials/pictureForm";
 
 class AddPicture extends Component {
     componentWillReceiveProps(newProps) {
-        if (newProps.success.post_success) this.props.history.push("/admin");
+        if (newProps.post_success) this.props.history.push("/admin");
     }
 
     handleSubmit(payload) {
@@ -38,12 +38,12 @@ class AddPicture extends Component {
 }
 
 AddPicture.propTypes = {
-    success: PropTypes.object,
+    post_success: PropTypes.bool,
     postPicture: PropTypes.func
 };
 
 function mapStateToProps({ success }) {
-    return { success };
+    return { post_success: success.post_success };
 }
 
 export default connect(mapStateToProps, { postPicture })(AddPicture);

@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import ProfileBox from "../admin_partials/profileBox";
 import { sendVerifyToken } from "../../actions/profiles";
+import ProfileBox from "../admin_partials/profileBox";
 
 class MyProfile extends Component {
     render() {
@@ -20,8 +20,8 @@ class MyProfile extends Component {
 
 MyProfile.propTypes = {
     auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    sendVerifyToken: PropTypes.func,
-    send_token_success: PropTypes.bool
+    send_token_success: PropTypes.bool,
+    sendVerifyToken: PropTypes.func
 };
 
 function mapStateToProps({ auth, success }) {

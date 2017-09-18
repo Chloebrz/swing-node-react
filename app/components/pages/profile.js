@@ -20,7 +20,9 @@ class Profile extends Component {
 
 Profile.propTypes = {
     profile: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    pictures: PropTypes.arrayOf(PropTypes.object)
+    pictures: PropTypes.arrayOf(PropTypes.object),
+    fetchProfile: PropTypes.func,
+    fetchUserPictures: PropTypes.func
 };
 
 function mapStateToProps({ profile, pictures }) {

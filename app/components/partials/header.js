@@ -130,8 +130,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    fetchUser: PropTypes.func,
-    auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+    auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    fetchUser: PropTypes.func
 };
 
 function mapStateToProps({ auth }) {

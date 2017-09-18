@@ -94,7 +94,8 @@ ProfileForm.propTypes = {
     handleSubmit: PropTypes.func,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    bio: PropTypes.string
+    bio: PropTypes.string,
+    email: PropTypes.string
 };
 
 export default ProfileForm;

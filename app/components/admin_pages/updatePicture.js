@@ -24,7 +24,7 @@ class UpdatePicture extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.success.update_success) this.props.history.push("/admin");
+        if (newProps.update_success) this.props.history.push("/admin");
 
         if (newProps.picture)
             this.state = {
@@ -82,14 +82,14 @@ class UpdatePicture extends Component {
 }
 
 UpdatePicture.propTypes = {
-    success: PropTypes.object,
+    update_success: PropTypes.bool,
     picture: PropTypes.object,
     fetchPicture: PropTypes.func,
     updatePicture: PropTypes.func
 };
 
 function mapStateToProps({ success, pictures }) {
-    return { success, picture: pictures[0] };
+    return { update_success: success.update_success, picture: pictures[0] };
 }
 
 export default connect(mapStateToProps, { fetchPicture, updatePicture })(UpdatePicture);

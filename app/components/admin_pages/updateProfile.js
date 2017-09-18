@@ -9,7 +9,7 @@ import styles from "../../css/profile.css";
 
 class UpdateProfile extends Component {
     componentWillReceiveProps(newProps) {
-        if (newProps.success.profile_success) this.props.history.push("/admin/profile");
+        if (newProps.profile_success) this.props.history.push("/admin/profile");
     }
 
     handleSubmit(payload) {
@@ -49,12 +49,12 @@ class UpdateProfile extends Component {
 
 UpdateProfile.propTypes = {
     auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    success: PropTypes.object,
+    profile_success: PropTypes.bool,
     updateProfile: PropTypes.func
 };
 
 function mapStateToProps({ auth, success }) {
-    return { auth, success };
+    return { auth, profile_success: success.profile_success };
 }
 
 export default connect(mapStateToProps, { updateProfile })(UpdateProfile);

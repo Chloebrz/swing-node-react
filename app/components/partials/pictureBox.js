@@ -34,7 +34,9 @@ PictureBox.propTypes = {
     type: PropTypes.string,
     res: PropTypes.string,
     legend: PropTypes.string,
-    creatorId: PropTypes.string
+    date: PropTypes.string,
+    creatorId: PropTypes.string,
+    creator: PropTypes.string
 };
 
 export default PictureBox;

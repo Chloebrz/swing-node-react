@@ -138,6 +138,7 @@ class RegisterLogin extends Component {
 }
 
 RegisterLogin.propTypes = {
+    errors: PropTypes.object,
     title: PropTypes.string,
     confirmPassword: PropTypes.bool,
     question: PropTypes.string,

@@ -8,7 +8,7 @@ import RegisterLogin from "../partials/registerLogin";
 
 class Signup extends Component {
     componentWillReceiveProps(newProps) {
-        if (newProps.success.signup_login_success) {
+        if (newProps.signup_login_success) {
             this.props.fetchUser();
             this.props.history.push("/admin");
         }
@@ -37,14 +37,14 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
+    signup_login_success: PropTypes.bool,
+    errors: PropTypes.object,
     signupUser: PropTypes.func,
-    fetchUser: PropTypes.func,
-    success: PropTypes.object,
-    errors: PropTypes.object
+    fetchUser: PropTypes.func
 };
 
 function mapStateToProps({ success, errors }) {
-    return { success, errors };
+    return { signup_login_success: success.signup_login_success, errors };
 }
 
 export default connect(mapStateToProps, { signupUser, fetchUser })(Signup);
