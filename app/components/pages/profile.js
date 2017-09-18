@@ -19,7 +19,8 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-    profile: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
+    profile: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
 function mapStateToProps({ profile, pictures }) {

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import moment from "moment";
 moment.locale("fr");
 
-import styles from "../../css/profile.css";
 import PictureBox from "../partials/pictureBox";
 
 class ProfileBox extends Component {
@@ -77,9 +76,11 @@ class ProfileBox extends Component {
 
     render() {
         return (
-            <div className={styles}>
+            <div>
                 {this.renderProfile()}
-                {this.renderPictures()}
+                <div className="row">
+                    {this.renderPictures()}
+                </div>
             </div>
         );
     }

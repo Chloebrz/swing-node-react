@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import styles from "../../css/profile.css";
-
 class ProfileBox extends Component {
     renderVerifyEmail() {
         if (this.props.profile.isVerified)
@@ -80,7 +78,7 @@ class ProfileBox extends Component {
 
     render() {
         return (
-            <div className={styles}>
+            <div>
                 {this.renderProfile()}
             </div>
         );

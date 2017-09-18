@@ -20,7 +20,8 @@ class MyProfile extends Component {
 
 MyProfile.propTypes = {
     auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    sendVerifyToken: PropTypes.func
+    sendVerifyToken: PropTypes.func,
+    send_token_success: PropTypes.bool
 };
 
 function mapStateToProps({ auth, success }) {
