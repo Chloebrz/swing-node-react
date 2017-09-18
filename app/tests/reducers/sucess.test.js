@@ -5,7 +5,8 @@ import {
     UPDATE_PICTURE_SUCCESS,
     FETCH_PICTURES,
     SIGNUP_LOGIN_SUCCESS,
-    UPDATE_PROFILE_SUCCESS
+    UPDATE_PROFILE_SUCCESS,
+    SEND_TOKEN_SUCCESS
 } from "../../actions/types";
 
 describe("SUCCESS REDUCER", () => {
@@ -61,5 +62,14 @@ describe("SUCCESS REDUCER", () => {
                 type: UPDATE_PROFILE_SUCCESS
             })
         ).toEqual({ a_success: false, profile_success: true });
+    });
+
+    it("should handle SEND_TOKEN_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(success(state, { type: SEND_TOKEN_SUCCESS })).toEqual({
+            a_success: false,
+            send_token_success: true
+        });
     });
 });

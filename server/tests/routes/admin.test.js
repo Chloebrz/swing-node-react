@@ -30,6 +30,20 @@ describe("ADMIN ROUTES", () => {
                 .end(done);
         });
 
+        it("should get all pictures with user_doc", done => {
+            request(app)
+                .get("/api/admin/pictures")
+                .send()
+                .expect(200)
+                .expect(res => {
+                    const pics = res.body;
+                    expect(pics[0].user_doc).toExist();
+                    expect(pics[1].user_doc).toExist();
+                    expect(pics[2].user_doc).toExist();
+                })
+                .end(done);
+        });
+
         it("should add res property to all pictures", done => {
             request(app)
                 .get("/api/admin/pictures")

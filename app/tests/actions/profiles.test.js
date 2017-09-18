@@ -105,4 +105,14 @@ describe("PROFILES ACTIONS", () => {
             expect(store.getActions()).toEqual(expectedAction);
         });
     });
+
+    it("should create SEND_TOKEN_SUCCESS when verify token has been sent", () => {
+        const expectedAction = [{ type: types.SEND_TOKEN_SUCCESS }];
+
+        nock(host).get("/api/token/send").reply(200);
+
+        return store.dispatch(actions.sendVerifyToken()).then(() => {
+            expect(store.getActions()).toEqual(expectedAction);
+        });
+    });
 });

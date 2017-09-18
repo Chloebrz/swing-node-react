@@ -137,14 +137,7 @@ describe("AUTH ROUTES", () => {
         it("should create a token doc", done => {
             const user = require("./abefore.test").user;
 
-            request(app)
-                .get("/api/token/send")
-                .send()
-                .expect(200)
-                .expect(res => {
-                    expect(res.text).toBe(`A verification email has been sent to ${user.email}.`);
-                })
-                .end(done);
+            request(app).get("/api/token/send").send().expect(200).end(done);
         });
 
         it("should call sendMail of nodemailer", done => {
