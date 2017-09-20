@@ -4,3 +4,8 @@ footer {
     margin-top: 40px;
     border-top: 1px solid #eee;
 }
+
+.btn-login {
+    float: right;
+    color: #999;
+}

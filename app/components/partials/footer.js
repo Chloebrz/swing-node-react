@@ -1,15 +1,44 @@
 // Dependencies
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import style from "../../css/footer.css";
 
 class Footer extends Component {
+    renderLogin() {
+        switch (this.props.auth) {
+            case null:
+                return;
+            case false:
+                return (
+                    <Link className="btn-login" to="/login">
+                        Se connecter
+                    </Link>
+                );
+            default:
+                return;
+        }
+    }
+
     render() {
         return (
             <footer className={style}>
-                <p>&copy; Chloé Brouzes 2017</p>
+                <p>
+                    &copy; Chloé Brouzes 2017 {this.renderLogin()}
+                </p>
             </footer>
         );
     }
 }
 
-export default Footer;
+Footer.propTypes = {
+    auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+};
+
+function mapStateToProps({ auth }) {
+    return { auth };
+}
+
+export default connect(mapStateToProps)(Footer);
