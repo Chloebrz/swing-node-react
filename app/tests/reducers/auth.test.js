@@ -1,6 +1,6 @@
 // Dependencies
 import auth from "../../reducers/auth";
-import { FETCH_USER, UPDATE_PROFILE_SUCCESS } from "../../actions/types";
+import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../../actions/types";
 
 describe("AUTH REDUCER", () => {
     it("should return the initial state", () => {
@@ -8,15 +8,15 @@ describe("AUTH REDUCER", () => {
     });
 
     it("should return false if no payload", () => {
-        expect(auth(null, { type: FETCH_USER })).toEqual(false);
+        expect(auth(null, { type: FETCH_USER_SUCCESS })).toEqual(false);
     });
 
-    it("should handle FETCH_USER", () => {
+    it("should handle FETCH_USER_SUCCESS", () => {
         const payload = "payload";
 
         expect(
             auth(null, {
-                type: FETCH_USER,
+                type: FETCH_USER_SUCCESS,
                 payload: payload
             })
         ).toEqual(payload);

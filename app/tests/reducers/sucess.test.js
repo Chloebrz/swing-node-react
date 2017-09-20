@@ -1,9 +1,9 @@
 // Dependencies
 import success from "../../reducers/success";
 import {
+    FETCH_PICTURES_SUCCESS,
     POST_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS,
-    FETCH_PICTURES,
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_SUCCESS
@@ -14,6 +14,16 @@ describe("SUCCESS REDUCER", () => {
         expect(success(undefined, {})).toEqual({});
     });
 
+    it("should handle FETCH_PICTURES_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_PICTURES_SUCCESS
+            })
+        ).toEqual({ a_success: false, fetch_pictures_success: true });
+    });
+
     it("should handle POST_PICTURE_SUCCESS", () => {
         const state = { a_success: false };
 
@@ -21,7 +31,7 @@ describe("SUCCESS REDUCER", () => {
             success(state, {
                 type: POST_PICTURE_SUCCESS
             })
-        ).toEqual({ a_success: false, post_success: true });
+        ).toEqual({ a_success: false, post_picture_success: true });
     });
 
     it("should handle UPDATE_PICTURE_SUCCESS", () => {
@@ -31,17 +41,7 @@ describe("SUCCESS REDUCER", () => {
             success(state, {
                 type: UPDATE_PICTURE_SUCCESS
             })
-        ).toEqual({ a_success: false, update_success: true });
-    });
-
-    it("should handle FETCH_PICTURES", () => {
-        const state = { a_success: false };
-
-        expect(
-            success(state, {
-                type: FETCH_PICTURES
-            })
-        ).toEqual({ a_success: false, fetch_success: true });
+        ).toEqual({ a_success: false, update_picture_success: true });
     });
 
     it("should handle SIGNUP_LOGIN_SUCCESS", () => {
@@ -61,7 +61,7 @@ describe("SUCCESS REDUCER", () => {
             success(state, {
                 type: UPDATE_PROFILE_SUCCESS
             })
-        ).toEqual({ a_success: false, profile_success: true });
+        ).toEqual({ a_success: false, update_profile_success: true });
     });
 
     it("should handle SEND_TOKEN_SUCCESS", () => {

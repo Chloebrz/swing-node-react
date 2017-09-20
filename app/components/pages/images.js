@@ -48,7 +48,7 @@ class Images extends Component {
     }
 
     renderPictures() {
-        if (!this.props.fetch_success)
+        if (!this.props.fetch_pictures_success)
             return (
                 <img
                     className="icon icon-xl icon-loading"
@@ -117,13 +117,13 @@ class Images extends Component {
 }
 
 Images.propTypes = {
-    fetch_success: PropTypes.bool,
+    fetch_pictures_success: PropTypes.bool,
     fetchPictures: PropTypes.func,
     pictures: PropTypes.arrayOf(PropTypes.object)
 };
 
 function mapStateToProps({ pictures, success }) {
-    return { pictures, fetch_success: success.fetch_success };
+    return { pictures, fetch_pictures_success: success.fetch_pictures_success };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Images);

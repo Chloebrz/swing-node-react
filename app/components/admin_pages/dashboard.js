@@ -16,7 +16,7 @@ class Dashboard extends Component {
     }
 
     renderPictures() {
-        if (!this.props.fetch_success)
+        if (!this.props.fetch_pictures_success)
             return (
                 <img
                     className="icon-xl icon-loading"
@@ -67,13 +67,13 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    fetch_success: PropTypes.bool,
+    fetch_pictures_success: PropTypes.bool,
     pictures: PropTypes.arrayOf(PropTypes.object),
     fetchPictures: PropTypes.func
 };
 
 function mapStateToProps({ auth, pictures, success }) {
-    return { auth, pictures, fetch_success: success.fetch_success };
+    return { auth, pictures, fetch_pictures_success: success.fetch_pictures_success };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Dashboard);

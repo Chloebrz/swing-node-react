@@ -22,7 +22,7 @@ export const fetchPictures = () => async dispatch => {
 export const fetchUserPictures = payload => async dispatch => {
     try {
         let res = await axios.get(`/api/admin/pictures/${payload.id}`);
-        dispatch({ type: types.FETCH_PICTURES, payload: res.data });
+        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
     } catch (err) {
         dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });
     }
