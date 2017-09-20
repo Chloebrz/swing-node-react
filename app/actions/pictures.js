@@ -7,8 +7,12 @@ import * as types from "./types";
  * Send a GET request to /api/admin/pictures and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchPictures = () => async dispatch => {
-    const res = await axios.get("/api/admin/pictures");
-    dispatch({ type: types.FETCH_PICTURES, payload: res.data });
+    try {
+        let res = await axios.get("/api/admin/pictures");
+        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });
+    }
 };
 
 /**
@@ -16,8 +20,12 @@ export const fetchPictures = () => async dispatch => {
  * Send a GET request to /api/admin/pictures/:id and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchUserPictures = payload => async dispatch => {
-    const res = await axios.get(`/api/admin/pictures/${payload.id}`);
-    dispatch({ type: types.FETCH_PICTURES, payload: res.data });
+    try {
+        let res = await axios.get(`/api/admin/pictures/${payload.id}`);
+        dispatch({ type: types.FETCH_PICTURES, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });
+    }
 };
 
 /**
@@ -25,8 +33,12 @@ export const fetchUserPictures = payload => async dispatch => {
  * Send a GET request to /api/admin/picture/:id and dispatch the result as payload of a FETCH_PICTURE action
  */
 export const fetchPicture = payload => async dispatch => {
-    const res = await axios.get(`/api/admin/picture/${payload.id}`);
-    dispatch({ type: types.FETCH_PICTURE, payload: res.data });
+    try {
+        let res = await axios.get(`/api/admin/picture/${payload.id}`);
+        dispatch({ type: types.FETCH_PICTURE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.FETCH_PICTURE_ERROR, payload: err });
+    }
 };
 
 /**
@@ -34,8 +46,12 @@ export const fetchPicture = payload => async dispatch => {
  * Send a POST request to /api/admin/picture and dispatch a POST_PICTURE_SUCCESS action when succeedded
  */
 export const postPicture = payload => async dispatch => {
-    await axios.post("/api/admin/picture", payload);
-    dispatch({ type: types.POST_PICTURE_SUCCESS });
+    try {
+        let res = await axios.post("/api/admin/picture", payload);
+        dispatch({ type: types.POST_PICTURE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.POST_PICTURE_ERROR, payload: err });
+    }
 };
 
 /**
@@ -43,8 +59,12 @@ export const postPicture = payload => async dispatch => {
  * Send a DELETE request to /api/admin/picture/:id and dispatch the result as payload of a DELETE_PICTURE action
  */
 export const deletePicture = payload => async dispatch => {
-    const res = await axios.delete(`/api/admin/picture/${payload.id}`);
-    dispatch({ type: types.DELETE_PICTURE, payload: res.data });
+    try {
+        let res = await axios.delete(`/api/admin/picture/${payload.id}`);
+        dispatch({ type: types.DELETE_PICTURE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.DELETE_PICTURE_ERROR, payload: err });
+    }
 };
 
 /**
@@ -52,6 +72,10 @@ export const deletePicture = payload => async dispatch => {
  * Send a PATCH request to /api/admin/picture and dispatch a UPDATE_PICTURE_SUCCESS action when succeedded
  */
 export const updatePicture = payload => async dispatch => {
-    await axios.patch(`/api/admin/picture/${payload.id}`, payload);
-    dispatch({ type: types.UPDATE_PICTURE_SUCCESS });
+    try {
+        let res = await axios.patch(`/api/admin/picture/${payload.id}`, payload);
+        dispatch({ type: types.UPDATE_PICTURE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.UPDATE_PICTURE_ERROR, payload: err });
+    }
 };

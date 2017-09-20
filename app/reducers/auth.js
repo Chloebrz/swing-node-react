@@ -1,9 +1,9 @@
 // Dependencies
-import { FETCH_USER, UPDATE_PROFILE_SUCCESS } from "../actions/types";
+import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../actions/types";
 
 export default function(state = null, action) {
     switch (action.type) {
-        case FETCH_USER:
+        case FETCH_USER_SUCCESS:
             return action.payload || false;
 
         case UPDATE_PROFILE_SUCCESS:

@@ -120,7 +120,11 @@ module.exports = app => {
         try {
             // save the new picture
             await picture.save();
-            res.send();
+
+            // add the base64 data
+            picture.img.res = new Buffer(picture.img.data).toString("base64");
+
+            res.send(picture);
         } catch (err) {
             res.status(400).send(err);
         }
@@ -182,6 +186,10 @@ module.exports = app => {
             );
 
             if (!picture) return res.status(404).send();
+
+            // add the base64 data
+            if (body.img) picture.img.res = new Buffer(picture.img.data).toString("base64");
+
             res.send(picture);
         } catch (err) {
             res.status(400).send(err);

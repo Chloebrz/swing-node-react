@@ -7,8 +7,12 @@ import * as types from "./types";
  * Send a GET request to /api/current_user and dispatch the result as payload of a FETCH_USER action
  */
 export const fetchUser = () => async dispatch => {
-    const res = await axios.get("/api/current_user");
-    dispatch({ type: types.FETCH_USER, payload: res.data });
+    try {
+        const res = await axios.get("/api/current_user");
+        dispatch({ type: types.FETCH_USER_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.FETCH_USER_ERROR, payload: err });
+    }
 };
 
 /**
@@ -16,8 +20,12 @@ export const fetchUser = () => async dispatch => {
  * Send a GET request to /api/admin/profile/:id and dispatch the result as payload of a FETCH_PROFILE action
  */
 export const fetchProfile = payload => async dispatch => {
-    const res = await axios.get(`/api/admin/profile/${payload.id}`);
-    dispatch({ type: types.FETCH_PROFILE, payload: res.data });
+    try {
+        const res = await axios.get(`/api/admin/profile/${payload.id}`);
+        dispatch({ type: types.FETCH_PROFILE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.FETCH_PROFILE_ERROR, payload: err });
+    }
 };
 
 /**
@@ -47,8 +55,12 @@ export const loginUser = payload => async dispatch => {
  * Send a PATCH request to /api/admin/profile/:id and dispatch the result as payload of a UPDATE_PROFILE_SUCCESS action
  */
 export const updateProfile = payload => async dispatch => {
-    const res = await axios.patch(`/api/admin/profile/${payload.id}`, payload);
-    dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data });
+    try {
+        const res = await axios.patch(`/api/admin/profile/${payload.id}`, payload);
+        dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data });
+    } catch (err) {
+        dispatch({ type: types.UPDATE_PROFILE_ERROR, payload: err });
+    }
 };
 
 /**
@@ -56,6 +68,10 @@ export const updateProfile = payload => async dispatch => {
  * Send a GET request to /api/token/send and TODO dispatch a TOKEN_SENT action when succeedded
  */
 export const sendVerifyToken = () => async dispatch => {
-    await axios.get("/api/token/send");
-    dispatch({ type: types.SEND_TOKEN_SUCCESS });
+    try {
+        await axios.get("/api/token/send");
+        dispatch({ type: types.SEND_TOKEN_SUCCESS });
+    } catch (err) {
+        dispatch({ type: types.SEND_TOKEN_ERROR, payload: err });
+    }
 };
