@@ -47,23 +47,33 @@ class UpdatePicture extends Component {
     }
 
     renderPictureForm() {
-        if (!this.state.loaded)
-            return (
-                <img
-                    className="icon-xl icon-loading"
-                    src={require("../../images/icons/loading.gif")}
-                />
-            );
+        switch (this.props.picture) {
+            case null:
+                return (
+                    <img
+                        className="icon icon-xl icon-loading"
+                        src={require("../../images/icons/loading.gif")}
+                    />
+                );
 
-        return (
-            <PictureForm
-                name={this.state.name}
-                legend={this.state.legend}
-                res={this.state.res}
-                handleSubmit={this.handleSubmit.bind(this)}
-                history={this.props.history}
-            />
-        );
+            case false:
+                return (
+                    <div className="center">
+                        <img src={require("../../images/placeholders/404.png")} />
+                    </div>
+                );
+
+            default:
+                return (
+                    <PictureForm
+                        name={this.state.name}
+                        legend={this.state.legend}
+                        res={this.state.res}
+                        handleSubmit={this.handleSubmit.bind(this)}
+                        history={this.props.history}
+                    />
+                );
+        }
     }
 
     render() {
@@ -83,13 +93,13 @@ class UpdatePicture extends Component {
 
 UpdatePicture.propTypes = {
     update_picture_success: PropTypes.bool,
-    picture: PropTypes.object,
+    picture: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     fetchPicture: PropTypes.func,
     updatePicture: PropTypes.func
 };
 
-function mapStateToProps({ success, pictures }) {
-    return { update_picture_success: success.update_picture_success, picture: pictures[0] };
+function mapStateToProps({ success, picture }) {
+    return { update_picture_success: success.update_picture_success, picture };
 }
 
 export default connect(mapStateToProps, { fetchPicture, updatePicture })(UpdatePicture);

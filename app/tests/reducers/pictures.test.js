@@ -2,7 +2,6 @@
 import pictures from "../../reducers/pictures";
 import {
     FETCH_PICTURES_SUCCESS,
-    FETCH_PICTURE_SUCCESS,
     POST_PICTURE_SUCCESS,
     DELETE_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS
@@ -22,17 +21,6 @@ describe("PICTURES REDUCER", () => {
                 payload: payload
             })
         ).toEqual(payload);
-    });
-
-    it("should handle FETCH_PICTURE_SUCCESS", () => {
-        const payload = "payload";
-
-        expect(
-            pictures([], {
-                type: FETCH_PICTURE_SUCCESS,
-                payload: payload
-            })
-        ).toEqual([payload]);
     });
 
     it("should handle POST_PICTURE_SUCCESS", () => {

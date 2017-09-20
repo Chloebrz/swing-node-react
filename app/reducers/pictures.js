@@ -1,7 +1,6 @@
 // Dependencies
 import {
     FETCH_PICTURES_SUCCESS,
-    FETCH_PICTURE_SUCCESS,
     POST_PICTURE_SUCCESS,
     DELETE_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS
@@ -11,9 +10,6 @@ export default function(state = [], action) {
     switch (action.type) {
         case FETCH_PICTURES_SUCCESS:
             return action.payload;
-
-        case FETCH_PICTURE_SUCCESS:
-            return [action.payload];
 
         case POST_PICTURE_SUCCESS:
             state.push(action.payload);
