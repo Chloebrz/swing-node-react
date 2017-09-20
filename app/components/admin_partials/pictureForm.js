@@ -19,12 +19,15 @@ class PictureForm extends Component {
                 name: false,
                 legend: false,
                 file: false
-            }
+            },
+            loading: false
         };
     }
 
     handleSubmit(e) {
         e.preventDefault();
+
+        if (this.state.loading) return;
 
         this.setState(
             {
@@ -39,6 +42,8 @@ class PictureForm extends Component {
             function() {
                 if (this.state.errors.name || this.state.errors.legend || this.state.errors.file)
                     return;
+
+                this.setState({ loading: true });
 
                 this.props.handleSubmit({
                     name: this.state.picture.name,
@@ -80,6 +85,29 @@ class PictureForm extends Component {
         errors[field] = false;
 
         this.setState({ picture, errors });
+    }
+
+    renderSaveButton() {
+        if (this.state.loading)
+            return (
+                <button
+                    className="btn btn-lg btn-success disabled"
+                    type="submit"
+                    onClick={this.handleSubmit.bind(this)}
+                >
+                    Sauvegarde...
+                </button>
+            );
+
+        return (
+            <button
+                className="btn btn-lg btn-success"
+                type="submit"
+                onClick={this.handleSubmit.bind(this)}
+            >
+                Sauvegarder
+            </button>
+        );
     }
 
     render() {
@@ -137,13 +165,7 @@ class PictureForm extends Component {
                     <br />
                     <br />
                     <div className="center">
-                        <button
-                            className="btn btn-lg btn-success"
-                            type="submit"
-                            onClick={this.handleSubmit.bind(this)}
-                        >
-                            Sauvegarder
-                        </button>
+                        {this.renderSaveButton()}
                         <button
                             className="btn btn-secondary right"
                             onClick={() => this.props.history.push("/admin")}

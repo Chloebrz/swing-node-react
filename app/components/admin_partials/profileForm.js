@@ -17,6 +17,10 @@ class ProfileForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
+        if (this.state.loading) return;
+
+        this.setState({ loading: true });
+
         this.props.handleSubmit({
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -30,6 +34,29 @@ class ProfileForm extends Component {
         let state = this.state;
         state[field] = e.target.value;
         this.setState(state);
+    }
+
+    renderSaveButton() {
+        if (this.state.loading)
+            return (
+                <button
+                    className="btn btn-lg btn-success disabled"
+                    type="submit"
+                    onClick={this.handleSubmit.bind(this)}
+                >
+                    Sauvegarde...
+                </button>
+            );
+
+        return (
+            <button
+                className="btn btn-lg btn-success"
+                type="submit"
+                onClick={this.handleSubmit.bind(this)}
+            >
+                Sauvegarder
+            </button>
+        );
     }
 
     render() {
@@ -71,13 +98,7 @@ class ProfileForm extends Component {
                 />
 
                 <div className="center">
-                    <button
-                        className="btn btn-lg btn-success"
-                        type="submit"
-                        onClick={this.handleSubmit.bind(this)}
-                    >
-                        Sauvegarder
-                    </button>
+                    {this.renderSaveButton()}
                     <button
                         className="btn btn-secondary right"
                         onClick={() => this.props.history.push("/admin/profile")}
