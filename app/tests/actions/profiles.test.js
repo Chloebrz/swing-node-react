@@ -51,7 +51,10 @@ describe("PROFILES ACTIONS", () => {
         it("should create FETCH_PROFILE_SUCCESS when fetching a profile has been done", () => {
             const payload = { id: 123 };
             const data = { id: 123, name: "test" };
-            const expectedAction = [{ type: types.FETCH_PROFILE_SUCCESS, payload: data }];
+            const expectedAction = [
+                { type: types.FETCH_PROFILE },
+                { type: types.FETCH_PROFILE_SUCCESS, payload: data }
+            ];
 
             nock(host).get("/api/admin/profile/123").reply(200, data);
 
@@ -63,12 +66,14 @@ describe("PROFILES ACTIONS", () => {
         it("should create FETCH_PROFILE_ERROR if error returned when fetching profile", () => {
             const payload = { id: 123 };
             const err = "an_error";
+            const expectedAction = { type: types.FETCH_PROFILE };
 
             nock(host).get("/api/admin/profile/123").reply(400, err);
 
             return store.dispatch(actions.fetchProfile(payload)).then(() => {
-                expect(store.getActions()[0].type).toBe(types.FETCH_PROFILE_ERROR);
-                expect(store.getActions()[0].payload.response.data).toBe(err);
+                expect(store.getActions()[0]).toEqual(expectedAction);
+                expect(store.getActions()[1].type).toBe(types.FETCH_PROFILE_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
             });
         });
     });

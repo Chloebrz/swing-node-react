@@ -1,10 +1,21 @@
 // Dependencies
 import profile from "../../reducers/profile";
-import { FETCH_PROFILE_SUCCESS } from "../../actions/types";
+import { FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_ERROR } from "../../actions/types";
 
 describe("PROFILE REDUCER", () => {
     it("should return the initial state", () => {
         expect(profile(undefined, {})).toEqual(null);
+    });
+
+    it("should handle FETCH_PROFILE", () => {
+        const payload = "payload";
+
+        expect(
+            profile(null, {
+                type: FETCH_PROFILE,
+                payload: payload
+            })
+        ).toEqual(null);
     });
 
     it("should handle FETCH_PROFILE_SUCCESS", () => {
@@ -16,5 +27,16 @@ describe("PROFILE REDUCER", () => {
                 payload: payload
             })
         ).toEqual(payload);
+    });
+
+    it("should handle FETCH_PROFILE_ERROR", () => {
+        const payload = "payload";
+
+        expect(
+            profile(null, {
+                type: FETCH_PROFILE_ERROR,
+                payload: payload
+            })
+        ).toEqual(false);
     });
 });

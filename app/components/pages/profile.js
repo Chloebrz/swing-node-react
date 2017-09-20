@@ -13,8 +13,34 @@ class Profile extends Component {
         this.props.fetchUserPictures({ id: this.props.match.params.id });
     }
 
+    renderProfile() {
+        switch (this.props.profile) {
+            case null:
+                return (
+                    <img
+                        className="icon icon-xl icon-loading"
+                        src={require("../../images/icons/loading.gif")}
+                    />
+                );
+
+            case false:
+                return (
+                    <div className="center">
+                        <img src={require("../../images/placeholders/404.png")} />
+                    </div>
+                );
+
+            default:
+                return <ProfileBox profile={this.props.profile} pictures={this.props.pictures} />;
+        }
+    }
+
     render() {
-        return <ProfileBox profile={this.props.profile} pictures={this.props.pictures} />;
+        return (
+            <div>
+                {this.renderProfile()}
+            </div>
+        );
     }
 }
 

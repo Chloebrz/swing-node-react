@@ -77,7 +77,10 @@ describe("PICTURES ACTIONS", () => {
         it("should create FETCH_PICTURE_SUCCESS when fetching picture has been done", () => {
             const payload = { id: 123 };
             const data = { id: 123, name: "abc" };
-            const expectedAction = [{ type: types.FETCH_PICTURE_SUCCESS, payload: data }];
+            const expectedAction = [
+                { type: types.FETCH_PICTURE },
+                { type: types.FETCH_PICTURE_SUCCESS, payload: data }
+            ];
 
             nock(host).get("/api/admin/picture/123").reply(200, data);
 
@@ -89,12 +92,14 @@ describe("PICTURES ACTIONS", () => {
         it("should create FETCH_PICTURE_ERROR if error returned when fetching picture", () => {
             const payload = { id: 123 };
             const err = "an_error";
+            const expectedAction = { type: types.FETCH_PICTURE };
 
             nock(host).get("/api/admin/picture/123").reply(400, err);
 
             return store.dispatch(actions.fetchPicture(payload)).then(() => {
-                expect(store.getActions()[0].type).toBe(types.FETCH_PICTURE_ERROR);
-                expect(store.getActions()[0].payload.response.data).toBe(err);
+                expect(store.getActions()[0]).toEqual(expectedAction);
+                expect(store.getActions()[1].type).toBe(types.FETCH_PICTURE_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
             });
         });
     });

@@ -3,6 +3,7 @@
 export const FETCH_USER_SUCCESS = "fetch_user_success";
 export const FETCH_USER_ERROR = "fetch_user_error";
 
+export const FETCH_PROFILE = "fetch_profile";
 export const FETCH_PROFILE_SUCCESS = "fetch_profile_success";
 export const FETCH_PROFILE_ERROR = "fetch_profile_error";
 
@@ -20,6 +21,7 @@ export const SEND_TOKEN_ERROR = "send_token_error";
 export const FETCH_PICTURES_SUCCESS = "fetch_pictures_success";
 export const FETCH_PICTURES_ERROR = "fetch_pictures_error";
 
+export const FETCH_PICTURE = "fetch_picture";
 export const FETCH_PICTURE_SUCCESS = "fetch_picture_success";
 export const FETCH_PICTURE_ERROR = "fetch_picture_error";
 

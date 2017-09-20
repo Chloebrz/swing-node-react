@@ -33,6 +33,8 @@ export const fetchUserPictures = payload => async dispatch => {
  * Send a GET request to /api/admin/picture/:id and dispatch the result as payload of a FETCH_PICTURE action
  */
 export const fetchPicture = payload => async dispatch => {
+    dispatch({ type: types.FETCH_PICTURE });
+
     try {
         let res = await axios.get(`/api/admin/picture/${payload.id}`);
         dispatch({ type: types.FETCH_PICTURE_SUCCESS, payload: res.data });

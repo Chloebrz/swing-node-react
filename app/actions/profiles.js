@@ -20,6 +20,8 @@ export const fetchUser = () => async dispatch => {
  * Send a GET request to /api/admin/profile/:id and dispatch the result as payload of a FETCH_PROFILE action
  */
 export const fetchProfile = payload => async dispatch => {
+    dispatch({ type: types.FETCH_PROFILE });
+
     try {
         const res = await axios.get(`/api/admin/profile/${payload.id}`);
         dispatch({ type: types.FETCH_PROFILE_SUCCESS, payload: res.data });
