@@ -7,8 +7,12 @@ import {
     UPDATE_PICTURE_SUCCESS,
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
-    SEND_TOKEN_SUCCESS
+    SEND_TOKEN_RESET,
+    SEND_TOKEN,
+    SEND_TOKEN_SUCCESS,
+    SEND_TOKEN_ERROR
 } from "../../actions/types";
+import * as c from "../../actions/const";
 
 describe("SUCCESS REDUCER", () => {
     it("should return the initial state", () => {
@@ -85,12 +89,39 @@ describe("SUCCESS REDUCER", () => {
         ).toEqual({ a_success: false, update_profile_success: true });
     });
 
+    it("should handle SEND_TOKEN_RESET", () => {
+        const state = { a_success: false };
+
+        expect(success(state, { type: SEND_TOKEN_RESET })).toEqual({
+            a_success: false,
+            send_token: c.RESET
+        });
+    });
+
+    it("should handle SEND_TOKEN", () => {
+        const state = { a_success: false };
+
+        expect(success(state, { type: SEND_TOKEN })).toEqual({
+            a_success: false,
+            send_token: c.LOADING
+        });
+    });
+
     it("should handle SEND_TOKEN_SUCCESS", () => {
         const state = { a_success: false };
 
         expect(success(state, { type: SEND_TOKEN_SUCCESS })).toEqual({
             a_success: false,
-            send_token_success: true
+            send_token: c.SUCCESS
+        });
+    });
+
+    it("should handle SEND_TOKEN_ERROR", () => {
+        const state = { a_success: false };
+
+        expect(success(state, { type: SEND_TOKEN_ERROR })).toEqual({
+            a_success: false,
+            send_token: c.ERROR
         });
     });
 });

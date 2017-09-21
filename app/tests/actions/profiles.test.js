@@ -158,7 +158,7 @@ describe("PROFILES ACTIONS", () => {
 
     describe("sendVerifyToken()", () => {
         it("should create SEND_TOKEN_SUCCESS when verify token has been sent", () => {
-            const expectedAction = [{ type: types.SEND_TOKEN_SUCCESS }];
+            const expectedAction = [{ type: types.SEND_TOKEN }, { type: types.SEND_TOKEN_SUCCESS }];
 
             nock(host).get("/api/token/send").reply(200);
 
@@ -169,12 +169,14 @@ describe("PROFILES ACTIONS", () => {
 
         it("should create SEND_TOKEN_ERROR if error returned when sending token", () => {
             const err = "an_error";
+            const expectedAction = { type: types.SEND_TOKEN };
 
             nock(host).get("/api/token/send").reply(400, err);
 
             return store.dispatch(actions.sendVerifyToken()).then(() => {
-                expect(store.getActions()[0].type).toBe(types.SEND_TOKEN_ERROR);
-                expect(store.getActions()[0].payload.response.data).toBe(err);
+                expect(store.getActions()[0]).toEqual(expectedAction);
+                expect(store.getActions()[1].type).toBe(types.SEND_TOKEN_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
             });
         });
     });

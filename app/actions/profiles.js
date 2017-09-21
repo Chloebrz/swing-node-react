@@ -67,9 +67,11 @@ export const updateProfile = payload => async dispatch => {
 
 /**
  * Send an email with a link to verify the email adress of the user
- * Send a GET request to /api/token/send and TODO dispatch a TOKEN_SENT action when succeedded
+ * Send a GET request to /api/token/send and dispatch a TOKEN_SENT action when succeedded
  */
 export const sendVerifyToken = () => async dispatch => {
+    dispatch({ type: types.SEND_TOKEN });
+
     try {
         await axios.get("/api/token/send");
         dispatch({ type: types.SEND_TOKEN_SUCCESS });

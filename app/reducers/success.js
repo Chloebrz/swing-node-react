@@ -6,8 +6,12 @@ import {
     UPDATE_PICTURE_SUCCESS,
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
-    SEND_TOKEN_SUCCESS
+    SEND_TOKEN_RESET,
+    SEND_TOKEN,
+    SEND_TOKEN_SUCCESS,
+    SEND_TOKEN_ERROR
 } from "../actions/types";
+import * as c from "../actions/const";
 
 export default function(state = {}, action) {
     switch (action.type) {
@@ -29,8 +33,18 @@ export default function(state = {}, action) {
         case UPDATE_PROFILE_SUCCESS:
             return Object.assign({}, state, { update_profile_success: true });
 
+        case SEND_TOKEN_RESET:
+            return Object.assign({}, state, { send_token: c.RESET });
+
+        case SEND_TOKEN:
+            return Object.assign({}, state, { send_token: c.LOADING });
+
         case SEND_TOKEN_SUCCESS:
-            return Object.assign({}, state, { send_token_success: true });
+            return Object.assign({}, state, { send_token: c.SUCCESS });
+
+        case SEND_TOKEN_ERROR: {
+            return Object.assign({}, state, { send_token: c.ERROR });
+        }
 
         default:
             return state;

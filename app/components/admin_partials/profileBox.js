@@ -3,20 +3,31 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import * as c from "../../actions/const";
+
 class ProfileBox extends Component {
+    sendVerifyToken() {
+        if (this.props.token_sent === c.LOADING) return;
+        this.props.sendVerifyToken();
+    }
+
     renderVerifyEmail() {
         if (this.props.profile.isVerified)
             return <img className="icon-sm" src={require("../../images/icons/checkmark.png")} />;
 
         return (
-            <button
-                className="btn btn-link"
-                onClick={() => {
-                    this.props.sendVerifyToken();
-                }}
-            >
-                Vérifier mon adresse
-            </button>
+            <span>
+                <button
+                    className={`btn btn-link ${this.props.token_sent === c.LOADING
+                        ? "disabled"
+                        : ""}`}
+                    onClick={this.sendVerifyToken.bind(this)}
+                >
+                    Vérifier mon adresse
+                </button>
+                {this.props.token_sent === c.LOADING &&
+                    <img className="icon-md" src={require("../../images/icons/loading.gif")} />}
+            </span>
         );
     }
 
@@ -40,6 +51,27 @@ class ProfileBox extends Component {
         );
     }
 
+    renderTokenSentAlert() {
+        switch (this.props.token_sent) {
+            case c.ERROR:
+                return (
+                    <div className="alert alert-danger" role="alert">
+                        <strong>Erreur...</strong> Une erreur est survenue lors de l'envoi du mail
+                    </div>
+                );
+            case c.SUCCESS:
+                return (
+                    <div className="alert alert-success" role="alert">
+                        <strong>Envoyé !</strong> Un lien de vérification a été envoyé à{" "}
+                        {this.props.profile.email}
+                    </div>
+                );
+
+            default:
+                return;
+        }
+    }
+
     renderProfile() {
         if (!this.props.profile) return;
 
@@ -56,11 +88,7 @@ class ProfileBox extends Component {
                         <p>
                             {this.props.profile.email} {this.renderVerifyEmail()}
                         </p>
-                        {this.props.token_sent &&
-                            <div className="alert alert-success" role="alert">
-                                <strong>Envoyé !</strong> Un lien de vérification a été envoyé à{" "}
-                                {this.props.profile.email}
-                            </div>}
+                        {this.renderTokenSentAlert()}
                     </div>
                 </div>
 
@@ -88,7 +116,7 @@ class ProfileBox extends Component {
 ProfileBox.propTypes = {
     profile: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     sendVerifyToken: PropTypes.func,
-    token_sent: PropTypes.bool
+    token_sent: PropTypes.oneOf([c.RESET, c.LOADING, c.SUCCESS, c.ERROR])
 };
 
 export default ProfileBox;

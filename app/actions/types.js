@@ -13,6 +13,8 @@ export const SIGNUP_LOGIN_ERROR = "signup_login_error";
 export const UPDATE_PROFILE_SUCCESS = "update_profile_success";
 export const UPDATE_PROFILE_ERROR = "update_profile_error";
 
+export const SEND_TOKEN_RESET = "send_token_reset";
+export const SEND_TOKEN = "send_token";
 export const SEND_TOKEN_SUCCESS = "send_token_success";
 export const SEND_TOKEN_ERROR = "send_token_error";
 
