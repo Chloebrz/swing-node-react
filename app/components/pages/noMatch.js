@@ -1,14 +1,12 @@
 // Dependencies
-import React, { Component } from "react";
+import React from "react";
 
-class NoMatch extends Component {
-    render() {
-        return (
-            <div className="center">
-                <img src={require("../../images/placeholders/404.png")} />
-            </div>
-        );
-    }
-}
+const NoMatch = () => {
+    return (
+        <div className="center">
+            <img src={require("../../images/placeholders/404.png")} />
+        </div>
+    );
+};
 
 export default NoMatch;

@@ -1,26 +1,24 @@
 // Dependencies
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-class ContactBox extends Component {
-    render() {
-        return (
-            <div>
-                <h1>
-                    {this.props.name}
-                </h1>
-                <p>
-                    {this.props.desc}
-                    {this.props.children}
-                </p>
-                <p>
-                    {this.props.emailDesc}{" "}
-                    <a href={"mailto:" + this.props.emailAddress + "?subject=SWING"}>ici</a>
-                </p>
-            </div>
-        );
-    }
-}
+const ContactBox = props => {
+    return (
+        <div>
+            <h1>
+                {props.name}
+            </h1>
+            <p>
+                {props.desc}
+                {props.children}
+            </p>
+            <p>
+                {props.emailDesc}{" "}
+                <a href={"mailto:" + props.emailAddress + "?subject=SWING"}>ici</a>
+            </p>
+        </div>
+    );
+};
 
 ContactBox.propTypes = {
     name: PropTypes.string,
