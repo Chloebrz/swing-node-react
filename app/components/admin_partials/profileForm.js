@@ -1,122 +1,114 @@
 // Dependencies
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
 import PropTypes from "prop-types";
 
-class ProfileForm extends Component {
-    constructor(props) {
-        super();
+const validate = values => {
+    const errors = {};
 
-        this.state = {
-            firstname: props.firstname || "",
-            lastname: props.lastname || "",
-            bio: props.bio || "",
-            email: props.email
-        };
-    }
+    if (!values.firstname) errors.firstname = "Required";
+    if (!values.lastname) errors.lastname = "Required";
 
-    handleSubmit(e) {
-        e.preventDefault();
+    return errors;
+};
 
-        if (this.state.loading) return;
+const renderField = ({
+    input,
+    label,
+    type,
+    meta: { touched, error },
+    textarea,
+    rows,
+    placeholder
+}) => {
+    const inputType = <input {...input} placeholder={"* " + label} type={type} />;
+    const textareaType = <textarea {...input} placeholder={placeholder} rows={rows} type={type} />;
 
-        this.setState({ loading: true });
+    return (
+        <div className="field">
+            <h4>
+                {label + " :"}
+            </h4>
+            <div>
+                {textarea ? textareaType : inputType}
+                {touched &&
+                    (error &&
+                        <span className="error">
+                            {error}
+                        </span>)}
+            </div>
+        </div>
+    );
+};
 
-        this.props.handleSubmit({
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            bio: this.state.bio
-        });
-    }
+let ProfileForm = props => {
+    const { handleSubmit, submitting, history } = props;
 
-    handleChange(e, field) {
-        e.preventDefault();
-
-        let state = this.state;
-        state[field] = e.target.value;
-        this.setState(state);
-    }
-
-    renderSaveButton() {
-        if (this.state.loading)
-            return (
-                <button
-                    className="btn btn-lg btn-success disabled"
-                    type="submit"
-                    onClick={this.handleSubmit.bind(this)}
-                >
-                    Sauvegarde...
-                </button>
-            );
-
-        return (
-            <button
-                className="btn btn-lg btn-success"
-                type="submit"
-                onClick={this.handleSubmit.bind(this)}
-            >
-                Sauvegarder
-            </button>
-        );
-    }
-
-    render() {
-        return (
-            <div className="profile-form">
-                <div className="row">
-                    <div className="col-lg-3 col-md-4 col-sm-5">
-                        <img src={require("../../images/placeholders/profile.png")} />
-                    </div>
-                    <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
-                        <h4>Prénom :</h4>
-                        <input
-                            type="text"
-                            placeholder="Prénom"
-                            value={this.state.firstname}
-                            onChange={e => this.handleChange(e, "firstname")}
-                        />
-
-                        <h4>Nom :</h4>
-                        <input
-                            type="text"
-                            placeholder="Nom"
-                            value={this.state.lastname}
-                            onChange={e => this.handleChange(e, "lastname")}
-                        />
-                    </div>
+    return (
+        <form className="profile-form" onSubmit={handleSubmit}>
+            <div className="row">
+                <div className="col-lg-3 col-md-4 col-sm-5">
+                    <img src={require("../../images/placeholders/profile.png")} />
                 </div>
-
-                <br />
-                <br />
-
-                <h4>Bio :</h4>
-                <textarea
-                    type="text"
-                    rows="5"
-                    placeholder="Quisque sollicitudin tellus non ipsum consectetur tincidunt."
-                    value={this.state.bio}
-                    onChange={e => this.handleChange(e, "bio")}
-                />
-
-                <div className="center">
-                    {this.renderSaveButton()}
-                    <button
-                        className="btn btn-secondary right"
-                        onClick={() => this.props.history.push("/admin/profile")}
-                    >
-                        Annuler
-                    </button>
+                <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
+                    <Field name="firstname" label="Prénom" component={renderField} type="text" />
+                    <Field name="lastname" label="Nom" component={renderField} type="text" />
                 </div>
             </div>
-        );
-    }
-}
+
+            <br />
+            <br />
+
+            <Field
+                name="bio"
+                label="Bio"
+                component={renderField}
+                type="text"
+                textarea={true}
+                rows="5"
+                placeholder="Quisque sollicitudin tellus non ipsum consectetur tincidunt."
+            />
+
+            <div className="center">
+                <button className="btn btn-lg btn-success" disabled={submitting} type="submit">
+                    Sauvegarder
+                </button>
+                <button
+                    className="btn btn-secondary right"
+                    onClick={() => history.push("/admin/profile")}
+                >
+                    Annuler
+                </button>
+            </div>
+        </form>
+    );
+};
 
 ProfileForm.propTypes = {
     handleSubmit: PropTypes.func,
+    id: PropTypes.string,
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    bio: PropTypes.string,
-    email: PropTypes.string
+    bio: PropTypes.string
 };
+
+ProfileForm = reduxForm({
+    form: "profile",
+    validate
+})(ProfileForm);
+
+function mapStateToProps({ auth }) {
+    return {
+        initialValues: {
+            id: auth._id,
+            firstname: auth.name.firstname,
+            lastname: auth.name.lastname,
+            bio: auth.bio
+        }
+    };
+}
+
+ProfileForm = connect(mapStateToProps)(ProfileForm);
 
 export default ProfileForm;

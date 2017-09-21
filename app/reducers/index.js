@@ -1,5 +1,7 @@
 // Dependencies
 import { combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
+
 import auth from "./auth";
 import picture from "./picture";
 import pictures from "./pictures";
@@ -13,5 +15,6 @@ export default combineReducers({
     pictures,
     success,
     errors,
-    profile
+    profile,
+    form: formReducer
 });

@@ -1,7 +1,6 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 import { updateProfile } from "../../actions/profiles";
 import ProfileForm from "../admin_partials/profileForm";
@@ -12,49 +11,29 @@ class UpdateProfile extends Component {
         if (newProps.update_profile_success) this.props.history.push("/admin/profile");
     }
 
-    handleSubmit(payload) {
+    submit(values) {
         this.props.updateProfile({
-            id: this.props.auth._id,
+            id: values.id,
             name: {
-                firstname: payload.firstname,
-                lastname: payload.lastname
+                firstname: values.firstname,
+                lastname: values.lastname
             },
-            bio: payload.bio
+            bio: values.bio
         });
-    }
-
-    renderProfileForm() {
-        if (!this.props.auth) return;
-
-        return (
-            <ProfileForm
-                handleSubmit={this.handleSubmit.bind(this)}
-                firstname={this.props.auth.name.firstname}
-                lastname={this.props.auth.name.lastname}
-                bio={this.props.auth.bio}
-                history={this.props.history}
-            />
-        );
     }
 
     render() {
         return (
             <div className={styles}>
                 <h1>Modifier mon profil</h1>
-                {this.renderProfileForm()}
+                <ProfileForm onSubmit={this.submit.bind(this)} history={this.props.history} />
             </div>
         );
     }
 }
 
-UpdateProfile.propTypes = {
-    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-    update_profile_success: PropTypes.bool,
-    updateProfile: PropTypes.func
-};
-
-function mapStateToProps({ auth, success }) {
-    return { auth, update_profile_success: success.update_profile_success };
+function mapStateToProps({ success }) {
+    return { update_profile_success: success.update_profile_success };
 }
 
 export default connect(mapStateToProps, { updateProfile })(UpdateProfile);

@@ -2,10 +2,11 @@
     margin: auto;
 }
 
-.profile-form input {
+.field {
     margin-bottom: 20px;
 }
 
-.profile-form textarea {
-    margin-bottom: 20px;
+.field span {
+    flex-flow: column nowrap;
+    display: flex;
 }

@@ -16,5 +16,6 @@ textarea {
 }
 
 .error {
-    color: red;
+    color: #700;
+    font-weight: bold;
 }
