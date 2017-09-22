@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { postPicture } from "../../actions/pictures";
-import PictureForm from "../admin_partials/pictureForm";
+import PictureForm from "../admin_partials/picture-form";
 
 class AddPicture extends Component {
     componentWillReceiveProps(newProps) {
         if (newProps.post_picture_success) this.props.history.push("/admin");
     }
 
-    handleSubmit(payload) {
+    submit(values) {
         this.props.postPicture({
-            name: payload.name,
-            img: payload.img,
-            legend: payload.legend
+            name: values.name,
+            img: values.image,
+            legend: values.legend
         });
     }
 
@@ -28,10 +28,7 @@ class AddPicture extends Component {
                     (10 caractères minimum).
                 </p>
 
-                <PictureForm
-                    handleSubmit={this.handleSubmit.bind(this)}
-                    history={this.props.history}
-                />
+                <PictureForm onSubmit={this.submit.bind(this)} history={this.props.history} />
             </div>
         );
     }

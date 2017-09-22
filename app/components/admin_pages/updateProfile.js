@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { updateProfile } from "../../actions/profiles";
 import ProfileForm from "../admin_partials/profileForm";
@@ -31,6 +32,11 @@ class UpdateProfile extends Component {
         );
     }
 }
+
+UpdateProfile.propTypes = {
+    update_profile_success: PropTypes.bool,
+    updateProfile: PropTypes.func
+};
 
 function mapStateToProps({ success }) {
     return { update_profile_success: success.update_profile_success };
