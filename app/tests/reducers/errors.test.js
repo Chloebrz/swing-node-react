@@ -1,31 +1,31 @@
 // Dependencies
 import errors from "../../reducers/errors";
-import { SIGNUP_LOGIN_ERROR } from "../../actions/types";
+import { SIGNUP_ERROR, LOGIN_ERROR } from "../../actions/types";
 
 describe("ERRORS REDUCER", () => {
     it("should return the initial state", () => {
         expect(errors(undefined, {})).toEqual({});
     });
 
-    it("should return the previous state if no payload", () => {
-        const state = { a_success: false };
+    it("should handle SIGNUP_ERROR", () => {
+        const state = { an_error: "err" };
 
         expect(
             errors(state, {
-                type: SIGNUP_LOGIN_ERROR
+                type: SIGNUP_ERROR,
+                payload: "signup_err"
             })
-        ).toEqual(state);
+        ).toEqual({ an_error: "err", signup_error: "signup_err" });
     });
 
-    it("should handle SIGNUP_LOGIN_ERROR", () => {
-        const state = { a_success: false };
-        const payload = "payload";
+    it("should handle LOGIN_ERROR", () => {
+        const state = { an_error: "err" };
 
         expect(
             errors(state, {
-                type: SIGNUP_LOGIN_ERROR,
-                payload
+                type: LOGIN_ERROR,
+                payload: "login_err"
             })
-        ).toEqual(payload);
+        ).toEqual({ an_error: "err", login_error: "login_err" });
     });
 });

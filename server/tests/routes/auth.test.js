@@ -34,7 +34,7 @@ describe("AUTH ROUTES", () => {
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
-                    expect(res.body.errors).toInclude({ email: "Adresse mail déjà utilisée" });
+                    expect(res.body.error).toBe("Adresse mail déjà utilisée");
                 })
                 .end(done);
         });
@@ -72,7 +72,7 @@ describe("AUTH ROUTES", () => {
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
-                    expect(res.body.errors).toInclude({ email: "Adresse mail incorrecte" });
+                    expect(res.body.error).toBe("Adresse mail incorrecte");
                 })
                 .end(done);
         });
@@ -85,7 +85,7 @@ describe("AUTH ROUTES", () => {
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
-                    expect(res.body.errors).toInclude({ password: "Mot de passe incorrect" });
+                    expect(res.body.error).toBe("Mot de passe incorrect");
                 })
                 .end(done);
         });

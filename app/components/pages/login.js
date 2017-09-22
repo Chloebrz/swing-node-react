@@ -43,7 +43,7 @@ Login.propTypes = {
 };
 
 function mapStateToProps({ success, errors }) {
-    return { signup_login_success: success.signup_login_success, error: errors.error_login };
+    return { signup_login_success: success.signup_login_success, error: errors.login_error };
 }
 
 export default connect(mapStateToProps, { loginUser, fetchUser })(Login);

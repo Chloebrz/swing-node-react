@@ -91,10 +91,10 @@ describe("PROFILES ACTIONS", () => {
             });
         });
 
-        it("should create SIGNUP_LOGIN_ERROR when signing up user has not been successfully done", () => {
+        it("should create SIGNUP_ERROR when signing up user has not been successfully done", () => {
             const payload = { id: 123 };
-            const data = { success: false, errors: "errors" };
-            const expectedAction = [{ type: types.SIGNUP_LOGIN_ERROR, payload: data.errors }];
+            const data = { success: false, error: "error" };
+            const expectedAction = [{ type: types.SIGNUP_ERROR, payload: data.error }];
 
             nock(host).post("/auth/signup", payload).reply(200, data);
 
@@ -117,10 +117,10 @@ describe("PROFILES ACTIONS", () => {
             });
         });
 
-        it("should create SIGNUP_LOGIN_ERROR when logging up user has not been successfully done", () => {
+        it("should create LOGIN_ERROR when logging up user has not been successfully done", () => {
             const payload = { id: 123 };
-            const data = { success: false, errors: "errors" };
-            const expectedAction = [{ type: types.SIGNUP_LOGIN_ERROR, payload: data.errors }];
+            const data = { success: false, error: "error" };
+            const expectedAction = [{ type: types.LOGIN_ERROR, payload: data.error }];
 
             nock(host).post("/auth/login", payload).reply(200, data);
 
