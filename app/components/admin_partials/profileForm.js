@@ -7,8 +7,8 @@ import PropTypes from "prop-types";
 const validate = values => {
     const errors = {};
 
-    if (!values.firstname) errors.firstname = "Required";
-    if (!values.lastname) errors.lastname = "Required";
+    if (!values.firstname) errors.firstname = "Obligatoire";
+    if (!values.lastname) errors.lastname = "Obligatoire";
 
     return errors;
 };

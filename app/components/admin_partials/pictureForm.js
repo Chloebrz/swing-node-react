@@ -10,13 +10,13 @@ import style from "../../css/picture_form.css";
 const validate = values => {
     const errors = {};
 
-    if (!values.name) errors.name = "Required";
-    else if (values.name.trim().length < 5) errors.name = "Must be at least 5";
+    if (!values.name) errors.name = "Obligatoire";
+    else if (values.name.trim().length < 5) errors.name = "5 catactères minimum";
 
-    if (!values.legend) errors.legend = "Required";
-    else if (values.legend.trim().length < 15) errors.legend = "Must be at least 15";
+    if (!values.legend) errors.legend = "Obligatoire";
+    else if (values.legend.trim().length < 15) errors.legend = "15 caractères minimum";
 
-    if (!values.image) errors.image = "Required";
+    if (!values.image) errors.image = "Obligatoire";
 
     return errors;
 };

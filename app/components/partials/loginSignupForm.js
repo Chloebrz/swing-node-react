@@ -9,16 +9,16 @@ const validate = (values, props) => {
     const { signup } = props;
     const errors = {};
 
-    if (!values.email) errors.email = "Required";
+    if (!values.email) errors.email = "Obligatoire";
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-        errors.email = "Invalid email address";
+        errors.email = "Adresse mail non valide";
 
-    if (!values.password) errors.password = "Required";
-    else if (signup && values.password.trim().length < 5) errors.password = "Must be at least 5";
+    if (!values.password) errors.password = "Obligatoire";
+    else if (signup && values.password.trim().length < 5) errors.password = "5 caractère minimum";
 
-    if (signup && !values.password_conf) errors.password_conf = "Required";
+    if (signup && !values.password_conf) errors.password_conf = "Obligatoire";
     else if (signup && values.password_conf !== values.password)
-        errors.password_conf = "Must be the same";
+        errors.password_conf = "Mots de passe non identiques";
 
     return errors;
 };
