@@ -4,6 +4,10 @@
     padding: 20px;
 }
 
+.signup-login-box button {
+    width: 100%;
+}
+
 .signup-login-box input {
     width: 100%;
 }

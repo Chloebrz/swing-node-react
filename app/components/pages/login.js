@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { loginUser, fetchUser } from "../../actions/profiles";
-import RegisterLogin from "../partials/registerLogin";
+import LoginForm from "../partials/loginForm";
 
 class Login extends Component {
     componentWillReceiveProps(newProps) {
@@ -14,36 +14,26 @@ class Login extends Component {
         }
     }
 
-    handleSubmit(payload) {
+    submit(values) {
         this.props.loginUser({
-            email: payload.email,
-            password: payload.password
+            email: values.email,
+            password: values.password
         });
     }
 
     render() {
-        return (
-            <RegisterLogin
-                title="Se connecter"
-                question="Pas encore inscrit ?"
-                redirectLink="/signup"
-                redirectTitle="S'inscrire"
-                handleSubmit={this.handleSubmit.bind(this)}
-                errors={this.props.errors}
-            />
-        );
+        return <LoginForm onSubmit={this.submit.bind(this)} err={this.props.error} />;
     }
 }
 
 Login.propTypes = {
     signup_login_success: PropTypes.bool,
-    errors: PropTypes.object,
     fetchUser: PropTypes.func,
     loginUser: PropTypes.func
 };
 
 function mapStateToProps({ success, errors }) {
-    return { signup_login_success: success.signup_login_success, errors };
+    return { signup_login_success: success.signup_login_success, error: errors.error_login };
 }
 
 export default connect(mapStateToProps, { loginUser, fetchUser })(Login);

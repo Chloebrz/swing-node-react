@@ -14,11 +14,11 @@ module.exports = new LocalStrategy(
         User.findOne({ email })
             .then(existingUser => {
                 user = existingUser;
-                if (!user) return done({ email: "Adresse mail incorrecte" });
+                if (!user) return done("Adresse mail incorrecte");
                 return user.comparePassword(password);
             })
             .then(isMatch => {
-                if (!isMatch) return done({ password: "Mot de passe incorrect" });
+                if (!isMatch) return done("Mot de passe incorrect");
                 return done(null, user);
             })
             .catch(err => {

@@ -49,7 +49,7 @@ export const signupUser = payload => async dispatch => {
 export const loginUser = payload => async dispatch => {
     const res = await axios.post("/auth/login", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
-    else dispatch({ type: types.SIGNUP_LOGIN_ERROR, payload: res.data.errors });
+    else dispatch({ type: types.LOGIN_ERROR, payload: res.data.error });
 };
 
 /**

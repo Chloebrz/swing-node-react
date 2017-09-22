@@ -109,6 +109,4 @@ function mapStateToProps({ auth }) {
     };
 }
 
-ProfileForm = connect(mapStateToProps)(ProfileForm);
-
-export default ProfileForm;
+export default connect(mapStateToProps)(ProfileForm);

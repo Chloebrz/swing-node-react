@@ -60,10 +60,10 @@ module.exports = app => {
             if (err)
                 return res.json({
                     success: false,
-                    errors: err
+                    error: err
                 });
 
-            if (!user) return res.send({ success: false, message: "authentication failed" });
+            if (!user) return res.send({ success: false, error: "authentication failed" });
 
             req.logIn(user, loginErr => {
                 if (loginErr) return next(loginErr);
