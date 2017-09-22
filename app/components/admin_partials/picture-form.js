@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm, change } from "redux-form";
 import PropTypes from "prop-types";
 
+import FileInput from "./fileInput";
 import style from "../../css/picture_form.css";
 
 const validate = values => {
@@ -15,7 +16,7 @@ const validate = values => {
     if (!values.legend) errors.legend = "Required";
     else if (values.legend.trim().length < 15) errors.legend = "Must be at least 15";
 
-    if (!values.file) errors.file = "Required";
+    if (!values.image) errors.image = "Required";
 
     return errors;
 };
@@ -51,27 +52,7 @@ let PictureForm = props => {
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-md-7">
-                        <input
-                            name="image"
-                            type="file"
-                            value=""
-                            onChange={e => {
-                                e.preventDefault();
-
-                                const reader = new FileReader();
-                                const file = e.target.files[0];
-
-                                reader.onload = upload => {
-                                    let file_value = {
-                                        data: upload.target.result,
-                                        filename: file.name,
-                                        filetype: file.type
-                                    };
-                                    props.dispatch(change("picture", "image", file_value));
-                                };
-                                reader.readAsDataURL(file);
-                            }}
-                        />
+                        <Field type="file" name="image" component={FileInput} />
                     </div>
 
                     <div className="col-md-5">
