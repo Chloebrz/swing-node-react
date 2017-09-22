@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { loginUser, fetchUser } from "../../actions/profiles";
-import LoginForm from "../partials/loginForm";
+import LoginSignupForm from "../partials/loginSignupForm";
 
 class Login extends Component {
     componentWillReceiveProps(newProps) {
@@ -22,7 +22,17 @@ class Login extends Component {
     }
 
     render() {
-        return <LoginForm onSubmit={this.submit.bind(this)} err={this.props.error} />;
+        return (
+            <LoginSignupForm
+                onSubmit={this.submit.bind(this)}
+                title="Se connecter"
+                signup={false}
+                redirectQuestion="Pas encore inscrit ?"
+                redirectLink="/signup"
+                redirectTitle="S'inscrire"
+                err={this.props.error}
+            />
+        );
     }
 }
 
