@@ -12,7 +12,7 @@ module.exports = new LocalStrategy(
     (email, password, done) => {
         User.findOne({ email })
             .then(user => {
-                if (user) return done({ email: "Adresse mail déjà utilisée" });
+                if (user) return done("Adresse mail déjà utilisée");
 
                 new User({
                     email,

@@ -38,7 +38,7 @@ export const fetchProfile = payload => async dispatch => {
 export const signupUser = payload => async dispatch => {
     const res = await axios.post("/auth/signup", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
-    else dispatch({ type: types.SIGNUP_LOGIN_ERROR, payload: res.data.errors });
+    else dispatch({ type: types.SIGNUP_ERROR, payload: res.data.error });
 };
 
 /**

@@ -8,8 +8,7 @@ export const FETCH_PROFILE_SUCCESS = "fetch_profile_success";
 export const FETCH_PROFILE_ERROR = "fetch_profile_error";
 
 export const SIGNUP_LOGIN_SUCCESS = "signup_login_success";
-export const SIGNUP_LOGIN_ERROR = "signup_login_error";
-
+export const SIGNUP_ERROR = "signup_error";
 export const LOGIN_ERROR = "login_error";
 
 export const UPDATE_PROFILE_SUCCESS = "update_profile_success";
