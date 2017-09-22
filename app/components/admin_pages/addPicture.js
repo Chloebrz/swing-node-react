@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { postPicture } from "../../actions/pictures";
-import PictureForm from "../admin_partials/picture-form";
+import PictureForm from "../admin_partials/pictureForm";
 
 class AddPicture extends Component {
     componentWillReceiveProps(newProps) {
@@ -27,7 +27,6 @@ class AddPicture extends Component {
                     Ajouter une nouvelle image avec un titre (5 caractères minimum) et une légende
                     (10 caractères minimum).
                 </p>
-
                 <PictureForm onSubmit={this.submit.bind(this)} history={this.props.history} />
             </div>
         );

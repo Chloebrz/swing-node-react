@@ -7,42 +7,22 @@ import { fetchPicture, updatePicture } from "../../actions/pictures";
 import PictureForm from "../admin_partials/pictureForm";
 
 class UpdatePicture extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            file: null,
-            name: "",
-            legend: "",
-            res: "",
-            loaded: false
-        };
-    }
-
     componentWillMount() {
         this.props.fetchPicture({ id: this.props.match.params.id });
     }
 
     componentWillReceiveProps(newProps) {
         if (newProps.update_picture_success) this.props.history.push("/admin");
-
-        if (newProps.picture)
-            this.state = {
-                res: `data:${newProps.picture.img.contentType};base64,${newProps.picture.img.res}`,
-                name: newProps.picture.name,
-                legend: newProps.picture.legend,
-                loaded: true
-            };
     }
 
-    handleSubmit(payload) {
+    submit(values) {
         var picture = {
             id: this.props.match.params.id,
-            name: payload.name,
-            legend: payload.legend
+            name: values.name,
+            legend: values.legend
         };
 
-        if (payload.img) picture.img = payload.img;
+        if (values.image.filename) picture.img = values.image;
         this.props.updatePicture(picture);
     }
 
@@ -66,10 +46,8 @@ class UpdatePicture extends Component {
             default:
                 return (
                     <PictureForm
-                        name={this.state.name}
-                        legend={this.state.legend}
-                        res={this.state.res}
-                        handleSubmit={this.handleSubmit.bind(this)}
+                        picture={this.props.picture}
+                        onSubmit={this.submit.bind(this)}
                         history={this.props.history}
                     />
                 );
@@ -84,7 +62,6 @@ class UpdatePicture extends Component {
                     Modifier l'image sélectionnée avec un titre (5 caractères minimum) et une
                     légende (10 caractères minimum).
                 </p>
-
                 {this.renderPictureForm()}
             </div>
         );

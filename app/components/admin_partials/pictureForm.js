@@ -1,189 +1,109 @@
 // Dependencies
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { Field, reduxForm, change } from "redux-form";
 import PropTypes from "prop-types";
 
+import FileInput from "./fileInput";
 import style from "../../css/picture_form.css";
 
-class PictureForm extends Component {
-    constructor(props) {
-        super();
+const validate = values => {
+    const errors = {};
 
-        this.state = {
-            picture: {
-                name: props.name || "",
-                legend: props.legend || "",
-                file: null,
-                res: props.res || require("../../images/placeholders/picture.png")
-            },
-            errors: {
-                name: false,
-                legend: false,
-                file: false
-            },
-            loading: false
-        };
-    }
+    if (!values.name) errors.name = "Required";
+    else if (values.name.trim().length < 5) errors.name = "Must be at least 5";
 
-    handleSubmit(e) {
-        e.preventDefault();
+    if (!values.legend) errors.legend = "Required";
+    else if (values.legend.trim().length < 15) errors.legend = "Must be at least 15";
 
-        if (this.state.loading) return;
+    if (!values.image) errors.image = "Required";
 
-        this.setState(
-            {
-                errors: {
-                    name: this.state.picture.name.trim().length < 5,
-                    legend: this.state.picture.legend.trim().length < 15,
-                    file:
-                        !this.state.picture.file &&
-                        this.state.picture.res === require("../../images/placeholders/picture.png")
-                }
-            },
-            function() {
-                if (this.state.errors.name || this.state.errors.legend || this.state.errors.file)
-                    return;
-
-                this.setState({ loading: true });
-
-                this.props.handleSubmit({
-                    name: this.state.picture.name,
-                    img: this.state.picture.file,
-                    legend: this.state.picture.legend
-                });
-            }
-        );
-    }
-
-    handleImageChange(e) {
-        e.preventDefault();
-
-        const reader = new FileReader();
-        const file = e.target.files[0];
-
-        reader.onload = upload => {
-            let picture = this.state.picture;
-            picture.file = {
-                data: upload.target.result,
-                filename: file.name,
-                filetype: file.type
-            };
-
-            let errors = this.state.errors;
-            errors.file = false;
-            this.setState({ picture, errors });
-        };
-        reader.readAsDataURL(file);
-    }
-
-    handleChange(e, field) {
-        e.preventDefault();
-
-        let picture = this.state.picture;
-        picture[field] = e.target.value;
-
-        let errors = this.state.errors;
-        errors[field] = false;
-
-        this.setState({ picture, errors });
-    }
-
-    renderSaveButton() {
-        if (this.state.loading)
-            return (
-                <button
-                    className="btn btn-lg btn-success disabled"
-                    type="submit"
-                    onClick={this.handleSubmit.bind(this)}
-                >
-                    Sauvegarde...
-                </button>
-            );
-
-        return (
-            <button
-                className="btn btn-lg btn-success"
-                type="submit"
-                onClick={this.handleSubmit.bind(this)}
-            >
-                Sauvegarder
-            </button>
-        );
-    }
-
-    render() {
-        return (
-            <div className={style}>
-                <hr className="featurette-divider" />
-
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="row">
-                        <div className="col-md-7 image-upload">
-                            <label htmlFor="file-input">
-                                <img
-                                    src={
-                                        this.state.picture.file
-                                            ? this.state.picture.file.data
-                                            : this.state.picture.res
-                                    }
-                                />
-                            </label>
-                            <input
-                                id="file-input"
-                                type="file"
-                                onChange={this.handleImageChange.bind(this)}
-                            />
-                            {this.state.errors.file &&
-                                <div className="error">Sélectionner une image</div>}
-                        </div>
-
-                        <div className="col-md-5">
-                            <h4>Nom :</h4>
-                            <input
-                                type="text"
-                                placeholder="Nom"
-                                value={this.state.picture.name}
-                                onChange={e => this.handleChange(e, "name")}
-                            />
-                            {this.state.errors.name &&
-                                <div className="error">5 caractères minimum</div>}
-
-                            <br />
-                            <br />
-
-                            <h4>Légende :</h4>
-                            <textarea
-                                type="text"
-                                rows="5"
-                                placeholder="Légende"
-                                value={this.state.picture.legend}
-                                onChange={e => this.handleChange(e, "legend")}
-                            />
-                            {this.state.errors.legend &&
-                                <div className="error">15 caractères minimum</div>}
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div className="center">
-                        {this.renderSaveButton()}
-                        <button
-                            className="btn btn-secondary right"
-                            onClick={() => this.props.history.push("/admin")}
-                        >
-                            Annuler
-                        </button>
-                    </div>
-                </form>
-            </div>
-        );
-    }
-}
-
-PictureForm.propTypes = {
-    name: PropTypes.string,
-    legend: PropTypes.string,
-    res: PropTypes.string,
-    handleSubmit: PropTypes.func
+    return errors;
 };
 
-export default PictureForm;
+const renderField = ({ input, label, type, meta: { touched, error }, textarea, rows }) => {
+    const inputType = <input {...input} placeholder={"* " + label} type={type} />;
+    const textareaType = <textarea {...input} placeholder={"* " + label} rows={rows} type={type} />;
+
+    return (
+        <div className="field">
+            <h4>
+                {label + " :"}
+            </h4>
+            <div>
+                {textarea ? textareaType : inputType}
+                {touched &&
+                    (error &&
+                        <span className="error">
+                            {error}
+                        </span>)}
+            </div>
+        </div>
+    );
+};
+
+let PictureForm = props => {
+    const { handleSubmit, submitting, history } = props;
+
+    return (
+        <div className={style}>
+            <hr className="featurette-divider" />
+
+            <form onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="col-md-7">
+                        <Field type="file" name="image" component={FileInput} />
+                    </div>
+
+                    <div className="col-md-5">
+                        <Field name="name" label="Nom" component={renderField} type="text" />
+                        <Field
+                            name="legend"
+                            label="Légende"
+                            component={renderField}
+                            type="text"
+                            textarea={true}
+                            rows="5"
+                        />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div className="center">
+                    <button className="btn btn-lg btn-success" disabled={submitting} type="submit">
+                        Sauvegarder
+                    </button>
+                    <button
+                        className="btn btn-secondary right"
+                        onClick={() => history.push("/admin")}
+                    >
+                        Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+PictureForm.propTypes = {};
+
+function mapStateToProps(state, props) {
+    const initialValues = props.picture
+        ? {
+              image: {
+                  data: `data:${props.picture.img.contentType};base64,${props.picture.img.res}`
+              },
+              name: props.picture.name,
+              legend: props.picture.legend
+          }
+        : {};
+
+    return { initialValues };
+}
+
+PictureForm = reduxForm({
+    form: "picture",
+    validate
+})(PictureForm);
+
+export default connect(mapStateToProps)(PictureForm);
