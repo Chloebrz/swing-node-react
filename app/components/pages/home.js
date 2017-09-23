@@ -1,10 +1,10 @@
 // Dependencies
 import React from "react";
-import style from "../../css/home.css";
+import styles from "../../css/pages/home.css";
 
 const Home = () => {
     return (
-        <div className={style}>
+        <div className={styles}>
             <img
                 className="img-responsive img-radius"
                 src={require("../../images/home/home.jpg")}

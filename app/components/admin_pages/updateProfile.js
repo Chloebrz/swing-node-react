@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 import { updateProfile } from "../../actions/profiles";
 import ProfileForm from "../admin_partials/profileForm";
-import styles from "../../css/profile.css";
 
 class UpdateProfile extends Component {
     componentWillReceiveProps(newProps) {
@@ -25,7 +24,7 @@ class UpdateProfile extends Component {
 
     render() {
         return (
-            <div className={styles}>
+            <div>
                 <h1>Modifier mon profil</h1>
                 <ProfileForm onSubmit={this.submit.bind(this)} history={this.props.history} />
             </div>

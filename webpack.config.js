@@ -37,6 +37,10 @@ var config = {
             {
                 test: /\.(gif|svg)$/i,
                 loader: "url-loader?name=/public/icons/[name].[ext]"
+            },
+            {
+                test: /\.(eot|ttf|woff|woff2)$/,
+                loader: "url-loader?name=public/fonts/[name].[ext]"
             }
         ]
     }

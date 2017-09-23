@@ -8,7 +8,7 @@ moment.locale("fr");
 
 import { fetchPictures } from "../../actions/pictures";
 import PictureBox from "../admin_partials/pictureBox";
-import style from "../../css/dashboard.css";
+import styles from "../../css/pages/dashboard.css";
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -49,7 +49,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div className={style}>
+            <div className={styles}>
                 <div className="center">
                     <Link to="/admin/add_picture">
                         <img

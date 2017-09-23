@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import PropTypes from "prop-types";
 
+import styles from "../../css/partials/form.css";
+
 const validate = values => {
     const errors = {};
 
@@ -35,6 +37,7 @@ const renderField = ({
                 {touched &&
                     (error &&
                         <span className="error">
+                            <i className="fa fa-exclamation-circle" />
                             {error}
                         </span>)}
             </div>
@@ -46,7 +49,7 @@ let ProfileForm = props => {
     const { handleSubmit, submitting, history } = props;
 
     return (
-        <form className="profile-form" onSubmit={handleSubmit}>
+        <form className={styles} onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-lg-3 col-md-4 col-sm-5">
                     <img src={require("../../images/placeholders/profile.png")} />

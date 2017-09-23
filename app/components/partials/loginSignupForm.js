@@ -3,7 +3,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 
-import style from "../../css/signup-login.css";
+import styles from "../../css/partials/form.css";
 
 const validate = (values, props) => {
     const { signup } = props;
@@ -29,6 +29,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) =>
         {touched &&
             (error &&
                 <span className="error">
+                    <i className="fa fa-exclamation-circle" />
                     {error}
                 </span>)}
     </div>;
@@ -38,7 +39,7 @@ let LoginSignupForm = props => {
     const { title, signup, redirectQuestion, redirectLink, redirectTitle } = props;
 
     return (
-        <div className={style} className="signup-login-box">
+        <div className={styles} className="signup-login-box">
             <div className="center">
                 <h3>
                     {title} avec
@@ -69,6 +70,7 @@ let LoginSignupForm = props => {
                     />}
                 {err &&
                     <div className="field center error">
+                        <i className="fa fa-exclamation-circle" />
                         {err}
                     </div>}
                 <button type="submit" className="btn btn-success" disabled={submitting}>

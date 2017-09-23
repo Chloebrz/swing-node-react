@@ -17,12 +17,11 @@ import Profile from "./components/pages/profile";
 import NoMatch from "./components/pages/noMatch";
 
 import mainStyle from "./css/main.css";
-import headerStyle from "./css/header.css";
 
 const routes = (
     <BrowserRouter>
         <div className={mainStyle}>
-            <Header className={headerStyle} />
+            <Header />
             <div className="container">
                 <Switch>
                     <Route exact path="/" component={Home} />

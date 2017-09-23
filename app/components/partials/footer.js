@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import style from "../../css/footer.css";
+import styles from "../../css/partials/footer.css";
 
 class Footer extends Component {
     renderLogin() {
@@ -24,7 +24,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <footer className={style}>
+            <footer className={styles}>
                 <p>
                     &copy; Chloé Brouzes 2017 {this.renderLogin()}
                 </p>

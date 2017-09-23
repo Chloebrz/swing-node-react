@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { fetchUser } from "../../actions/profiles";
+import styles from "../../css/partials/header.css";
 
 class Header extends Component {
     constructor(props) {
@@ -56,7 +57,7 @@ class Header extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav className={styles} className="navbar navbar-expand-md navbar-dark bg-dark">
                 <Link to={this.props.auth ? "/admin" : "/"} className="navbar-brand">
                     <img id="logo" src={require("../../images/s-wing.png")} alt="SWING" />
                 </Link>

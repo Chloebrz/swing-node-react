@@ -5,7 +5,7 @@ import { Field, reduxForm, change } from "redux-form";
 import PropTypes from "prop-types";
 
 import FileInput from "./fileInput";
-import style from "../../css/picture_form.css";
+import styles from "../../css/partials/form.css";
 
 const validate = values => {
     const errors = {};
@@ -35,6 +35,7 @@ const renderField = ({ input, label, type, meta: { touched, error }, textarea, r
                 {touched &&
                     (error &&
                         <span className="error">
+                            <i className="fa fa-exclamation-circle" />
                             {error}
                         </span>)}
             </div>
@@ -46,7 +47,7 @@ let PictureForm = props => {
     const { handleSubmit, submitting, history } = props;
 
     return (
-        <div className={style}>
+        <div className={styles}>
             <hr className="featurette-divider" />
 
             <form onSubmit={handleSubmit}>

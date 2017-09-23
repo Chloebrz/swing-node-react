@@ -8,7 +8,7 @@ moment.locale("fr");
 import { fetchPictures } from "../../actions/pictures";
 import PictureBox from "../partials/pictureBox";
 import PicturesCarousel from "../partials/picturesCarousel";
-import style from "../../css/images.css";
+import styles from "../../css/pages/images.css";
 
 class Images extends Component {
     constructor() {
@@ -64,7 +64,7 @@ class Images extends Component {
 
     render() {
         return (
-            <div className={style} className="album">
+            <div className={styles} className="album">
                 <h1>Vidéos</h1>
 
                 <p>
