@@ -11,7 +11,8 @@ export const fetchPictures = payload => async dispatch => {
 
     try {
         let res = await axios.post("/api/admin/pictures", payload);
-        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
+        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data.pictures });
+        if (res.data.last) dispatch({ type: types.FETCH_PICTURES_DONE });
     } catch (err) {
         dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });
     }

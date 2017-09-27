@@ -25,6 +25,8 @@ class Images extends Component {
     }
 
     renderLoadMore() {
+        if (this.props.fetch_pictures_done) return;
+
         return (
             <div className="center">
                 <button
@@ -142,7 +144,11 @@ Images.propTypes = {
 };
 
 function mapStateToProps({ pictures, success }) {
-    return { pictures, fetch_pictures_success: success.fetch_pictures_success };
+    return {
+        pictures,
+        fetch_pictures_success: success.fetch_pictures_success,
+        fetch_pictures_done: success.fetch_pictures_done
+    };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Images);

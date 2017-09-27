@@ -37,8 +37,11 @@ module.exports = app => {
                 picture.img.res = new Buffer(picture.img.data.buffer).toString("base64");
             });
 
+            // check if there are other pictures to load
+            const last = pictures.length < 6;
+
             // send the result
-            res.send(pictures);
+            res.send({ pictures, last });
         } catch (err) {
             res.status(400).send(err);
         }

@@ -1,6 +1,8 @@
 // Dependencies
 import {
     FETCH_PICTURES_SUCCESS,
+    FETCH_PICTURES,
+    FETCH_PICTURES_DONE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS,
@@ -17,6 +19,12 @@ export default function(state = {}, action) {
     switch (action.type) {
         case FETCH_PICTURES_SUCCESS:
             return Object.assign({}, state, { fetch_pictures_success: true });
+
+        case FETCH_PICTURES:
+            return Object.assign({}, state, { fetch_pictures_done: false });
+
+        case FETCH_PICTURES_DONE:
+            return Object.assign({}, state, { fetch_pictures_done: true });
 
         case POST_PICTURE_SUCCESS:
             return Object.assign({}, state, { post_picture_success: true });
