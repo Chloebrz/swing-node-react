@@ -21,7 +21,10 @@ export default function(state = {}, action) {
             return Object.assign({}, state, { fetch_pictures_success: true });
 
         case FETCH_PICTURES:
-            return Object.assign({}, state, { fetch_pictures_done: false });
+            return Object.assign({}, state, {
+                fetch_pictures_success: false,
+                fetch_pictures_done: false
+            });
 
         case FETCH_PICTURES_DONE:
             return Object.assign({}, state, { fetch_pictures_done: true });

@@ -38,7 +38,7 @@ describe("SUCCESS REDUCER", () => {
             success(state, {
                 type: FETCH_PICTURES
             })
-        ).toEqual({ a_success: false, fetch_pictures_done: false });
+        ).toEqual({ a_success: false, fetch_pictures_success: false, fetch_pictures_done: false });
     });
 
     it("should handle FETCH_PICTURES_DONE", () => {
