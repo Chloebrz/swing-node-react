@@ -15,12 +15,30 @@ class Images extends Component {
         super();
 
         this.state = {
-            album: true
+            album: true,
+            n: 1
         };
     }
 
     componentDidMount() {
-        this.props.fetchPictures();
+        this.props.fetchPictures({ n: this.state.n });
+    }
+
+    renderLoadMore() {
+        return (
+            <div className="center">
+                <button
+                    className="btn btn-secondary"
+                    onClick={() => {
+                        const n = ++this.state.n;
+                        this.setState({ n });
+                        this.props.fetchPictures({ n: this.state.n });
+                    }}
+                >
+                    Plus
+                </button>
+            </div>
+        );
     }
 
     renderAlbum() {
@@ -111,6 +129,7 @@ class Images extends Component {
                 <div className="row">
                     {this.renderPictures()}
                 </div>
+                {this.renderLoadMore()}
             </div>
         );
     }

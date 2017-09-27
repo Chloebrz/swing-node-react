@@ -4,11 +4,11 @@ import * as types from "./types";
 
 /**
  * Fetch all the pictures of the database
- * Send a GET request to /api/admin/pictures and dispatch the result as payload of a FETCH_PICTURES action
+ * Send a POST request to /api/admin/pictures with the page number and dispatch the result as payload of a FETCH_PICTURES action
  */
-export const fetchPictures = () => async dispatch => {
+export const fetchPictures = payload => async dispatch => {
     try {
-        let res = await axios.get("/api/admin/pictures");
+        let res = await axios.post("/api/admin/pictures", payload);
         dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
     } catch (err) {
         dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });

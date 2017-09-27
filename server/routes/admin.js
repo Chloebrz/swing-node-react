@@ -9,10 +9,13 @@ const auth = require("../middlewares/auth");
 
 module.exports = app => {
     /**
-     * GET /api/admin/pictures
+     * POST /api/admin/pictures
      * Gets all the picture items from the pictures database
      */
-    app.get("/api/admin/pictures", async (req, res) => {
+    app.post("/api/admin/pictures", async (req, res) => {
+        // get the loading number
+        const n = req.body.n;
+
         try {
             // retrieve the picture items sorted by creation date
             const pictures = await Picture.aggregate([
@@ -25,7 +28,7 @@ module.exports = app => {
                     }
                 },
                 { $sort: { createdAt: -1 } }
-            ]);
+            ]).limit(6 * n);
 
             // add the base64 data to each item
             pictures.forEach(picture => {
