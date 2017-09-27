@@ -2,6 +2,8 @@
 import success from "../../reducers/success";
 import {
     FETCH_PICTURES_SUCCESS,
+    FETCH_PICTURES,
+    FETCH_PICTURES_DONE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS,
@@ -27,6 +29,26 @@ describe("SUCCESS REDUCER", () => {
                 type: FETCH_PICTURES_SUCCESS
             })
         ).toEqual({ a_success: false, fetch_pictures_success: true });
+    });
+
+    it("should handle FETCH_PICTURES", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_PICTURES
+            })
+        ).toEqual({ a_success: false, fetch_pictures_done: false });
+    });
+
+    it("should handle FETCH_PICTURES_DONE", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_PICTURES_DONE
+            })
+        ).toEqual({ a_success: false, fetch_pictures_done: true });
     });
 
     it("should handle POST_PICTURE_SUCCESS", () => {

@@ -1,6 +1,7 @@
 // Dependencies
 import pictures from "../../reducers/pictures";
 import {
+    FETCH_PICTURES,
     FETCH_PICTURES_SUCCESS,
     POST_PICTURE_SUCCESS,
     DELETE_PICTURE_SUCCESS,
@@ -12,15 +13,26 @@ describe("PICTURES REDUCER", () => {
         expect(pictures(undefined, {})).toEqual([]);
     });
 
+    it("should handle FETCH_PICTURES", () => {
+        const state = ["t", "e", "s", "t"];
+
+        expect(
+            pictures(state, {
+                type: FETCH_PICTURES
+            })
+        ).toEqual([]);
+    });
+
     it("should handle FETCH_PICTURES_SUCCESS", () => {
+        const state = ["s", "t", "a", "t", "e"];
         const payload = ["t", "e", "s", "t"];
 
         expect(
-            pictures([], {
+            pictures(state, {
                 type: FETCH_PICTURES_SUCCESS,
                 payload: payload
             })
-        ).toEqual(payload);
+        ).toEqual(["s", "t", "a", "t", "e", "t", "e", "s", "t"]);
     });
 
     it("should handle POST_PICTURE_SUCCESS", () => {

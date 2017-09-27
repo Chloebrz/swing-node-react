@@ -25,35 +25,67 @@ beforeEach(function() {
 describe("PICTURES ACTIONS", () => {
     describe("fetchPictures()", () => {
         it("should create FETCH_PICTURES_SUCCESS when fetching pictures has been done", () => {
-            const data = ["t", "e", "s", "t"];
-            const expectedAction = [{ type: types.FETCH_PICTURES_SUCCESS, payload: data }];
+            const payload = { n: 1 };
+            const data = { pictures: ["t", "e", "s", "t"] };
+            const expectedAction = [{ type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures }];
 
-            nock(host).get("/api/admin/pictures").reply(200, data);
+            nock(host).post("/api/admin/pictures", payload).reply(200, data);
 
-            return store.dispatch(actions.fetchPictures()).then(() => {
+            return store.dispatch(actions.fetchPictures(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
             });
         });
 
         it("should create FETCH_PICTURES_ERROR if error returned when fetching pictures", () => {
+            const payload = { n: 1 };
             const err = "an_error";
 
-            nock(host).get("/api/admin/pictures").reply(400, err);
+            nock(host).post("/api/admin/pictures", payload).reply(400, err);
 
-            return store.dispatch(actions.fetchPictures()).then(() => {
+            return store.dispatch(actions.fetchPictures(payload)).then(() => {
                 expect(store.getActions()[0].type).toBe(types.FETCH_PICTURES_ERROR);
                 expect(store.getActions()[0].payload.response.data).toBe(err);
+            });
+        });
+
+        it("should create FETCH_PICTURES if n = 0", () => {
+            const payload = { n: 0 };
+            const data = { pictures: ["t", "e", "s", "t"] };
+            const expectedAction = [
+                { type: types.FETCH_PICTURES },
+                { type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures }
+            ];
+
+            nock(host).post("/api/admin/pictures", payload).reply(200, data);
+
+            return store.dispatch(actions.fetchPictures(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+            });
+        });
+
+        it("should create FETCH_PICTURES_DONE if all pictures loaded", () => {
+            const payload = { n: 2 };
+            const data = { pictures: ["t", "e", "s", "t"], last: true };
+            const expectedAction = [
+                { type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures },
+                { type: types.FETCH_PICTURES_DONE }
+            ];
+
+            nock(host).post("/api/admin/pictures", payload).reply(200, data);
+
+            return store.dispatch(actions.fetchPictures(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
             });
         });
     });
 
     describe("fetchUserPictures()", () => {
         it("should create FETCH_PICTURES_SUCCESS when fetching pictures of a given user has been done", () => {
-            const payload = { id: 123 };
-            const data = ["t", "e", "s", "t", "s"];
-            const expectedAction = [{ type: types.FETCH_PICTURES_SUCCESS, payload: data }];
+            const payload = { n: 1, id: 123 };
+            const data = { pictures: ["t", "e", "s", "t", "s"] };
+            const expectedAction = [{ type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures }];
 
-            nock(host).get("/api/admin/pictures/123").reply(200, data);
+            nock(host).post("/api/admin/pictures/123", payload).reply(200, data);
 
             return store.dispatch(actions.fetchUserPictures(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
@@ -61,14 +93,44 @@ describe("PICTURES ACTIONS", () => {
         });
 
         it("should create FETCH_PICTURES_ERROR if error returned when fetching pictures of a given user", () => {
-            const payload = { id: 123 };
+            const payload = { n: 1, id: 123 };
             const err = "an_error";
 
-            nock(host).get("/api/admin/pictures/123").reply(400, err);
+            nock(host).post("/api/admin/pictures/123", payload).reply(400, err);
 
             return store.dispatch(actions.fetchUserPictures(payload)).then(() => {
                 expect(store.getActions()[0].type).toBe(types.FETCH_PICTURES_ERROR);
                 expect(store.getActions()[0].payload.response.data).toBe(err);
+            });
+        });
+
+        it("should create FETCH_PICTURES if n = 0", () => {
+            const payload = { n: 0, id: 123 };
+            const data = { pictures: ["t", "e", "s", "t", "s"] };
+            const expectedAction = [
+                { type: types.FETCH_PICTURES },
+                { type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures }
+            ];
+
+            nock(host).post("/api/admin/pictures/123", payload).reply(200, data);
+
+            return store.dispatch(actions.fetchUserPictures(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+            });
+        });
+
+        it("should create FETCH_PICTURES_DONE if all pictures loaded", () => {
+            const payload = { n: 2, id: 123 };
+            const data = { pictures: ["t", "e", "s", "t"], last: true };
+            const expectedAction = [
+                { type: types.FETCH_PICTURES_SUCCESS, payload: data.pictures },
+                { type: types.FETCH_PICTURES_DONE }
+            ];
+
+            nock(host).post("/api/admin/pictures/123", payload).reply(200, data);
+
+            return store.dispatch(actions.fetchUserPictures(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
             });
         });
     });

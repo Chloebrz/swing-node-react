@@ -26,7 +26,7 @@ export const fetchUserPictures = payload => async dispatch => {
     if (payload.n === 0) dispatch({ type: types.FETCH_PICTURES });
 
     try {
-        let res = await axios.post(`/api/admin/pictures/${payload.id}`);
+        let res = await axios.post(`/api/admin/pictures/${payload.id}`, payload);
         dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data.pictures });
         if (res.data.last) dispatch({ type: types.FETCH_PICTURES_DONE });
     } catch (err) {

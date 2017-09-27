@@ -16,60 +16,89 @@ describe("ADMIN ROUTES", () => {
 
     beforeEach(populatePictures);
 
-    describe("GET /api/admin/pictures", () => {
-        it("should get all pictures", done => {
+    describe("POST /api/admin/pictures", () => {
+        it("should get 6 pictures max", done => {
             request(app)
-                .get("/api/admin/pictures")
-                .send()
+                .post("/api/admin/pictures")
+                .send({ n: 0 })
                 .expect(200)
                 .expect(res => {
-                    const pics = res.body;
-
-                    expect(pics.length).toBe(3);
+                    expect(res.body.pictures.length).toBe(6);
+                    expect(res.body.last).toBe(false);
                 })
                 .end(done);
         });
 
         it("should get all pictures with user_doc", done => {
             request(app)
-                .get("/api/admin/pictures")
-                .send()
+                .post("/api/admin/pictures")
+                .send({ n: 0 })
                 .expect(200)
                 .expect(res => {
-                    const pics = res.body;
+                    const pics = res.body.pictures;
                     expect(pics[0].user_doc).toExist();
                     expect(pics[1].user_doc).toExist();
                     expect(pics[2].user_doc).toExist();
+                    expect(pics[3].user_doc).toExist();
+                    expect(pics[4].user_doc).toExist();
+                    expect(pics[5].user_doc).toExist();
                 })
                 .end(done);
         });
 
         it("should add res property to all pictures", done => {
             request(app)
-                .get("/api/admin/pictures")
-                .send()
+                .post("/api/admin/pictures")
+                .send({ n: 0 })
                 .expect(200)
                 .expect(res => {
-                    const pics = res.body;
+                    const pics = res.body.pictures;
                     expect(pics[0].img.res).toExist();
                     expect(pics[1].img.res).toExist();
                     expect(pics[2].img.res).toExist();
+                    expect(pics[3].img.res).toExist();
+                    expect(pics[4].img.res).toExist();
+                    expect(pics[5].img.res).toExist();
+                })
+                .end(done);
+        });
+
+        it("should return last if all pictures loaded", done => {
+            request(app)
+                .post("/api/admin/pictures")
+                .send({ n: 1 })
+                .expect(200)
+                .expect(res => {
+                    expect(res.body.last).toBe(true);
                 })
                 .end(done);
         });
     });
 
-    describe("GET /api/admin/pictures/:id", () => {
+    describe("POST /api/admin/pictures/:id", () => {
         it("should return 404 for non-object ids", done => {
-            request(app).get("/api/admin/pictures/123").expect(404).end(done);
+            request(app).post("/api/admin/pictures/123").send({ n: 0 }).expect(404).end(done);
         });
 
-        it("should return all the pictures created by the user", done => {
+        it("should return 6 pictures max created by the user", done => {
             request(app)
-                .get(`/api/admin/pictures/${userOneId}`)
+                .post(`/api/admin/pictures/${userOneId}`)
+                .send({ n: 0 })
                 .expect(200)
                 .expect(res => {
-                    expect(res.body.length).toBe(2);
+                    expect(res.body.pictures.length).toBe(6);
+                    expect(res.body.last).toBe(false);
+                })
+                .end(done);
+        });
+
+        it("should return last if all pictures loaded", done => {
+            request(app)
+                .post(`/api/admin/pictures/${userOneId}`)
+                .send({ n: 1 })
+                .expect(200)
+                .expect(res => {
+                    expect(res.body.last).toBe(true);
                 })
                 .end(done);
         });

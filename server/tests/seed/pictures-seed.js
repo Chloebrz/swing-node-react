@@ -44,6 +44,54 @@ const pictures = [
         legend: "legendLegendThree",
         createdAt: new Date().getTime(),
         creatorId: userOneId
+    },
+    {
+        _id: new ObjectID(),
+        name: "pictureFour",
+        img: {
+            name: "imgFour",
+            data: "bufFour",
+            contentType: "typeFour"
+        },
+        legend: "legendLegendFour",
+        createdAt: new Date().getTime(),
+        creatorId: userOneId
+    },
+    {
+        _id: new ObjectID(),
+        name: "pictureFive",
+        img: {
+            name: "imgFive",
+            data: "bufFive",
+            contentType: "typeFive"
+        },
+        legend: "legendLegendFive",
+        createdAt: new Date().getTime(),
+        creatorId: userOneId
+    },
+    {
+        _id: new ObjectID(),
+        name: "pictureSix",
+        img: {
+            name: "imgSix",
+            data: "bufSix",
+            contentType: "typeSix"
+        },
+        legend: "legendLegendSix",
+        createdAt: new Date().getTime(),
+        creatorId: userOneId
+    },
+    {
+        _id: new ObjectID(),
+        name: "pictureSeven",
+        img: {
+            name: "imgSeven",
+            data: "bufSeven",
+            contentType: "typeSeven"
+        },
+        legend: "legendLegendSeven",
+        createdAt: new Date().getTime(),
+        creatorId: userOneId
     }
 ];
 
