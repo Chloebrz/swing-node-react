@@ -28,7 +28,9 @@ module.exports = app => {
                     }
                 },
                 { $sort: { createdAt: -1 } }
-            ]).limit(6 * n);
+            ])
+                .skip(n * 6)
+                .limit(6);
 
             // add the base64 data to each item
             pictures.forEach(picture => {

@@ -1,5 +1,6 @@
 // Dependencies
 import {
+    FETCH_PICTURES,
     FETCH_PICTURES_SUCCESS,
     POST_PICTURE_SUCCESS,
     DELETE_PICTURE_SUCCESS,
@@ -8,8 +9,11 @@ import {
 
 export default function(state = [], action) {
     switch (action.type) {
+        case FETCH_PICTURES:
+            return [];
+
         case FETCH_PICTURES_SUCCESS:
-            return action.payload;
+            return state.concat(action.payload);
 
         case POST_PICTURE_SUCCESS:
             state.push(action.payload);

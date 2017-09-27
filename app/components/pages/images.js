@@ -16,7 +16,7 @@ class Images extends Component {
 
         this.state = {
             album: true,
-            n: 1
+            n: 0
         };
     }
 

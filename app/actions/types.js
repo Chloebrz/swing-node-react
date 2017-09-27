@@ -21,6 +21,7 @@ export const SEND_TOKEN_ERROR = "send_token_error";
 
 // Pictures
 
+export const FETCH_PICTURES = "fetch_pictures";
 export const FETCH_PICTURES_SUCCESS = "fetch_pictures_success";
 export const FETCH_PICTURES_ERROR = "fetch_pictures_error";
 

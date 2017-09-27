@@ -7,6 +7,8 @@ import * as types from "./types";
  * Send a POST request to /api/admin/pictures with the page number and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchPictures = payload => async dispatch => {
+    if (payload.n === 0) dispatch({ type: types.FETCH_PICTURES });
+
     try {
         let res = await axios.post("/api/admin/pictures", payload);
         dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
@@ -20,6 +22,8 @@ export const fetchPictures = payload => async dispatch => {
  * Send a GET request to /api/admin/pictures/:id and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchUserPictures = payload => async dispatch => {
+    dispatch({ type: types.FETCH_PICTURES });
+
     try {
         let res = await axios.get(`/api/admin/pictures/${payload.id}`);
         dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
