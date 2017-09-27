@@ -14,7 +14,7 @@ module.exports = app => {
      */
     app.post("/api/admin/pictures", async (req, res) => {
         // get the loading number
-        const n = req.body.n;
+        const n = req.body.n || 0;
 
         try {
             // retrieve the picture items sorted by creation date
@@ -48,19 +48,25 @@ module.exports = app => {
     });
 
     /**
-     * GET /api/admin/pictures/:id
+     * POST /api/admin/pictures/:id
      * Gets the picture items from the pictures database created by a user given its id
      */
-    app.get("/api/admin/pictures/:id", async (req, res) => {
+    app.post("/api/admin/pictures/:id", async (req, res) => {
         // get the id of the user to retrieve the pictures of
         const id = req.params.id;
+
+        // get the loading number
+        const n = req.body.n || 0;
 
         // check if the id is a valid object id
         if (!ObjectID.isValid(id)) return res.status(404).send();
 
         try {
             // retrieve the picture items sorted by creation date
-            const pictures = await Picture.find({ creatorId: id }).sort("-createdAt");
+            const pictures = await Picture.find({ creatorId: id })
+                .sort("-createdAt")
+                .skip(n * 6)
+                .limit(6);
 
             if (!pictures) return res.status(404).send();
 
@@ -69,8 +75,11 @@ module.exports = app => {
                 picture.img.res = new Buffer(picture.img.data).toString("base64");
             });
 
+            // check if there are other pictures to load
+            const last = pictures.length < 6;
+
             // send the result
-            res.send(pictures);
+            res.send({ pictures, last });
         } catch (err) {
             res.status(400).send(err);
         }

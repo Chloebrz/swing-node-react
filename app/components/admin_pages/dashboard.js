@@ -11,8 +11,33 @@ import PictureBox from "../admin_partials/pictureBox";
 import styles from "../../css/pages/dashboard.css";
 
 class Dashboard extends Component {
+    constructor() {
+        super();
+        this.state = { n: 0 };
+    }
+
     componentDidMount() {
-        this.props.fetchPictures();
+        this.props.fetchPictures({ n: this.state.n });
+    }
+
+    renderLoadMore() {
+        if (this.props.pictures.length === 0 || this.props.fetch_pictures_done) return;
+
+        return (
+            <div className="center">
+                <hr className="featurette-divider" />
+                <button
+                    className="btn btn-secondary"
+                    onClick={() => {
+                        const n = ++this.state.n;
+                        this.setState({ n });
+                        this.props.fetchPictures({ n: this.state.n });
+                    }}
+                >
+                    Plus
+                </button>
+            </div>
+        );
     }
 
     renderPictures() {
@@ -60,6 +85,7 @@ class Dashboard extends Component {
                 </div>
 
                 {this.renderPictures()}
+                {this.renderLoadMore()}
             </div>
         );
     }
@@ -68,12 +94,18 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     fetch_pictures_success: PropTypes.bool,
+    fetch_pictures_done: PropTypes.bool,
     pictures: PropTypes.arrayOf(PropTypes.object),
     fetchPictures: PropTypes.func
 };
 
 function mapStateToProps({ auth, pictures, success }) {
-    return { auth, pictures, fetch_pictures_success: success.fetch_pictures_success };
+    return {
+        auth,
+        pictures,
+        fetch_pictures_success: success.fetch_pictures_success,
+        fetch_pictures_done: success.fetch_pictures_done
+    };
 }
 
 export default connect(mapStateToProps, { fetchPictures })(Dashboard);

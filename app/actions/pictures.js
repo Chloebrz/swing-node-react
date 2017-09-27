@@ -4,7 +4,7 @@ import * as types from "./types";
 
 /**
  * Fetch all the pictures of the database
- * Send a POST request to /api/admin/pictures with the page number and dispatch the result as payload of a FETCH_PICTURES action
+ * Send a POST request to /api/admin/pictures with the loading number and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchPictures = payload => async dispatch => {
     if (payload.n === 0) dispatch({ type: types.FETCH_PICTURES });
@@ -20,14 +20,15 @@ export const fetchPictures = payload => async dispatch => {
 
 /**
  * Fetch the pictures of the database created by a user given his id
- * Send a GET request to /api/admin/pictures/:id and dispatch the result as payload of a FETCH_PICTURES action
+ * Send a POST request to /api/admin/pictures/:id with the loading number and dispatch the result as payload of a FETCH_PICTURES action
  */
 export const fetchUserPictures = payload => async dispatch => {
-    dispatch({ type: types.FETCH_PICTURES });
+    if (payload.n === 0) dispatch({ type: types.FETCH_PICTURES });
 
     try {
-        let res = await axios.get(`/api/admin/pictures/${payload.id}`);
-        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data });
+        let res = await axios.post(`/api/admin/pictures/${payload.id}`);
+        dispatch({ type: types.FETCH_PICTURES_SUCCESS, payload: res.data.pictures });
+        if (res.data.last) dispatch({ type: types.FETCH_PICTURES_DONE });
     } catch (err) {
         dispatch({ type: types.FETCH_PICTURES_ERROR, payload: err });
     }

@@ -25,7 +25,7 @@ class Images extends Component {
     }
 
     renderLoadMore() {
-        if (this.props.fetch_pictures_done) return;
+        if (this.props.pictures.length === 0 || this.props.fetch_pictures_done) return;
 
         return (
             <div className="center">
@@ -139,6 +139,7 @@ class Images extends Component {
 
 Images.propTypes = {
     fetch_pictures_success: PropTypes.bool,
+    fetch_pictures_done: PropTypes.bool,
     fetchPictures: PropTypes.func,
     pictures: PropTypes.arrayOf(PropTypes.object)
 };
