@@ -37,7 +37,7 @@ const renderProfile = profile => {
                 <div>
                     <h2>Bio :</h2>
                     <p>
-                        {bio}
+                        {profile.bio}
                     </p>
                 </div>}
         </div>

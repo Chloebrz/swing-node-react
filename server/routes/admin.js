@@ -14,15 +14,18 @@ module.exports = app => {
      */
     app.get("/api/admin/pictures", async (req, res) => {
         try {
-            // retrieve the picture items
-            const pictures = await Picture.aggregate({
-                $lookup: {
-                    from: "users",
-                    localField: "creatorId",
-                    foreignField: "_id",
-                    as: "user_doc"
-                }
-            });
+            // retrieve the picture items sorted by creation date
+            const pictures = await Picture.aggregate([
+                {
+                    $lookup: {
+                        from: "users",
+                        localField: "creatorId",
+                        foreignField: "_id",
+                        as: "user_doc"
+                    }
+                },
+                { $sort: { createdAt: -1 } }
+            ]);
 
             // add the base64 data to each item
             pictures.forEach(picture => {
@@ -48,8 +51,8 @@ module.exports = app => {
         if (!ObjectID.isValid(id)) return res.status(404).send();
 
         try {
-            // retrieve the picture items
-            const pictures = await Picture.find({ creatorId: id });
+            // retrieve the picture items sorted by creation date
+            const pictures = await Picture.find({ creatorId: id }).sort("-createdAt");
 
             if (!pictures) return res.status(404).send();
 
