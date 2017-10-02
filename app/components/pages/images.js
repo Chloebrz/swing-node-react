@@ -106,7 +106,7 @@ class Images extends Component {
                     flotteurs réalisés.
                 </p>
 
-                <p>
+                <p className="hidesmall">
                     Mode de visionnage :{" "}
                     <button
                         className="btn btn-outline-secondary btn-sm"

@@ -34,3 +34,13 @@
 .legend-date {
     font-size: 125%;
 }
+
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+
+    .hidesmall {
+        display: none;
+    }
+}
