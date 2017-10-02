@@ -6,7 +6,6 @@ const path = require("path");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
-const flash = require("connect-flash");
 
 const keys = require("./config/keys");
 
@@ -22,7 +21,6 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieSession({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: [keys.cookieKey] }));
 app.use(express.static(path.join(__dirname, "..", "public")));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -1,6 +1,5 @@
 // Dependencies
 const passport = require("passport");
-const validator = require("validator");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
