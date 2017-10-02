@@ -56,7 +56,7 @@ const Home = () => {
 
             <h1>Le principe</h1>
             <p className="center">
-                <video width="600" controls>
+                <video controls>
                     <source src={require("../../images/home/imaginez.mp4")} type="video/mp4" />
                     <source src={require("../../images/home/imaginez.webm")} type="video/webm" />
                     Votre navigateur ne supporte pas ces types de vidéos.

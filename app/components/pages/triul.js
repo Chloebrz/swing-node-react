@@ -32,7 +32,7 @@ const Triul = () => {
 
             <h1>Le Triul : démonstration en vidéo</h1>
             <p className="center">
-                <video width="600" controls>
+                <video controls>
                     <source src={require("../../images/triul/video_triul.mp4")} type="video/mp4" />
                     <source
                         src={require("../../images/triul/video_triul.webm")}

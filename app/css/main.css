@@ -20,3 +20,13 @@ textarea {
     color: #700;
     font-weight: bold;
 }
+
+video {
+    width: 600px;
+}
+
+@media (max-width: 800px) {
+    video {
+        width: 100%;
+    }
+}
