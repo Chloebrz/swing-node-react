@@ -98,8 +98,18 @@ class PictureBox extends Component {
             <div>
                 <hr className="featurette-divider" />
                 <div className="row featurette">
-                    <div className="col-md-5 order-md-2">
-                        <h2 className="featurette-heading">
+                    <div className="col-md-7">
+                        <h2 className="featurette-heading hidelarge">
+                            {this.props.name}
+                        </h2>
+                        <img
+                            className="featurette-image img-fluid mx-auto"
+                            src={`data:${this.props.type};base64,${this.props.res}`}
+                            alt={this.props.name}
+                        />
+                    </div>
+                    <div className="col-md-5">
+                        <h2 className="featurette-heading hidesmall">
                             {this.props.name}
                         </h2>
                         <p className="lead">
@@ -110,13 +120,6 @@ class PictureBox extends Component {
                         </p>
 
                         {this.renderIcons()}
-                    </div>
-                    <div className="col-md-7 order-md-1">
-                        <img
-                            className="featurette-image img-fluid mx-auto"
-                            src={`data:${this.props.type};base64,${this.props.res}`}
-                            alt={this.props.name}
-                        />
                     </div>
                 </div>
             </div>

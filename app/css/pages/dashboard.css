@@ -32,3 +32,15 @@
         margin-top: 7rem;
     }
 }
+
+@media (min-width: 600px) {
+    .hidelarge {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .hidesmall {
+        display: none;
+    }
+}

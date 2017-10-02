@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import * as c from "../../actions/const";
+import styles from "../../css/partials/profile.css";
 
 class ProfileBox extends Component {
     sendVerifyToken() {
@@ -79,7 +80,10 @@ class ProfileBox extends Component {
             <div>
                 <div className="row">
                     <div className="col-lg-3 col-md-4 col-sm-5">
-                        <img src={require("../../images/placeholders/profile.png")} />
+                        <img
+                            className="profile-picture"
+                            src={require("../../images/placeholders/profile.png")}
+                        />
                     </div>
                     <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
                         <h2>
@@ -92,9 +96,6 @@ class ProfileBox extends Component {
                     </div>
                 </div>
 
-                <br />
-                <br />
-
                 {this.renderBio()}
 
                 <Link to="/admin/update_profile" className="btn btn-info">
@@ -106,7 +107,7 @@ class ProfileBox extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles}>
                 {this.renderProfile()}
             </div>
         );

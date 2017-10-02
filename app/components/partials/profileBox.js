@@ -5,6 +5,7 @@ import moment from "moment";
 moment.locale("fr");
 
 import PictureBox from "../partials/pictureBox";
+import styles from "../../css/partials/profile.css";
 
 const renderProfile = profile => {
     if (!profile) return;
@@ -13,7 +14,10 @@ const renderProfile = profile => {
         <div>
             <div className="row">
                 <div className="col-lg-3 col-md-4 col-sm-5">
-                    <img src={require("../../images/placeholders/profile.png")} />
+                    <img
+                        className="profile-picture"
+                        src={require("../../images/placeholders/profile.png")}
+                    />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
                     <h2>
@@ -29,9 +33,6 @@ const renderProfile = profile => {
                     </p>
                 </div>
             </div>
-
-            <br />
-            <br />
 
             {profile.bio &&
                 <div>
@@ -63,7 +64,7 @@ const renderPictures = pictures => {
 
 const ProfileBox = props => {
     return (
-        <div>
+        <div className={styles}>
             {renderProfile(props.profile)}
             <div className="row">
                 {renderPictures(props.pictures)}
