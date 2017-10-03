@@ -86,7 +86,9 @@ let PictureForm = props => {
     );
 };
 
-PictureForm.propTypes = {};
+PictureForm.propTypes = {
+    picture: PropTypes.object
+};
 
 function mapStateToProps(state, props) {
     const initialValues = props.picture

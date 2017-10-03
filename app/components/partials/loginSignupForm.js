@@ -2,6 +2,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import styles from "../../css/partials/form.css";
 
@@ -86,7 +87,13 @@ let LoginSignupForm = props => {
     );
 };
 
-LoginSignupForm.propTypes = {};
+LoginSignupForm.propTypes = {
+    title: PropTypes.string,
+    signup: PropTypes.bool,
+    redirectQuestion: PropTypes.string,
+    redirectLink: PropTypes.string,
+    redirectTitle: PropTypes.string
+};
 
 LoginSignupForm = reduxForm({
     form: "register",

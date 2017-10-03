@@ -2,7 +2,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import PropTypes from "prop-types";
 
 import styles from "../../css/partials/form.css";
 
@@ -86,14 +85,6 @@ let ProfileForm = props => {
             </div>
         </form>
     );
-};
-
-ProfileForm.propTypes = {
-    handleSubmit: PropTypes.func,
-    id: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    bio: PropTypes.string
 };
 
 ProfileForm = reduxForm({
