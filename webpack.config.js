@@ -16,7 +16,7 @@ var config = {
     module: {
         loaders: [
             { test: /\.js$/, loader: "jsx-loader" },
-            { test: /\.png$|\.jpg$/, loader: "url-loader?limit=8192&name=images/[name].[ext]" },
+            { test: /\.png$|\.jpg$/, loader: "url-loader?name=images/[name].[ext]" },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             {
                 test: /\.js$|\.jsx$/,
@@ -36,11 +36,11 @@ var config = {
             },
             {
                 test: /\.(gif|svg)$/i,
-                loader: "url-loader?limit=8192&name=icons/[name].[ext]"
+                loader: "url-loader?name=icons/[name].[ext]"
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
-                loader: "url-loader?limit=8192&name=fonts/[name].[ext]"
+                loader: "url-loader?name=fonts/[name].[ext]"
             }
         ]
     }
