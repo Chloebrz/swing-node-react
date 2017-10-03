@@ -1,5 +1,4 @@
 node_modules
-public
 coverage-app
 coverage
 .nyc_output
