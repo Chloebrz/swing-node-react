@@ -16,7 +16,7 @@ var config = {
     module: {
         loaders: [
             { test: /\.js$/, loader: "jsx-loader" },
-            { test: /\.png$|\.jpg$/, loader: "url-loader" },
+            { test: /\.png$|\.jpg$/, loader: "url-loader?limit=8192&name=images/[name].[ext]" },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             {
                 test: /\.js$|\.jsx$/,
@@ -32,15 +32,15 @@ var config = {
             },
             {
                 test: /\.(webm|mp4)$/,
-                loader: "url-loader?limit=10000&mimetype=video/mp4"
+                loader: "url-loader?limit=8192&name=videos/[name].[ext]"
             },
             {
                 test: /\.(gif|svg)$/i,
-                loader: "url-loader?name=/public/icons/[name].[ext]"
+                loader: "url-loader?limit=8192&name=icons/[name].[ext]"
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
-                loader: "url-loader?name=public/fonts/[name].[ext]"
+                loader: "url-loader?limit=8192&name=fonts/[name].[ext]"
             }
         ]
     }
