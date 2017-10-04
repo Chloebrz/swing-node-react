@@ -28,7 +28,7 @@ describe("PROFILES ACTIONS", () => {
             const user = { id: 123 };
             const expectedAction = [{ type: types.FETCH_USER_SUCCESS, payload: user }];
 
-            nock(host).get("/api/current_user").reply(200, user);
+            nock(host).get("/api/auth/current_user").reply(200, user);
 
             return store.dispatch(actions.fetchUser()).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
@@ -38,7 +38,7 @@ describe("PROFILES ACTIONS", () => {
         it("should create FETCH_USER_ERROR if error returned when fetching user", () => {
             const err = "an_error";
 
-            nock(host).get("/api/current_user").reply(400, err);
+            nock(host).get("/api/auth/current_user").reply(400, err);
 
             return store.dispatch(actions.fetchUser()).then(() => {
                 expect(store.getActions()[0].type).toBe(types.FETCH_USER_ERROR);
@@ -84,7 +84,7 @@ describe("PROFILES ACTIONS", () => {
             const data = { success: true };
             const expectedAction = [{ type: types.SIGNUP_LOGIN_SUCCESS }];
 
-            nock(host).post("/auth/signup", payload).reply(200, data);
+            nock(host).post("/api/auth/signup", payload).reply(200, data);
 
             return store.dispatch(actions.signupUser(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
@@ -96,7 +96,7 @@ describe("PROFILES ACTIONS", () => {
             const data = { success: false, error: "error" };
             const expectedAction = [{ type: types.SIGNUP_ERROR, payload: data.error }];
 
-            nock(host).post("/auth/signup", payload).reply(200, data);
+            nock(host).post("/api/auth/signup", payload).reply(200, data);
 
             return store.dispatch(actions.signupUser(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
@@ -110,7 +110,7 @@ describe("PROFILES ACTIONS", () => {
             const data = { success: true };
             const expectedAction = [{ type: types.SIGNUP_LOGIN_SUCCESS }];
 
-            nock(host).post("/auth/login", payload).reply(200, data);
+            nock(host).post("/api/auth/login", payload).reply(200, data);
 
             return store.dispatch(actions.loginUser(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
@@ -122,7 +122,7 @@ describe("PROFILES ACTIONS", () => {
             const data = { success: false, error: "error" };
             const expectedAction = [{ type: types.LOGIN_ERROR, payload: data.error }];
 
-            nock(host).post("/auth/login", payload).reply(200, data);
+            nock(host).post("/api/auth/login", payload).reply(200, data);
 
             return store.dispatch(actions.loginUser(payload)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);

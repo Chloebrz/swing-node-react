@@ -8,7 +8,7 @@ import * as types from "./types";
  */
 export const fetchUser = () => async dispatch => {
     try {
-        const res = await axios.get("/api/current_user");
+        const res = await axios.get("/api/auth/current_user");
         dispatch({ type: types.FETCH_USER_SUCCESS, payload: res.data });
     } catch (err) {
         dispatch({ type: types.FETCH_USER_ERROR, payload: err });
@@ -36,7 +36,7 @@ export const fetchProfile = payload => async dispatch => {
  * If error while creating the new user object dispatch the error data as payload of a SIGNUP_LOGIN_ERROR action
  */
 export const signupUser = payload => async dispatch => {
-    const res = await axios.post("/auth/signup", payload);
+    const res = await axios.post("/api/auth/signup", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
     else dispatch({ type: types.SIGNUP_ERROR, payload: res.data.error });
 };
@@ -47,7 +47,7 @@ export const signupUser = payload => async dispatch => {
  * If error while comparing the info dispatch the error data as payload of a SIGNUP_LOGIN_ERROR action
  */
 export const loginUser = payload => async dispatch => {
-    const res = await axios.post("/auth/login", payload);
+    const res = await axios.post("/api/auth/login", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
     else dispatch({ type: types.LOGIN_ERROR, payload: res.data.error });
 };

@@ -15,22 +15,22 @@ describe("AUTH ROUTES", () => {
 
     beforeEach(populateUsers);
 
-    describe("GET /auth/google", () => {
+    describe("GET /api/auth/google", () => {
         it.skip("should call authenticate() from passport", done => {});
     });
 
-    describe("GET /auth/google/callback", () => {
+    describe("GET /api/auth/google/callback", () => {
         it.skip("should call authenticate() from passport", done => {});
 
         it.skip("should call redirect to /admin", done => {});
     });
 
-    describe("POST /auth/signup", () => {
+    describe("POST /api/auth/signup", () => {
         it("should return error if email address already used", done => {
             const user = { email: users[0].email, password: "test123" };
 
             request(app)
-                .post("/auth/signup")
+                .post("/api/auth/signup")
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
@@ -43,7 +43,7 @@ describe("AUTH ROUTES", () => {
             const user = { email: "test@test.com", password: "test123" };
 
             request(app)
-                .post("/auth/signup")
+                .post("/api/auth/signup")
                 .send(user)
                 .expect(200)
                 .expect(res => {
@@ -63,12 +63,12 @@ describe("AUTH ROUTES", () => {
         });
     });
 
-    describe("POST /auth/login", () => {
+    describe("POST /api/auth/login", () => {
         it("should return error if wrong email", done => {
             const user = { email: "test@wrong.com", password: "test123" };
 
             request(app)
-                .post("/auth/login")
+                .post("/api/auth/login")
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
@@ -81,7 +81,7 @@ describe("AUTH ROUTES", () => {
             const user = { email: users[2].email, password: "test123" };
 
             request(app)
-                .post("/auth/login")
+                .post("/api/auth/login")
                 .send(user)
                 .expect(res => {
                     expect(res.body.success).toBe(false);
@@ -94,7 +94,7 @@ describe("AUTH ROUTES", () => {
             const user = { email: users[2].email, password: users[2].password };
 
             request(app)
-                .post("/auth/login")
+                .post("/api/auth/login")
                 .send(user)
                 .expect(200)
                 .expect(res => {
@@ -105,12 +105,12 @@ describe("AUTH ROUTES", () => {
         });
     });
 
-    describe("GET /api/logout", () => {
+    describe("GET /api/auth/logout", () => {
         it.skip("should call logout()", () => {});
 
         it("should redirect to /", done => {
             request(app)
-                .get("/api/logout")
+                .get("/api/auth/logout")
                 .send()
                 .expect(res => {
                     expect(res.header.location).toBe("/");
@@ -119,10 +119,10 @@ describe("AUTH ROUTES", () => {
         });
     });
 
-    describe("GET /api/current_user", () => {
+    describe("GET /api/auth/current_user", () => {
         it("should send empty object if no user logged in", done => {
             request(app)
-                .get("/api/current_user")
+                .get("/api/auth/current_user")
                 .send()
                 .expect(res => {
                     expect(res.body).toEqual({});

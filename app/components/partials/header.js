@@ -47,7 +47,7 @@ class Header extends Component {
                         </a>
                     </li>,
                     <li className="nav-item" key="logout">
-                        <a className="nav-link active" href="/api/logout">
+                        <a className="nav-link active" href="/api/auth/logout">
                             Logout
                         </a>
                     </li>

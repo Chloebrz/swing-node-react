@@ -15,7 +15,7 @@ module.exports = app => {
      * Logs a user in with Google OAuth
      */
     app.get(
-        "/auth/google",
+        "/api/auth/google",
         passport.authenticate("google", {
             scope: ["profile", "email"]
         })
@@ -25,7 +25,7 @@ module.exports = app => {
      * GET /auth/google/callback
      * Callback URL called by Google OAuth
      */
-    app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
+    app.get("/api/auth/google/callback", passport.authenticate("google"), (req, res) => {
         res.redirect("/admin");
     });
 
@@ -33,7 +33,7 @@ module.exports = app => {
      * POST /auth/signup
      * Logs a user in with email and password
      */
-    app.post("/auth/signup", (req, res, next) => {
+    app.post("/api/auth/signup", (req, res, next) => {
         return passport.authenticate("local-signup", (err, user) => {
             if (err)
                 return res.json({
@@ -54,7 +54,7 @@ module.exports = app => {
      * POST /auth/login
      * Logs a user in with email and password
      */
-    app.post("/auth/login", (req, res, next) => {
+    app.post("/api/auth/login", (req, res, next) => {
         return passport.authenticate("local-login", (err, user) => {
             if (err)
                 return res.json({
@@ -75,7 +75,7 @@ module.exports = app => {
      * GET /api/logout
      * Logs a user out
      */
-    app.get("/api/logout", (req, res) => {
+    app.get("/api/auth/logout", (req, res) => {
         req.logout();
         res.redirect("/");
     });
@@ -84,7 +84,7 @@ module.exports = app => {
      * GET /api/current_user
      * Gets the current user info
      */
-    app.get("/api/current_user", (req, res) => {
+    app.get("/api/auth/current_user", (req, res) => {
         res.send(req.user);
     });
 
