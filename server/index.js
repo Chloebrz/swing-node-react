@@ -26,7 +26,9 @@ app.use(passport.session());
 
 // Route handlers
 require("./routes/auth")(app);
-require("./routes/admin")(app);
+require("./routes/admin_profiles")(app);
+require("./routes/admin_pictures")(app);
+require("./routes/admin_videos")(app);
 require("./routes/react")(app);
 
 // Server setup
