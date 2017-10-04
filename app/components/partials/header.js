@@ -13,7 +13,8 @@ class Header extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isMenuOpen: false,
+            isDropdownOpen: false
         };
     }
 
@@ -22,90 +23,147 @@ class Header extends Component {
     }
 
     toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        this.setState({ isMenuOpen: !this.state.isMenuOpen });
+    }
+
+    toggleDropdown() {
+        this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
     }
 
     closeToogle() {
         this.setState({
-            isOpen: false
+            isMenuOpen: false,
+            isDropdownOpen: false
         });
     }
 
-    renderLogout() {
+    renderPublicContent() {
+        return (
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/">
+                        Accueil
+                    </Link>
+                </li>
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/description">
+                        Description
+                    </Link>
+                </li>
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/images">
+                        Images
+                    </Link>
+                </li>
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/triul">
+                        Triul
+                    </Link>
+                </li>
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/contact">
+                        Contact
+                    </Link>
+                </li>
+            </ul>
+        );
+    }
+
+    renderPrivateContent() {
+        return (
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/admin">
+                        Images
+                    </Link>
+                </li>
+                <li className="nav-item" onClick={this.closeToogle.bind(this)}>
+                    <Link className="nav-link" to="/admin/videos">
+                        Videos
+                    </Link>
+                </li>
+                <li className={`nav-item dropdown ${this.state.isDropdownOpen ? "show" : ""}`}>
+                    <a
+                        className="nav-link dropdown-toggle"
+                        onClick={this.toggleDropdown.bind(this)}
+                    >
+                        Website
+                    </a>
+                    <div className={`dropdown-menu ${this.state.isDropdownOpen ? "show" : ""}`}>
+                        <Link
+                            className="dropdown-item"
+                            to="/"
+                            onClick={this.closeToogle.bind(this)}
+                        >
+                            Accueil
+                        </Link>
+                        <Link
+                            className="dropdown-item"
+                            to="/description"
+                            onClick={this.closeToogle.bind(this)}
+                        >
+                            Description
+                        </Link>
+                        <Link
+                            className="dropdown-item"
+                            to="/images"
+                            onClick={this.closeToogle.bind(this)}
+                        >
+                            Images
+                        </Link>
+                        <Link
+                            className="dropdown-item"
+                            to="/triul"
+                            onClick={this.closeToogle.bind(this)}
+                        >
+                            Triul
+                        </Link>
+                        <Link
+                            className="dropdown-item"
+                            to="/contact"
+                            onClick={this.closeToogle.bind(this)}
+                        >
+                            Contact
+                        </Link>
+                    </div>
+                </li>
+                <li className="nav-item" key="profile">
+                    <a className="nav-link" href="/admin/profile">
+                        Mon profil
+                    </a>
+                </li>
+                <li className="nav-item" key="logout">
+                    <a className="nav-link active" href="/api/auth/logout">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        );
+    }
+
+    renderContent() {
         switch (this.props.auth) {
             case null:
-                return;
+                return this.renderPublicContent();
             case false:
-                return;
+                return this.renderPublicContent();
             default:
-                return [
-                    <li className="nav-item" key="profile">
-                        <a className="nav-link" href="/admin/profile">
-                            Mon profil
-                        </a>
-                    </li>,
-                    <li className="nav-item" key="logout">
-                        <a className="nav-link active" href="/api/auth/logout">
-                            Logout
-                        </a>
-                    </li>
-                ];
+                return this.renderPrivateContent();
         }
     }
 
     render() {
         return (
             <nav className={styles} className="navbar navbar-expand-md navbar-dark bg-dark">
-                <Link to={this.props.auth ? "/admin" : "/"} className="navbar-brand">
+                <Link to="/" className="navbar-brand">
                     <img id="logo" src={require("../../images/s-wing.png")} alt="SWING" />
                 </Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbar-menu"
-                    aria-controls="navbar-menu"
-                    aria-expanded={this.state.isOpen}
-                    aria-label="Toggle navigation"
-                    onClick={this.toggle}
-                >
+                <button className="navbar-toggler" type="button" onClick={this.toggle}>
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                <div
-                    className={`collapse navbar-collapse ${this.state.isOpen ? "show" : ""}`}
-                    id="navbar-menu"
-                >
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
-                            <Link className="nav-link" to="/">
-                                Accueil
-                            </Link>
-                        </li>
-                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
-                            <Link className="nav-link" to="/description">
-                                Description
-                            </Link>
-                        </li>
-                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
-                            <Link className="nav-link" to="/images">
-                                Images
-                            </Link>
-                        </li>
-                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
-                            <Link className="nav-link" to="/triul">
-                                Triul
-                            </Link>
-                        </li>
-                        <li className="nav-item" onClick={this.closeToogle.bind(this)}>
-                            <Link className="nav-link" to="/contact">
-                                Contact
-                            </Link>
-                        </li>
-                        {this.renderLogout()}
-                    </ul>
+                <div className={`collapse navbar-collapse ${this.state.isMenuOpen ? "show" : ""}`}>
+                    {this.renderContent()}
                 </div>
             </nav>
         );
