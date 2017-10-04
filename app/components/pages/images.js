@@ -8,6 +8,7 @@ moment.locale("fr");
 import { fetchPictures } from "../../actions/pictures";
 import PictureBox from "../partials/pictureBox";
 import PicturesCarousel from "../partials/picturesCarousel";
+import VideosCarousel from "../partials/videosCarousel";
 import styles from "../../css/pages/images.css";
 
 class Images extends Component {
@@ -84,42 +85,56 @@ class Images extends Component {
 
     render() {
         return (
-            <div className={styles} className="album">
-                <h1>Photos</h1>
+            <div className={styles}>
+                <div className="videos">
+                    <h1>Videos</h1>
 
-                <p>
-                    Ce projet a commencé par la validation du concept grâce à des calculs complexes.
-                    Puis a suivi la construction de prototypes de plus en plus avancés afin de
-                    tester le concept en navigation. Les photos suivantes présentent différentes
-                    versions du gréément et des flotteurs réalisés.
-                </p>
+                    <p>
+                        Ce projet a commencé par la validation du concept grâce à des calculs
+                        complexes. Puis a suivi la construction de prototypes de plus en plus
+                        avancés afin de tester le concept en navigation. Les vidéos ci-dessous
+                        dressent un historique de ces prototypes et présentent un virement sous
+                        différents angles.
+                    </p>
 
-                <p className="hidesmall">
-                    Mode de visionnage :{" "}
-                    <button
-                        className="btn btn-outline-secondary btn-sm"
-                        onClick={() => {
-                            this.setState({ album: true });
-                        }}
-                    >
-                        Album
-                    </button>{" "}
-                    ou{" "}
-                    <button
-                        className="btn btn-outline-secondary btn-sm"
-                        onClick={() => {
-                            this.setState({ album: false });
-                        }}
-                    >
-                        Carousel
-                    </button>
-                </p>
-                <br />
-
-                <div className="row">
-                    {this.renderPictures()}
+                    <VideosCarousel videos={this.props.videos} />
                 </div>
-                {this.renderLoadMore()}
+
+                <div className="photos">
+                    <h1>Photos</h1>
+
+                    <p>
+                        Les photos suivantes présentent différentes versions du gréément et des
+                        flotteurs réalisés.
+                    </p>
+
+                    <p className="hidesmall">
+                        Mode de visionnage :{" "}
+                        <button
+                            className="btn btn-outline-secondary btn-sm"
+                            onClick={() => {
+                                this.setState({ album: true });
+                            }}
+                        >
+                            Album
+                        </button>{" "}
+                        ou{" "}
+                        <button
+                            className="btn btn-outline-secondary btn-sm"
+                            onClick={() => {
+                                this.setState({ album: false });
+                            }}
+                        >
+                            Carousel
+                        </button>
+                    </p>
+                    <br />
+
+                    <div className="row">
+                        {this.renderPictures()}
+                    </div>
+                    {this.renderLoadMore()}
+                </div>
             </div>
         );
     }
@@ -129,12 +144,14 @@ Images.propTypes = {
     fetch_pictures_success: PropTypes.bool,
     fetch_pictures_done: PropTypes.bool,
     fetchPictures: PropTypes.func,
-    pictures: PropTypes.arrayOf(PropTypes.object)
+    pictures: PropTypes.arrayOf(PropTypes.object),
+    videos: PropTypes.arrayOf(PropTypes.object)
 };
 
-function mapStateToProps({ pictures, success }) {
+function mapStateToProps({ pictures, videos, success }) {
     return {
         pictures,
+        videos,
         fetch_pictures_success: success.fetch_pictures_success,
         fetch_pictures_done: success.fetch_pictures_done
     };
