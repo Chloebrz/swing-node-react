@@ -1,18 +1,16 @@
 // Dependencies
 const mongoose = require("mongoose");
 
-var PictureSchema = new mongoose.Schema({
+var VideoSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
         trim: true,
         minlength: 5
     },
-    img: {
-        name: String,
-        data: Buffer,
-        contentType: String,
-        res: String
+    url: {
+        type: String,
+        required: true
     },
     legend: {
         type: String,
@@ -30,4 +28,4 @@ var PictureSchema = new mongoose.Schema({
     }
 });
 
-mongoose.model("Picture", PictureSchema);
+mongoose.model("Video", VideoSchema);

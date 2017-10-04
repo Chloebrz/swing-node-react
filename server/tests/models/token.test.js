@@ -6,7 +6,7 @@ const { ObjectID } = require("mongodb");
 require("../../db/mongoose");
 const Token = mongoose.model("Token");
 
-describe("TOKEN MODEL", function() {
+describe("TOKEN MODEL", () => {
     it("should create a new token object", done => {
         const token = new Token({
             userId: new ObjectID(),

@@ -6,7 +6,7 @@ const { ObjectID } = require("mongodb");
 require("../../db/mongoose");
 const Picture = mongoose.model("Picture");
 
-describe("PICTURE MODEL", function() {
+describe("PICTURE MODEL", () => {
     it("should create a correct picture", done => {
         const picture = new Picture({
             name: "test name   ",
@@ -324,7 +324,7 @@ describe("PICTURE MODEL", function() {
             });
         });
 
-        it("should default to null if createdAt missing", done => {
+        it("should default if createdAt missing", done => {
             const picture = new Picture({
                 name: "test name",
                 img: {
@@ -338,7 +338,7 @@ describe("PICTURE MODEL", function() {
             });
 
             picture.save().then(pic => {
-                expect(pic.createdAt).toBe(null);
+                expect(pic.createdAt).toExist();
                 done();
             });
         });

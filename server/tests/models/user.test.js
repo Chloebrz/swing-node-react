@@ -6,7 +6,7 @@ require("../../db/mongoose");
 const User = mongoose.model("User");
 const { users, populateUsers } = require("../seed/users-seed");
 
-describe("USER MODEL", function() {
+describe("USER MODEL", () => {
     beforeEach(populateUsers);
 
     it("should create a new user object", done => {
