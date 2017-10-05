@@ -25,7 +25,7 @@ class AddPicture extends Component {
                 <h1>Nouvelle image</h1>
                 <p>
                     Ajouter une nouvelle image avec un titre (5 caractères minimum) et une légende
-                    (10 caractères minimum).
+                    (15 caractères minimum).
                 </p>
                 <PictureForm onSubmit={this.submit.bind(this)} history={this.props.history} />
             </div>

@@ -4,7 +4,7 @@ import * as types from "./types";
 
 /**
  * Fetch all the pictures of the database
- * Send a POST request to /api/admin/pictures with the loading number and dispatch the result as payload of a FETCH_PICTURES action
+ * Send a POST request to /api/admin/pictures with the loading number and dispatch the result as payload of a FETCH_PICTURES_SUCCESS action
  */
 export const fetchPictures = payload => async dispatch => {
     if (payload.n === 0) dispatch({ type: types.FETCH_PICTURES });

@@ -38,3 +38,11 @@ export const DELETE_PICTURE_ERROR = "delete_picture_error";
 
 export const UPDATE_PICTURE_SUCCESS = "update_picture_success";
 export const UPDATE_PICTURE_ERROR = "update_picture_error";
+
+// Videos
+
+export const FETCH_VIDEOS_SUCCESS = "fetch_videos_success";
+export const FETCH_VIDEOS_ERROR = "fetch_videos_error";
+
+export const POST_VIDEO_SUCCESS = "post_video_success";
+export const POST_VIDEO_ERROR = "post_video_error";

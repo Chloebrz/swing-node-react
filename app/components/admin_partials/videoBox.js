@@ -2,14 +2,14 @@
 import React from "react";
 
 const VideoBox = props => {
-    const { title, url, legend, date } = props;
+    const { name, url, legend, date } = props;
 
     return (
         <div>
             <hr className="featurette-divider" />
             <div className="featurette">
                 <h2 className="featurette-heading">
-                    {title}
+                    {name}
                 </h2>
                 <video controls>
                     <source src={`/assets/videos/${url}.mp4`} type="video/mp4" />

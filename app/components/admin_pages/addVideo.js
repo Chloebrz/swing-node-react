@@ -1,8 +1,45 @@
 // Dependencies
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const AddVideo = () => {
-    return <div>This is the page to add new videos</div>;
+import { postVideo } from "../../actions/videos";
+import VideoForm from "../admin_partials/videoForm";
+
+class AddVideo extends Component {
+    componentWillReceiveProps(newProps) {
+        if (newProps.post_video_success) this.props.history.push("/admin/videos");
+    }
+
+    submit(values) {
+        this.props.postVideo({
+            name: values.name,
+            url: values.url,
+            legend: values.legend
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Nouvelle vidéo</h1>
+                <p>
+                    Ajouter une nouvelle vidéo avec un titre (5 caractères minimum) et une légende
+                    (15 caractères minimum).
+                </p>
+                <VideoForm onSubmit={this.submit.bind(this)} history={this.props.history} />
+            </div>
+        );
+    }
+}
+
+AddVideo.propTypes = {
+    post_video_success: PropTypes.bool,
+    postVideo: PropTypes.func
 };
 
-export default AddVideo;
+function mapStateToProps({ success }) {
+    return { post_video_success: success.post_video_success };
+}
+
+export default connect(mapStateToProps, { postVideo })(AddVideo);

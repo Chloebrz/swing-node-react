@@ -7,7 +7,7 @@ const renderVideos = videos => {
         return (
             <div key={video._id}>
                 <h3 className="title">
-                    {video.title}
+                    {video.name}
                 </h3>
                 <video controls>
                     <source src={`/assets/videos/${video.url}.mp4`} type="video/mp4" />
