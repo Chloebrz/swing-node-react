@@ -5,6 +5,17 @@ const { ObjectID } = require("mongodb");
 const Video = mongoose.model("Video");
 const auth = require("../middlewares/auth");
 
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "public/assets/uploads/");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage });
+
 module.exports = app => {
     /**
      * GET /api/admin/videos
@@ -23,12 +34,17 @@ module.exports = app => {
      * POST /api/admin/video
      * Adds a new video item to the videos database
      */
-    app.post("/api/admin/video", auth.requireLogin, async (req, res) => {
+    app.post("/api/admin/video", auth.requireLogin, upload.single("file"), async (req, res) => {
+        // retrieve the video info
+        const file = req.file;
+        const meta = req.body;
+
         // create a new video
         const video = new Video({
-            name: req.body.name,
-            url: req.body.url,
-            legend: req.body.legend,
+            name: meta.name,
+            url: file.originalname,
+            legend: meta.legend,
+            mimetype: file.mimetype,
             createdAt: new Date().getTime(),
             creatorId: req.user._id
         });

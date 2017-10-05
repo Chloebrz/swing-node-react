@@ -2,7 +2,7 @@
 import React from "react";
 
 const VideoBox = props => {
-    const { name, url, legend, date } = props;
+    const { name, url, type, legend, date } = props;
 
     return (
         <div>
@@ -12,8 +12,7 @@ const VideoBox = props => {
                     {name}
                 </h2>
                 <video controls>
-                    <source src={`/assets/videos/${url}.mp4`} type="video/mp4" />
-                    <source src={`/assets/videos/${url}.webm`} type="video/webm" />
+                    <source src={`/assets/uploads/${url}`} type={type} />
                     Votre navigateur ne supporte pas ces types de vidéos.
                 </video>
                 <p className="lead">

@@ -22,6 +22,7 @@ class Videos extends Component {
                     key={video._id}
                     name={video.name}
                     url={video.url}
+                    type={video.mimetype}
                     legend={video.legend}
                     date={moment(video.createdAt).format("D MMMM YY")}
                 />

@@ -2,7 +2,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
-import FileInput from "./fileInput";
 import RenderField from "../partials/renderField";
 import styles from "../../css/partials/form.css";
 
@@ -20,6 +19,27 @@ const validate = values => {
     return errors;
 };
 
+const renderFileInput = ({ input: { onChange }, meta: { touched, error } }) => {
+    const handleUploadFile = e => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        onChange(file);
+    };
+
+    return (
+        <div className="field">
+            <div>
+                <input type="file" onChange={handleUploadFile} />
+                {touched &&
+                    (error &&
+                        <span className="error">
+                            {error}
+                        </span>)}
+            </div>
+        </div>
+    );
+};
+
 let VideoForm = props => {
     const { handleSubmit, submitting, history } = props;
 
@@ -30,8 +50,7 @@ let VideoForm = props => {
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-md-7">
-                        {/* <Field type="file" name="image" component={FileInput} /> */}
-                        <Field name="url" label="URL" component={RenderField} type="text" />
+                        <Field name="file" component={renderFileInput} />
                     </div>
 
                     <div className="col-md-5">

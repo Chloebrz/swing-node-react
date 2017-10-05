@@ -10,8 +10,7 @@ const renderVideos = videos => {
                     {video.name}
                 </h3>
                 <video controls>
-                    <source src={`/assets/videos/${video.url}.mp4`} type="video/mp4" />
-                    <source src={`/assets/videos/${video.url}.webm`} type="video/webm" />
+                    <source src={`/assets/uploads/${video.url}`} type={video.mimetype} />
                     Votre navigateur ne supporte pas ces types de vidéos.
                 </video>
                 <p>

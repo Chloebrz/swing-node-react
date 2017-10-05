@@ -6,6 +6,7 @@ import {
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS,
+    POST_VIDEO,
     POST_VIDEO_SUCCESS,
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
@@ -38,6 +39,9 @@ export default function(state = {}, action) {
 
         case UPDATE_PICTURE_SUCCESS:
             return Object.assign({}, state, { update_picture_success: true });
+
+        case POST_VIDEO:
+            return Object.assign({}, state, { post_video_success: false });
 
         case POST_VIDEO_SUCCESS:
             return Object.assign({}, state, { post_video_success: true });

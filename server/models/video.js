@@ -10,6 +10,11 @@ var VideoSchema = new mongoose.Schema({
     },
     url: {
         type: String,
+        required: true,
+        unique: true
+    },
+    mimetype: {
+        type: String,
         required: true
     },
     legend: {
