@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
+import RenderField from "../partials/renderField";
 import styles from "../../css/partials/form.css";
 
 const validate = values => {
@@ -12,36 +13,6 @@ const validate = values => {
     if (!values.lastname) errors.lastname = "Obligatoire";
 
     return errors;
-};
-
-const renderField = ({
-    input,
-    label,
-    type,
-    meta: { touched, error },
-    textarea,
-    rows,
-    placeholder
-}) => {
-    const inputType = <input {...input} placeholder={"* " + label} type={type} />;
-    const textareaType = <textarea {...input} placeholder={placeholder} rows={rows} type={type} />;
-
-    return (
-        <div className="field">
-            <h4>
-                {label + " :"}
-            </h4>
-            <div>
-                {textarea ? textareaType : inputType}
-                {touched &&
-                    (error &&
-                        <span className="error">
-                            <i className="fa fa-exclamation-circle" />
-                            {error}
-                        </span>)}
-            </div>
-        </div>
-    );
 };
 
 let ProfileForm = props => {
@@ -54,8 +25,8 @@ let ProfileForm = props => {
                     <img src={require("../../images/placeholders/profile.png")} />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-7 margin-center">
-                    <Field name="firstname" label="Prénom" component={renderField} type="text" />
-                    <Field name="lastname" label="Nom" component={renderField} type="text" />
+                    <Field name="firstname" label="Prénom" component={RenderField} type="text" />
+                    <Field name="lastname" label="Nom" component={RenderField} type="text" />
                 </div>
             </div>
 
@@ -65,7 +36,7 @@ let ProfileForm = props => {
             <Field
                 name="bio"
                 label="Bio"
-                component={renderField}
+                component={RenderField}
                 type="text"
                 textarea={true}
                 rows="5"

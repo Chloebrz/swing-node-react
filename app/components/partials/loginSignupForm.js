@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import RenderField from "./renderField";
 import styles from "../../css/partials/form.css";
 
 const validate = (values, props) => {
@@ -23,17 +24,6 @@ const validate = (values, props) => {
 
     return errors;
 };
-
-const renderField = ({ input, label, type, meta: { touched, error } }) =>
-    <div className="field">
-        <input {...input} placeholder={"* " + label} type={type} />
-        {touched &&
-            (error &&
-                <span className="error">
-                    <i className="fa fa-exclamation-circle" />
-                    {error}
-                </span>)}
-    </div>;
 
 let LoginSignupForm = props => {
     const { handleSubmit, submitting, err } = props;
@@ -55,17 +45,17 @@ let LoginSignupForm = props => {
 
             <p className="divider">ou</p>
             <form onSubmit={handleSubmit}>
-                <Field name="email" component={renderField} type="text" label="Adresse mail" />
+                <Field name="email" component={RenderField} type="text" label="Adresse mail" />
                 <Field
                     name="password"
-                    component={renderField}
+                    component={RenderField}
                     type="password"
                     label="Mot de passe"
                 />
                 {signup &&
                     <Field
                         name="password_conf"
-                        component={renderField}
+                        component={RenderField}
                         type="password"
                         label="Confirmation mot de passe"
                     />}
