@@ -5,16 +5,17 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
 
-import Home from "./components/pages/home";
-import Description from "./components/pages/description";
-import Images from "./components/pages/images";
-import Triul from "./components/pages/triul";
-import Contact from "./components/pages/contact";
-import Admin from "./components/admin_pages/admin";
-import Login from "./components/pages/login";
-import Signup from "./components/pages/signup";
-import Profile from "./components/pages/profile";
-import NoMatch from "./components/pages/noMatch";
+import Home from "./containers/public/home";
+import Description from "./containers/public/description";
+import Images from "./containers/public/images";
+import Triul from "./containers/public/triul";
+import Contact from "./containers/public/contact";
+import Login from "./containers/public/login";
+import Signup from "./containers/public/signup";
+import Profile from "./containers/public/profile";
+import NoMatch from "./containers/public/noMatch";
+
+import Admin from "./admin_routes";
 
 import mainStyle from "./css/main.css";
 

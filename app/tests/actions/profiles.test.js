@@ -7,7 +7,7 @@ import axios from "axios";
 import httpAdapter from "axios/lib/adapters/http";
 
 import * as actions from "../../actions/profiles";
-import * as types from "../../actions/types";
+import * as types from "../../constants/profiles_types";
 
 const host = "http://localhost";
 

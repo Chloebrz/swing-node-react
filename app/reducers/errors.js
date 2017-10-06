@@ -1,5 +1,5 @@
 // Dependencies
-import { SIGNUP_ERROR, LOGIN_ERROR } from "../actions/types";
+import { SIGNUP_ERROR, LOGIN_ERROR } from "../constants/profiles_types";
 
 export default function(state = {}, action) {
     switch (action.type) {

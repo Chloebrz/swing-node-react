@@ -1,5 +1,9 @@
 // Dependencies
-import { FETCH_PICTURE, FETCH_PICTURE_SUCCESS, FETCH_PICTURE_ERROR } from "../actions/types";
+import {
+    FETCH_PICTURE,
+    FETCH_PICTURE_SUCCESS,
+    FETCH_PICTURE_ERROR
+} from "../constants/pictures_types";
 
 export default function(state = null, action) {
     switch (action.type) {

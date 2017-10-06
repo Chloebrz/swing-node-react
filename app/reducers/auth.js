@@ -1,5 +1,5 @@
 // Dependencies
-import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../actions/types";
+import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../constants/profiles_types";
 
 export default function(state = null, action) {
     switch (action.type) {

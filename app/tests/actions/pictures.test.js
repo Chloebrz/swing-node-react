@@ -7,7 +7,7 @@ import axios from "axios";
 import httpAdapter from "axios/lib/adapters/http";
 
 import * as actions from "../../actions/pictures";
-import * as types from "../../actions/types";
+import * as types from "../../constants/pictures_types";
 
 const host = "http://localhost";
 

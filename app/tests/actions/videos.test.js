@@ -7,7 +7,7 @@ import axios from "axios";
 import httpAdapter from "axios/lib/adapters/http";
 
 import * as actions from "../../actions/videos";
-import * as types from "../../actions/types";
+import * as types from "../../constants/videos_types";
 
 const host = "http://localhost";
 
@@ -24,9 +24,23 @@ beforeEach(function() {
 
 describe("VIDEOS ACTIONS", () => {
     describe("fetchVideos()", () => {
+        it("should create FETCH_VIDEOS before fetching video", () => {
+            const data = ["t", "e", "s", "t"];
+            const expectedAction = { type: types.FETCH_VIDEOS };
+
+            nock(host).get("/api/admin/videos").reply(200, data);
+
+            return store.dispatch(actions.fetchVideos()).then(() => {
+                expect(store.getActions()[0]).toEqual(expectedAction);
+            });
+        });
+
         it("should create FETCH_VIDEOS_SUCCESS when fetching videos has been done", () => {
             const data = ["t", "e", "s", "t"];
-            const expectedAction = [{ type: types.FETCH_VIDEOS_SUCCESS, payload: data }];
+            const expectedAction = [
+                { type: types.FETCH_VIDEOS },
+                { type: types.FETCH_VIDEOS_SUCCESS, payload: data }
+            ];
 
             nock(host).get("/api/admin/videos").reply(200, data);
 
@@ -41,8 +55,8 @@ describe("VIDEOS ACTIONS", () => {
             nock(host).get("/api/admin/videos").reply(400, err);
 
             return store.dispatch(actions.fetchVideos()).then(() => {
-                expect(store.getActions()[0].type).toBe(types.FETCH_VIDEOS_ERROR);
-                expect(store.getActions()[0].payload.response.data).toBe(err);
+                expect(store.getActions()[1].type).toBe(types.FETCH_VIDEOS_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
             });
         });
     });

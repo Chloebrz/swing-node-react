@@ -1,6 +1,10 @@
 // Dependencies
 import picture from "../../reducers/picture";
-import { FETCH_PICTURE, FETCH_PICTURE_SUCCESS, FETCH_PICTURE_ERROR } from "../../actions/types";
+import {
+    FETCH_PICTURE,
+    FETCH_PICTURE_SUCCESS,
+    FETCH_PICTURE_ERROR
+} from "../../constants/pictures_types";
 
 describe("PICTURE REDUCER", () => {
     it("should return the initial state", () => {

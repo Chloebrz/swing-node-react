@@ -1,6 +1,6 @@
 // Dependencies
 import auth from "../../reducers/auth";
-import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../../actions/types";
+import { FETCH_USER_SUCCESS, UPDATE_PROFILE_SUCCESS } from "../../constants/profiles_types";
 
 describe("AUTH REDUCER", () => {
     it("should return the initial state", () => {

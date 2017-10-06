@@ -9,7 +9,7 @@ module.exports = new GoogleStrategy(
     {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: "/auth/google/callback",
+        callbackURL: "/api/auth/google/callback",
         proxy: true
     },
     (accessToken, refreshToken, profile, done) => {

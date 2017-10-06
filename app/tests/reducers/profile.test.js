@@ -1,6 +1,10 @@
 // Dependencies
 import profile from "../../reducers/profile";
-import { FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_ERROR } from "../../actions/types";
+import {
+    FETCH_PROFILE,
+    FETCH_PROFILE_SUCCESS,
+    FETCH_PROFILE_ERROR
+} from "../../constants/profiles_types";
 
 describe("PROFILE REDUCER", () => {
     it("should return the initial state", () => {

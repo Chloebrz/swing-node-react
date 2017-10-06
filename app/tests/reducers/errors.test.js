@@ -1,6 +1,6 @@
 // Dependencies
 import errors from "../../reducers/errors";
-import { SIGNUP_ERROR, LOGIN_ERROR } from "../../actions/types";
+import { SIGNUP_ERROR, LOGIN_ERROR } from "../../constants/profiles_types";
 
 describe("ERRORS REDUCER", () => {
     it("should return the initial state", () => {

@@ -6,17 +6,23 @@ import {
     FETCH_PICTURES_DONE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
-    UPDATE_PICTURE_SUCCESS,
+    UPDATE_PICTURE_SUCCESS
+} from "../../constants/pictures_types";
+import {
+    FETCH_VIDEOS,
+    FETCH_VIDEOS_SUCCESS,
     POST_VIDEO,
-    POST_VIDEO_SUCCESS,
+    POST_VIDEO_SUCCESS
+} from "../../constants/videos_types";
+import {
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_RESET,
     SEND_TOKEN,
     SEND_TOKEN_SUCCESS,
     SEND_TOKEN_ERROR
-} from "../../actions/types";
-import * as c from "../../actions/const";
+} from "../../constants/profiles_types";
+import * as s from "../../constants/state";
 
 describe("SUCCESS REDUCER", () => {
     it("should return the initial state", () => {
@@ -93,6 +99,26 @@ describe("SUCCESS REDUCER", () => {
         ).toEqual({ a_success: false, update_picture_success: true });
     });
 
+    it("should handle FETCH_VIDEOS_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_VIDEOS_SUCCESS
+            })
+        ).toEqual({ a_success: false, fetch_videos_success: true });
+    });
+
+    it("should handle FETCH_VIDEOS", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_VIDEOS
+            })
+        ).toEqual({ a_success: false, fetch_videos_success: false });
+    });
+
     it("should handle POST_VIDEO", () => {
         const state = { a_success: false };
 
@@ -138,7 +164,7 @@ describe("SUCCESS REDUCER", () => {
 
         expect(success(state, { type: SEND_TOKEN_RESET })).toEqual({
             a_success: false,
-            send_token: c.RESET
+            send_token: s.RESET
         });
     });
 
@@ -147,7 +173,7 @@ describe("SUCCESS REDUCER", () => {
 
         expect(success(state, { type: SEND_TOKEN })).toEqual({
             a_success: false,
-            send_token: c.LOADING
+            send_token: s.LOADING
         });
     });
 
@@ -156,7 +182,7 @@ describe("SUCCESS REDUCER", () => {
 
         expect(success(state, { type: SEND_TOKEN_SUCCESS })).toEqual({
             a_success: false,
-            send_token: c.SUCCESS
+            send_token: s.SUCCESS
         });
     });
 
@@ -165,7 +191,7 @@ describe("SUCCESS REDUCER", () => {
 
         expect(success(state, { type: SEND_TOKEN_ERROR })).toEqual({
             a_success: false,
-            send_token: c.ERROR
+            send_token: s.ERROR
         });
     });
 });

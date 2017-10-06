@@ -1,4 +1,4 @@
-import { FETCH_VIDEOS_SUCCESS, POST_VIDEO_SUCCESS } from "../actions/types";
+import { FETCH_VIDEOS_SUCCESS, POST_VIDEO_SUCCESS } from "../constants/videos_types";
 
 export default function(state = [], action) {
     switch (action.type) {

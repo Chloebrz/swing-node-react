@@ -6,7 +6,7 @@ import {
     POST_PICTURE_SUCCESS,
     DELETE_PICTURE_SUCCESS,
     UPDATE_PICTURE_SUCCESS
-} from "../../actions/types";
+} from "../../constants/pictures_types";
 
 describe("PICTURES REDUCER", () => {
     it("should return the initial state", () => {

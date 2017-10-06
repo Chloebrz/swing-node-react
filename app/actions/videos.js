@@ -1,14 +1,16 @@
 // Dependencies
 import axios from "axios";
-import * as types from "./types";
+import * as types from "../constants/videos_types";
 
 /**
  * Fetch all the videos of the database
  * Send a GET request to /api/admin/videos and dispatch the result as payload of a FETCH_VIDEOS_SUCCESS action
  */
-export const fetchVideos = payload => async dispatch => {
+export const fetchVideos = () => async dispatch => {
+    dispatch({ type: types.FETCH_VIDEOS });
+
     try {
-        let res = await axios.get("/api/admin/videos", payload);
+        let res = await axios.get("/api/admin/videos");
         dispatch({ type: types.FETCH_VIDEOS_SUCCESS, payload: res.data });
     } catch (err) {
         dispatch({ type: types.FETCH_VIDEOS_ERROR, payload: err });

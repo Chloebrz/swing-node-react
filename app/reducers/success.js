@@ -5,17 +5,23 @@ import {
     FETCH_PICTURES_DONE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
-    UPDATE_PICTURE_SUCCESS,
+    UPDATE_PICTURE_SUCCESS
+} from "../constants/pictures_types";
+import {
+    FETCH_VIDEOS,
+    FETCH_VIDEOS_SUCCESS,
     POST_VIDEO,
-    POST_VIDEO_SUCCESS,
+    POST_VIDEO_SUCCESS
+} from "../constants/videos_types";
+import {
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_RESET,
     SEND_TOKEN,
     SEND_TOKEN_SUCCESS,
     SEND_TOKEN_ERROR
-} from "../actions/types";
-import * as c from "../actions/const";
+} from "../constants/profiles_types";
+import * as s from "../constants/state";
 
 export default function(state = {}, action) {
     switch (action.type) {
@@ -40,6 +46,12 @@ export default function(state = {}, action) {
         case UPDATE_PICTURE_SUCCESS:
             return Object.assign({}, state, { update_picture_success: true });
 
+        case FETCH_VIDEOS_SUCCESS:
+            return Object.assign({}, state, { fetch_videos_success: true });
+
+        case FETCH_VIDEOS:
+            return Object.assign({}, state, { fetch_videos_success: false });
+
         case POST_VIDEO:
             return Object.assign({}, state, { post_video_success: false });
 
@@ -53,16 +65,16 @@ export default function(state = {}, action) {
             return Object.assign({}, state, { update_profile_success: true });
 
         case SEND_TOKEN_RESET:
-            return Object.assign({}, state, { send_token: c.RESET });
+            return Object.assign({}, state, { send_token: s.RESET });
 
         case SEND_TOKEN:
-            return Object.assign({}, state, { send_token: c.LOADING });
+            return Object.assign({}, state, { send_token: s.LOADING });
 
         case SEND_TOKEN_SUCCESS:
-            return Object.assign({}, state, { send_token: c.SUCCESS });
+            return Object.assign({}, state, { send_token: s.SUCCESS });
 
         case SEND_TOKEN_ERROR: {
-            return Object.assign({}, state, { send_token: c.ERROR });
+            return Object.assign({}, state, { send_token: s.ERROR });
         }
 
         default:

@@ -1,6 +1,6 @@
 // Dependencies
 import videos from "../../reducers/videos";
-import { FETCH_VIDEOS_SUCCESS, POST_VIDEO_SUCCESS } from "../../actions/types";
+import { FETCH_VIDEOS_SUCCESS, POST_VIDEO_SUCCESS } from "../../constants/videos_types";
 
 describe("VIDEOS REDUCER", () => {
     it("should return the initial state", () => {

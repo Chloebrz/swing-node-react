@@ -1,6 +1,6 @@
 // Dependencies
 import axios from "axios";
-import * as types from "./types";
+import * as types from "../constants/profiles_types";
 
 /**
  * Fetch the current logged in user

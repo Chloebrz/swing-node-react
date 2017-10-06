@@ -1,6 +1,6 @@
 // Dependencies
 import axios from "axios";
-import * as types from "./types";
+import * as types from "../constants/pictures_types";
 
 /**
  * Fetch all the pictures of the database
