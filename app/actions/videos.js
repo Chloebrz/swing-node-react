@@ -19,13 +19,13 @@ export const fetchVideos = payload => async dispatch => {
  * Post a new video to the database
  * Send a POST request to /api/admin/video and dispatch a POST_VIDEO_SUCCESS action when succeedded
  */
-export const postVideo = ({ file, name, legend }) => async dispatch => {
+export const postVideo = payload => async dispatch => {
     dispatch({ type: types.POST_VIDEO });
 
     let data = new FormData();
-    data.append("file", file);
-    data.append("name", name);
-    data.append("legend", legend);
+    data.append("file", payload.file);
+    data.append("name", payload.name);
+    data.append("legend", payload.legend);
 
     try {
         let res = await axios.post("/api/admin/video", data);

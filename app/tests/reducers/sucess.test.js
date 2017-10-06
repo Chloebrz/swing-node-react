@@ -7,6 +7,8 @@ import {
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS,
+    POST_VIDEO,
+    POST_VIDEO_SUCCESS,
     SIGNUP_LOGIN_SUCCESS,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_RESET,
@@ -89,6 +91,26 @@ describe("SUCCESS REDUCER", () => {
                 type: UPDATE_PICTURE_SUCCESS
             })
         ).toEqual({ a_success: false, update_picture_success: true });
+    });
+
+    it("should handle POST_VIDEO", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: POST_VIDEO
+            })
+        ).toEqual({ a_success: false, post_video_success: false });
+    });
+
+    it("should handle POST_VIDEO_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: POST_VIDEO_SUCCESS
+            })
+        ).toEqual({ a_success: false, post_video_success: true });
     });
 
     it("should handle SIGNUP_LOGIN_SUCCESS", () => {

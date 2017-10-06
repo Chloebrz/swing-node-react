@@ -5,31 +5,42 @@ const { ObjectID } = require("mongodb");
 
 require("../../db/mongoose");
 const Video = mongoose.model("Video");
+const { videos, populateVideos } = require("../seed/videos-seed");
 
 describe("VIDEO MODEL", () => {
+    beforeEach(populateVideos);
+
     it("should create a correct video", done => {
         const video = new Video({
             name: "test name",
             url: "some_url",
+            mimetype: "type",
             legend: "this is a legend test",
             createdAt: new Date().getTime(),
             creatorId: new ObjectID()
         });
 
-        video.save().then(vid => {
-            expect(vid.name).toBe("test name");
-            expect(vid.url).toBe("some_url");
-            expect(vid.legend).toBe("this is a legend test");
-            expect(vid.createdAt).toBeA("number");
-            expect(vid.creatorId).toExist();
-            done();
-        });
+        video
+            .save()
+            .then(vid => {
+                expect(vid.name).toBe("test name");
+                expect(vid.url).toBe("some_url");
+                expect(vid.mimetype).toBe("type");
+                expect(vid.legend).toBe("this is a legend test");
+                expect(vid.createdAt).toBeA("number");
+                expect(vid.creatorId).toExist();
+                done();
+            })
+            .catch(err => {
+                console.log("err", err);
+            });
     });
 
     describe("name", () => {
         it("should return error if name is missing", done => {
             const video = new Video({
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -46,6 +57,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: { id: 123 },
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -64,6 +76,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -82,6 +95,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name    ",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -98,6 +112,7 @@ describe("VIDEO MODEL", () => {
         it("should return error if url is missing", done => {
             const video = new Video({
                 name: "test name",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -114,6 +129,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: { id: 123 },
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -127,6 +143,45 @@ describe("VIDEO MODEL", () => {
                 done();
             });
         });
+
+        it("should return error if url already in use", () => {});
+    });
+
+    describe("mimetype", () => {
+        it("should return error if mimetype is missing", done => {
+            const video = new Video({
+                name: "test name",
+                url: "some_url",
+                legend: "this is a legend test",
+                createdAt: new Date().getTime(),
+                creatorId: new ObjectID()
+            });
+
+            video.save().catch(err => {
+                expect(err.errors.mimetype).toExist();
+                expect(err.errors.mimetype.message).toBe("Path `mimetype` is required.");
+                done();
+            });
+        });
+
+        it("should return error if mimetype is not a string", done => {
+            const video = new Video({
+                name: "test name",
+                url: "some_url",
+                mimetype: { id: 123 },
+                legend: "this is a legend test",
+                createdAt: new Date().getTime(),
+                creatorId: new ObjectID()
+            });
+
+            video.save().catch(err => {
+                expect(err.errors.mimetype).toExist();
+                expect(err.errors.mimetype.message).toBe(
+                    'Cast to String failed for value "{ id: 123 }" at path "mimetype"'
+                );
+                done();
+            });
+        });
     });
 
     describe("legend", () => {
@@ -134,6 +189,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
             });
@@ -149,6 +205,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: { id: 123 },
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -167,6 +224,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "test",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -185,6 +243,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "      this is a legend test     ",
                 createdAt: new Date().getTime(),
                 creatorId: new ObjectID()
@@ -202,6 +261,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: { id: 123 },
                 creatorId: new ObjectID()
@@ -220,6 +280,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 creatorId: new ObjectID()
             });
@@ -236,6 +297,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime()
             });
@@ -251,6 +313,7 @@ describe("VIDEO MODEL", () => {
             const video = new Video({
                 name: "test name",
                 url: "some_url",
+                mimetype: "type",
                 legend: "this is a legend test",
                 createdAt: new Date().getTime(),
                 creatorId: { id: 123 }

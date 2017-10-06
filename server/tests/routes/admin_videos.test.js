@@ -40,15 +40,6 @@ describe("ADMIN VIDEOS ROUTES", () => {
             request(app).post("/api/admin/video").send(video).expect(400).end(done);
         });
 
-        it("should return 400 if invalid body data - no url", done => {
-            const video = {
-                name: "video name",
-                legend: "this is a video legend"
-            };
-
-            request(app).post("/api/admin/video").send(video).expect(400).end(done);
-        });
-
         it("should return 400 if invalid body data - no legend", done => {
             const video = {
                 name: "video name",
@@ -61,7 +52,6 @@ describe("ADMIN VIDEOS ROUTES", () => {
         it("should create a video doc", done => {
             const video = {
                 name: "video name",
-                url: "some_url",
                 legend: "this is a video legend"
             };
 
@@ -72,8 +62,10 @@ describe("ADMIN VIDEOS ROUTES", () => {
                     .then(vids => {
                         expect(vids.length).toBe(1);
                         expect(vids[0].name).toBe(video.name);
-                        expect(vids[0].url).toBe(video.url);
+                        expect(vids[0].url).toBe("originalname");
                         expect(vids[0].legend).toBe(video.legend);
+                        expect(vids[0].createdAt).toExist();
+                        expect(vids[0].creatorId).toExist();
                         done();
                     })
                     .catch(e => done(e));

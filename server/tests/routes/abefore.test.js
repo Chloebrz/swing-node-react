@@ -8,8 +8,8 @@ const { userOneId } = require("../seed/pictures-seed");
 const user = { _id: userOneId, email: "test@test.com" };
 
 var app;
-var nodemailer, passport;
-var requireLoginStub, passportStub, nodemailerStub;
+var nodemailer, passport, multer;
+var requireLoginStub, passportStub, nodemailerStub, multerStub;
 const auth = require("../../middlewares/auth");
 
 const sendMailSpy = sinon.spy();
@@ -36,6 +36,18 @@ before(function() {
         }
     };
     nodemailer = proxyquire("../../routes/auth", { nodemailer: nodemailerStub });
+
+    multerStub = function() {
+        return {
+            single: function() {
+                return function(req, res, next) {
+                    req.file = { originalname: "originalname", mimetype: "mimetype" };
+                    next();
+                };
+            }
+        };
+    };
+    multer = proxyquire("../../routes/admin_videos", { multer: multerStub });
 
     app = require("../../index").app;
 });

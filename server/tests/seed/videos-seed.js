@@ -9,6 +9,7 @@ const videos = [
         _id: new ObjectID(),
         name: "videoOne",
         url: "url_video_one",
+        mimetype: "a_type",
         legend: "legend video one",
         createdAt: new Date().getTime(),
         creatorId: new ObjectID()
@@ -17,6 +18,7 @@ const videos = [
         _id: new ObjectID(),
         name: "videoTwo",
         url: "url_video_two",
+        mimetype: "a_type",
         legend: "legend video two",
         createdAt: new Date().getTime(),
         creatorId: new ObjectID()
@@ -34,5 +36,6 @@ const populateVideos = done => {
 };
 
 module.exports = {
+    videos,
     populateVideos
 };
