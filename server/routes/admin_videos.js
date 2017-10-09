@@ -1,6 +1,7 @@
 // Dependencies
 const mongoose = require("mongoose");
 const { ObjectID } = require("mongodb");
+const _ = require("lodash");
 
 const Video = mongoose.model("Video");
 const auth = require("../middlewares/auth");
@@ -31,6 +32,33 @@ module.exports = app => {
     });
 
     /**
+     * GET /api/admin/video/:id
+     * Gets a video item from the videos database given its id
+     * User can only get the videos he created
+     */
+    app.get("/api/admin/video/:id", auth.requireLogin, async (req, res) => {
+        // get the id of the video to retrieve
+        const id = req.params.id;
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            // retrieve the video item and send it
+            const video = await Video.findOne({ _id: id, creatorId: req.user._id });
+
+            if (!video)
+                return res.status(404).send({
+                    error: "Vous ne pouvez pas accéder à cette vidéo car vous ne l'avez pas ajoutée"
+                });
+
+            res.send(video);
+        } catch (err) {
+            res.status(404).send(err);
+        }
+    });
+
+    /**
      * POST /api/admin/video
      * Adds a new video item to the videos database
      */
@@ -52,6 +80,63 @@ module.exports = app => {
         try {
             // save the new video
             await video.save();
+            res.send(video);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    });
+
+    /**
+     * DELETE /api/admin/video/:id
+     * Deletes a video item from the videos database given its id
+     * User can only delete the videos he created
+     */
+    app.delete("/api/admin/video/:id", auth.requireLogin, async (req, res) => {
+        // get the id of the video to delete
+        const id = req.params.id;
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            // TODO: remove the file from /assets/uploads
+
+            // remove the video from the database
+            const video = await Video.findOneAndRemove({
+                _id: id,
+                creatorId: req.user._id
+            });
+
+            if (!video) return res.status(404).send();
+            res.send(video);
+        } catch (err) {
+            res.status(400).send(err);
+        }
+    });
+
+    /**
+     * PATCH /api/admin/video/:id
+     * Updates a video item from the videos database given its id and the properties to update
+     * The video file cannot be updated
+     * User can only update the videos he created
+     */
+    app.patch("/api/admin/video/:id", auth.requireLogin, async (req, res) => {
+        // get the id of the video to update and the properties to update
+        const id = req.params.id;
+        const body = _.pick(req.body, ["name", "legend"]);
+
+        // check if the id is a valid object id
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            // update the video item
+            const video = await Video.findOneAndUpdate(
+                { _id: id, creatorId: req.user._id },
+                { $set: body },
+                { new: true }
+            );
+
+            if (!video) return res.status(404).send();
             res.send(video);
         } catch (err) {
             res.status(400).send(err);

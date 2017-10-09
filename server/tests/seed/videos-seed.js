@@ -4,6 +4,8 @@ const { ObjectID } = require("mongodb");
 
 const Video = mongoose.model("Video");
 
+const { userOneId } = require("./users-seed");
+
 const videos = [
     {
         _id: new ObjectID(),
@@ -12,7 +14,7 @@ const videos = [
         mimetype: "a_type",
         legend: "legend video one",
         createdAt: new Date().getTime(),
-        creatorId: new ObjectID()
+        creatorId: userOneId
     },
     {
         _id: new ObjectID(),

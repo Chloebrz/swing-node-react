@@ -30,6 +30,50 @@ describe("ADMIN VIDEOS ROUTES", () => {
         });
     });
 
+    describe("GET /api/admin/video/:id", () => {
+        it("should return 404 for non-object ids", done => {
+            request(app).get("/api/admin/video/123").expect(404).end(done);
+        });
+
+        it("should return 404 if video not found", done => {
+            request(app)
+                .get(`/api/admin/video/${new ObjectID().toHexString()}`)
+                .expect(404)
+                .expect(res => {
+                    expect(res.body.error).toExist();
+                    expect(res.body.error).toBe(
+                        "Vous ne pouvez pas accéder à cette vidéo car vous ne l'avez pas ajoutée"
+                    );
+                })
+                .end(done);
+        });
+
+        it("should not return a video doc created by other user", done => {
+            request(app)
+                .get(`/api/admin/video/${videos[1]._id}`)
+                .expect(404)
+                .expect(res => {
+                    expect(res.body.error).toExist();
+                    expect(res.body.error).toBe(
+                        "Vous ne pouvez pas accéder à cette vidéo car vous ne l'avez pas ajoutée"
+                    );
+                })
+                .end(done);
+        });
+
+        it("should return a video doc", done => {
+            request(app)
+                .get(`/api/admin/video/${videos[0]._id}`)
+                .expect(200)
+                .expect(res => {
+                    const vid = res.body;
+                    expect(vid.name).toBe(videos[0].name);
+                    expect(vid.legend).toBe(videos[0].legend);
+                })
+                .end(done);
+        });
+    });
+
     describe("POST /api/admin/video", () => {
         it("should return 400 if invalid body data - no name", done => {
             const video = {
@@ -70,6 +114,78 @@ describe("ADMIN VIDEOS ROUTES", () => {
                     })
                     .catch(e => done(e));
             });
+        });
+    });
+
+    describe("DELETE /api/admin/video/:id", () => {
+        it("should return 404 for non-object ids", done => {
+            request(app).delete("/api/admin/video/123").expect(404).end(done);
+        });
+
+        it("should return 404 if video not found", done => {
+            request(app)
+                .delete(`/api/admin/video/${new ObjectID().toHexString}`)
+                .expect(404)
+                .end(done);
+        });
+
+        it("should not delete a video doc created by other user", done => {
+            request(app).delete(`/api/admin/video/${videos[1]._id}`).expect(404).end(done);
+        });
+
+        it("should delete a video doc", done => {
+            request(app)
+                .delete(`/api/admin/video/${videos[0]._id}`)
+                .expect(200)
+                .expect(res => {
+                    const vid = res.body;
+                    expect(vid.name).toBe(videos[0].name);
+                    expect(vid.legend).toBe(videos[0].legend);
+                })
+                .end(done);
+        });
+    });
+
+    describe("PATCH /api/admin/video/:id", () => {
+        it("should return 404 for non-object ids", done => {
+            const video = { name: "video", legend: "this is a legend test" };
+
+            request(app).patch("/api/admin/video/123").send(video).expect(404).end(done);
+        });
+
+        it("should return 404 if video not found", done => {
+            const video = { name: "video", legend: "this is a legend test" };
+
+            request(app)
+                .patch(`/api/admin/video/${new ObjectID().toHexString()}`)
+                .send(video)
+                .expect(404)
+                .end(done);
+        });
+
+        it("should not update a video doc created by other user", done => {
+            const video = { name: "video", legend: "this is a legend test" };
+
+            request(app)
+                .patch(`/api/admin/video/${videos[1]._id}`)
+                .send(video)
+                .expect(404)
+                .end(done);
+        });
+
+        it("should update a video doc", done => {
+            const video = { name: "video", legend: "this is a legend test" };
+
+            request(app)
+                .patch(`/api/admin/video/${videos[0]._id}`)
+                .send(video)
+                .expect(200)
+                .expect(res => {
+                    const vid = res.body;
+                    expect(vid.name).toBe(video.name);
+                    expect(vid.legend).toBe(video.legend);
+                })
+                .end(done);
         });
     });
 });

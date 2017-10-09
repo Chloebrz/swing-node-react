@@ -5,8 +5,7 @@ const { ObjectID } = require("mongodb");
 const Picture = mongoose.model("Picture");
 const User = mongoose.model("User");
 
-const userOneId = new ObjectID();
-const userTwoId = new ObjectID();
+const { userOneId, userTwoId } = require("./users-seed");
 
 const pictures = [
     {

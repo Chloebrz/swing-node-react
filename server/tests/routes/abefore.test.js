@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const proxyquire = require("proxyquire");
 
 require("../../db/mongoose");
-const { userOneId } = require("../seed/pictures-seed");
+const { userOneId } = require("../seed/users-seed");
 const user = { _id: userOneId, email: "test@test.com" };
 
 var app;
