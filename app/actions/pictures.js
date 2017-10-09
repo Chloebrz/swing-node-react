@@ -77,7 +77,7 @@ export const deletePicture = payload => async dispatch => {
 
 /**
  * Update a picture of the database given its id
- * Send a PATCH request to /api/admin/picture and dispatch a UPDATE_PICTURE_SUCCESS action when succeedded
+ * Send a PATCH request to /api/admin/picture/:id and dispatch a UPDATE_PICTURE_SUCCESS action when succeedded
  */
 export const updatePicture = payload => async dispatch => {
     try {

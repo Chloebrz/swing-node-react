@@ -61,6 +61,37 @@ describe("VIDEOS ACTIONS", () => {
         });
     });
 
+    describe("fetchVideo()", () => {
+        it("should create FETCH_VIDEO_SUCCESS when fetching video has been done", () => {
+            const payload = { id: 123 };
+            const data = { id: 123, name: "test" };
+            const expectedActions = [
+                { type: types.FETCH_VIDEO },
+                { type: types.FETCH_VIDEO_SUCCESS, payload: data }
+            ];
+
+            nock(host).get("/api/admin/video/123").reply(200, data);
+
+            return store.dispatch(actions.fetchVideo(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
+
+        it("should create FETCH_VIDEO_ERROR if error returned when fetching video", () => {
+            const payload = { id: 123 };
+            const err = "an_error";
+            const expectedAction = { type: types.FETCH_VIDEO };
+
+            nock(host).get("/api/admin/video/123").reply(400, err);
+
+            return store.dispatch(actions.fetchVideo(payload)).then(() => {
+                expect(store.getActions()[0]).toEqual(expectedAction);
+                expect(store.getActions()[1].type).toBe(types.FETCH_VIDEO_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
+            });
+        });
+    });
+
     describe("postVideo()", () => {
         it("should create POST_VIDEO before posting video", () => {
             const payload = { file: "a_file", name: "a_name", legend: "a legend" };
@@ -99,6 +130,58 @@ describe("VIDEOS ACTIONS", () => {
                 expect(store.getActions()[0].type).toBe(types.POST_VIDEO);
                 expect(store.getActions()[1].type).toBe(types.POST_VIDEO_ERROR);
                 expect(store.getActions()[1].payload.response.data).toBe(err);
+            });
+        });
+    });
+
+    describe("deleteVideo()", () => {
+        it("should create DELETE_VIDEO_SUCCESS when deleting video has been done", () => {
+            const payload = { id: 123 };
+            const data = { id: 123, name: "test" };
+            const expectedAction = [{ type: types.DELETE_VIDEO_SUCCESS, payload: data }];
+
+            nock(host).delete("/api/admin/video/123").reply(200, data);
+
+            return store.dispatch(actions.deleteVideo(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+            });
+        });
+
+        it("should create DELETE_VIDEO_ERROR if error returned when deleting video", () => {
+            const payload = { id: 123 };
+            const err = "an_error";
+
+            nock(host).delete("/api/admin/video/123").reply(400, err);
+
+            return store.dispatch(actions.deleteVideo(payload)).then(() => {
+                expect(store.getActions()[0].type).toBe(types.DELETE_VIDEO_ERROR);
+                expect(store.getActions()[0].payload.response.data).toBe(err);
+            });
+        });
+    });
+
+    describe("updateVideo()", () => {
+        it("should create UPDATE_VIDEO_SUCCESS when updating video has been done", () => {
+            const payload = { id: 123 };
+            const data = { id: 123, name: "test" };
+            const expectedAction = [{ type: types.UPDATE_VIDEO_SUCCESS, payload: data }];
+
+            nock(host).patch("/api/admin/video/123", payload).reply(200, data);
+
+            return store.dispatch(actions.updateVideo(payload)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+            });
+        });
+
+        it("should create UPDATE_VIDEO_ERROR if error returned when updating video", () => {
+            const payload = { id: 123 };
+            const err = "an_error";
+
+            nock(host).patch("/api/admin/video/123", payload).reply(400, err);
+
+            return store.dispatch(actions.updateVideo(payload)).then(() => {
+                expect(store.getActions()[0].type).toBe(types.UPDATE_VIDEO_ERROR);
+                expect(store.getActions()[0].payload.response.data).toBe(err);
             });
         });
     });
