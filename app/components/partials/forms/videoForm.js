@@ -15,7 +15,7 @@ const validate = values => {
     if (!values.legend) errors.legend = "Obligatoire";
     else if (values.legend.trim().length < 15) errors.legend = "15 caractères minimum";
 
-    if (!values.url) errors.url = "Obligatoire";
+    if (!values.file) errors.file = "Obligatoire";
 
     return errors;
 };

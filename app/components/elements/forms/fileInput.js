@@ -39,6 +39,7 @@ class FileInput extends React.Component {
                     {touched &&
                         (error &&
                             <span className="error">
+                                <i className="fa fa-exclamation-circle" />
                                 {error}
                             </span>)}
                 </div>
