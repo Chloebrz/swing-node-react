@@ -8,7 +8,6 @@ moment.locale("fr");
 
 import { fetchPictures } from "../../actions/pictures";
 import PictureBox from "../../components/partials/boxes/adminPictureBox";
-import styles from "../../css/pages/dashboard.css";
 
 class Dashboard extends Component {
     constructor() {
@@ -25,7 +24,7 @@ class Dashboard extends Component {
 
         return (
             <div className="center">
-                <hr className="featurette-divider" />
+                <hr className="divider" />
                 <button
                     className="btn btn-secondary"
                     onClick={() => {
@@ -74,7 +73,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div className={styles}>
+            <div>
                 <div className="center">
                     <Link to="/admin/add_picture">
                         <img

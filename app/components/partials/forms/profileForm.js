@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
 import TextInput from "../../elements/forms/textInput";
-import styles from "../../../css/partials/form.css";
+import styles from "../../../css/elements/form.css";
 
 const validate = values => {
     const errors = {};

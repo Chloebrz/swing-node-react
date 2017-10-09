@@ -26,6 +26,18 @@ video {
     width: 600px;
 }
 
+.divider {
+    margin: 5rem 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    float: right;
+}
+
 @media (max-width: 800px) {
     video {
         width: 100%;

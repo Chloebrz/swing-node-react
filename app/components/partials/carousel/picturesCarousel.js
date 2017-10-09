@@ -4,6 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import PropTypes from "prop-types";
 import moment from "moment";
 moment.locale("fr");
+import styles from "../../../css/elements/carousel.css";
 
 const renderPictures = pictures => {
     return pictures.map(picture => {

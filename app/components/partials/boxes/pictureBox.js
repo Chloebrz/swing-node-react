@@ -2,10 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import styles from "../../../css/elements/card.css";
 
 const PictureBox = props => {
     return (
-        <div className="card">
+        <div className={styles} className="card">
             <img src={`data:${props.type};base64,${props.res}`} alt={props.name} />
             <p className="card-text">
                 {props.legend}

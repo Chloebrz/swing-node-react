@@ -8,7 +8,6 @@ moment.locale("fr");
 
 import { fetchVideos } from "../../actions/videos";
 import VideoBox from "../../components/partials/boxes/adminVideoBox";
-import styles from "../../css/pages/dashboard.css";
 
 class Videos extends Component {
     componentDidMount() {
@@ -32,7 +31,7 @@ class Videos extends Component {
 
     render() {
         return (
-            <div className={styles}>
+            <div>
                 <div className="center">
                     <Link to="/admin/add_video">
                         <img

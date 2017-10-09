@@ -1,0 +1,36 @@
+@import "../min/carousel.min.css";
+
+.title {
+    padding-bottom: 15px;
+}
+
+.legend-text {
+    font-size: 200%;
+}
+
+.legend-date {
+    font-size: 125%;
+}
+
+@media (max-width: 600px) {
+    .control-arrow {
+        top: 50% !important;
+        bottom: auto !important;
+    }
+}
+
+.videos .slide {
+    background: none;
+}
+
+.videos .carousel .control-prev.control-arrow:before {
+    border-right: 8px solid #000;
+}
+
+.videos .carousel .control-next.control-arrow:before {
+    border-left: 8px solid #000;
+}
+
+.videos .carousel .control-arrow:hover {
+    background: none;
+}

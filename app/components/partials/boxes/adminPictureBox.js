@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 
 import { deletePicture } from "../../../actions/pictures";
+import styles from "../../../css/elements/featurette.css";
 
 const customStyles = {
     content: {
@@ -95,7 +96,7 @@ class PictureBox extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles}>
                 <hr className="featurette-divider" />
                 <div className="row featurette">
                     <div className="col-md-7">
@@ -115,7 +116,7 @@ class PictureBox extends Component {
                         <p className="lead">
                             {this.props.legend}
                         </p>
-                        <p className="card-text">
+                        <p className="featurette-text">
                             Ajouté le : {this.props.date} par {this.renderCreatorLink()}
                         </p>
 

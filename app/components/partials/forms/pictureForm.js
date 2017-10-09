@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import FileInput from "../../elements/forms/fileInput";
 import TextInput from "../../elements/forms/textInput";
-import styles from "../../../css/partials/form.css";
+import styles from "../../../css/elements/form.css";
 
 const validate = values => {
     const errors = {};
@@ -27,7 +27,7 @@ let PictureForm = props => {
 
     return (
         <div className={styles}>
-            <hr className="featurette-divider" />
+            <hr className="divider" />
 
             <form onSubmit={handleSubmit}>
                 <div className="row">

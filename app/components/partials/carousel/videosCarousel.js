@@ -1,6 +1,7 @@
 // Dependencies
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
+import styles from "../../../css/elements/carousel.css";
 
 const renderVideos = videos => {
     return videos.map(video => {

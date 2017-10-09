@@ -1,0 +1,42 @@
+.featurette-divider {
+    margin: 5rem 0;
+}
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+.featurette-image {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.featurette-text {
+    font-size: 85%;
+}
+
+@media (min-width: 40em) {
+    .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .hidelarge {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .hidesmall {
+        display: none;
+    }
+}

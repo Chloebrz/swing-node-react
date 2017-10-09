@@ -1,11 +1,12 @@
 // Dependencies
 import React from "react";
+import styles from "../../../css/elements/featurette.css";
 
 const VideoBox = props => {
     const { name, url, type, legend, date } = props;
 
     return (
-        <div>
+        <div className={styles}>
             <hr className="featurette-divider" />
             <div className="featurette">
                 <h2 className="featurette-heading">
@@ -18,7 +19,7 @@ const VideoBox = props => {
                 <p className="lead">
                     {legend}
                 </p>
-                <p className="card-text">
+                <p className="featurette-text">
                     Ajouté le : {date}
                 </p>
             </div>

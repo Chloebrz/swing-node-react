@@ -5,7 +5,7 @@ import moment from "moment";
 moment.locale("fr");
 
 import PictureBox from "../boxes/pictureBox";
-import styles from "../../../css/partials/profile.css";
+import styles from "../../../css/elements/profile.css";
 
 const renderProfile = profile => {
     if (!profile) return;

@@ -1,0 +1,51 @@
+/* General styles for forms */
+.error .fa {
+    margin-right: 5px;
+}
+
+.margin-center {
+    margin: auto;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+/* Image forms styles */
+
+.image-upload  input {
+    display: none;
+}
+
+.image-upload img {
+    cursor: pointer;
+}
+
+/* Login and signup forms styles */
+.signup-login-box {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+}
+
+.signup-login-box button {
+    width: 100%;
+}
+
+.signup-login-box input {
+    width: 100%;
+}
+
+.input {
+    margin-bottom: 15px;
+}
+
+.hint {
+    font-size: 0.9em;
+    color: #808080;
+}
+
+.divider-or {
+    text-align: center;
+    margin: 25px 0px;
+}

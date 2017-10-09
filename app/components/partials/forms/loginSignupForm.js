@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import TextInput from "../../elements/forms/textInput";
-import styles from "../../../css/partials/form.css";
+import styles from "../../../css/elements/form.css";
 
 const validate = (values, props) => {
     const { signup } = props;
@@ -43,7 +43,7 @@ let LoginSignupForm = props => {
                 </a>
             </div>
 
-            <p className="divider">ou</p>
+            <p className="divider-or">ou</p>
             <form onSubmit={handleSubmit}>
                 <Field name="email" component={TextInput} type="text" label="Adresse mail" />
                 <Field name="password" component={TextInput} type="password" label="Mot de passe" />

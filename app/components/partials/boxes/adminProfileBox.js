@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import * as s from "../../../constants/state";
-import styles from "../../../css/partials/profile.css";
+import styles from "../../../css/elements/profile.css";
 
 class ProfileBox extends Component {
     sendVerifyToken() {

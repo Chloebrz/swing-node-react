@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 
 import TextInput from "../../elements/forms/textInput";
 import FileInput from "../../elements/forms/basicFileInput";
-import styles from "../../../css/partials/form.css";
+import styles from "../../../css/elements/form.css";
 
 const validate = values => {
     const errors = {};
@@ -25,7 +25,7 @@ let VideoForm = props => {
 
     return (
         <div className={styles}>
-            <hr className="featurette-divider" />
+            <hr className="divider" />
 
             <form onSubmit={handleSubmit}>
                 <div className="row">
