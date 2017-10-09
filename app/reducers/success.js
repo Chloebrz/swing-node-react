@@ -11,7 +11,9 @@ import {
     FETCH_VIDEOS,
     FETCH_VIDEOS_SUCCESS,
     POST_VIDEO,
-    POST_VIDEO_SUCCESS
+    POST_VIDEO_SUCCESS,
+    FETCH_VIDEO,
+    UPDATE_VIDEO_SUCCESS
 } from "../constants/videos_types";
 import {
     SIGNUP_LOGIN_SUCCESS,
@@ -25,6 +27,8 @@ import * as s from "../constants/state";
 
 export default function(state = {}, action) {
     switch (action.type) {
+        /* Pictures */
+
         case FETCH_PICTURES_SUCCESS:
             return Object.assign({}, state, { fetch_pictures_success: true });
 
@@ -46,6 +50,8 @@ export default function(state = {}, action) {
         case UPDATE_PICTURE_SUCCESS:
             return Object.assign({}, state, { update_picture_success: true });
 
+        /* Videos */
+
         case FETCH_VIDEOS_SUCCESS:
             return Object.assign({}, state, { fetch_videos_success: true });
 
@@ -58,11 +64,21 @@ export default function(state = {}, action) {
         case POST_VIDEO_SUCCESS:
             return Object.assign({}, state, { post_video_success: true });
 
+        case FETCH_VIDEO:
+            return Object.assign({}, state, { update_video_success: false });
+
+        case UPDATE_VIDEO_SUCCESS:
+            return Object.assign({}, state, { update_video_success: true });
+
+        /* Login & Signup */
+
         case SIGNUP_LOGIN_SUCCESS:
             return Object.assign({}, state, { signup_login_success: true });
 
         case UPDATE_PROFILE_SUCCESS:
             return Object.assign({}, state, { update_profile_success: true });
+
+        /* Tokens */
 
         case SEND_TOKEN_RESET:
             return Object.assign({}, state, { send_token: s.RESET });

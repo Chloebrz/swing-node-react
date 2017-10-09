@@ -12,7 +12,9 @@ import {
     FETCH_VIDEOS,
     FETCH_VIDEOS_SUCCESS,
     POST_VIDEO,
-    POST_VIDEO_SUCCESS
+    POST_VIDEO_SUCCESS,
+    FETCH_VIDEO,
+    UPDATE_VIDEO_SUCCESS
 } from "../../constants/videos_types";
 import {
     SIGNUP_LOGIN_SUCCESS,
@@ -137,6 +139,26 @@ describe("SUCCESS REDUCER", () => {
                 type: POST_VIDEO_SUCCESS
             })
         ).toEqual({ a_success: false, post_video_success: true });
+    });
+
+    it("should handle FETCH_VIDEO", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: FETCH_VIDEO
+            })
+        ).toEqual({ a_success: false, update_video_success: false });
+    });
+
+    it("should handle UPDATE_VIDEO_SUCCESS", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: UPDATE_VIDEO_SUCCESS
+            })
+        ).toEqual({ a_success: false, update_video_success: true });
     });
 
     it("should handle SIGNUP_LOGIN_SUCCESS", () => {

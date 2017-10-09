@@ -19,11 +19,14 @@ class Videos extends Component {
             return (
                 <VideoBox
                     key={video._id}
+                    id={video._id}
                     name={video.name}
                     url={video.url}
                     type={video.mimetype}
                     legend={video.legend}
                     date={moment(video.createdAt).format("D MMMM YY")}
+                    creatorId={video.creatorId}
+                    isCreator={this.props.auth._id === video.creatorId}
                 />
             );
         });
@@ -48,12 +51,13 @@ class Videos extends Component {
 }
 
 Videos.propTypes = {
+    auth: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     videos: PropTypes.arrayOf(PropTypes.object),
     fetchVideos: PropTypes.func
 };
 
-function mapStateToProps({ videos }) {
-    return { videos };
+function mapStateToProps({ auth, videos }) {
+    return { auth, videos };
 }
 
 export default connect(mapStateToProps, { fetchVideos })(Videos);

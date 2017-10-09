@@ -1,6 +1,8 @@
 // Dependencies
 import React from "react";
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import PropTypes from "prop-types";
 
 import TextInput from "../../elements/forms/textInput";
 import FileInput from "../../elements/forms/basicFileInput";
@@ -63,9 +65,20 @@ let VideoForm = props => {
     );
 };
 
+VideoForm.propTypes = {
+    video: PropTypes.object
+};
+
+function mapStateToProps(state, props) {
+    const initialValues = props.video
+        ? { name: props.video.name, legend: props.video.legend, file: props.video.url }
+        : {};
+    return { initialValues };
+}
+
 VideoForm = reduxForm({
     form: "video",
     validate
 })(VideoForm);
 
-export default VideoForm;
+export default connect(mapStateToProps)(VideoForm);
