@@ -12,13 +12,17 @@
 }
 
 /* Image forms styles */
-
 .image-upload  input {
     display: none;
 }
 
 .image-upload img {
     cursor: pointer;
+}
+
+/* Video forms styles */
+video {
+    max-width: 100%;
 }
 
 /* Login and signup forms styles */

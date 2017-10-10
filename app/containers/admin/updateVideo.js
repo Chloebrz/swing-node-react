@@ -46,6 +46,7 @@ class UpdateVideo extends Component {
                         video={this.props.video}
                         onSubmit={this.submit.bind(this)}
                         history={this.props.history}
+                        update={true}
                     />
                 );
         }
