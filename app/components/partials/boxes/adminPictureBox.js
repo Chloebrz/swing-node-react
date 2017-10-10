@@ -3,21 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Modal from "react-modal";
 
 import { deletePicture } from "../../../actions/pictures";
+import DeleteModal from "../modals/deleteModal";
 import styles from "../../../css/elements/featurette.css";
-
-const customStyles = {
-    content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)"
-    }
-};
 
 class PictureBox extends Component {
     constructor() {
@@ -61,28 +50,14 @@ class PictureBox extends Component {
                     src={require("../../../images/icons/delete.png")}
                     onClick={this.openModal}
                 />
-                <Modal
+
+                <DeleteModal
                     isOpen={this.state.modalIsOpen}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Modal"
-                >
-                    <h2 ref={subtitle => (this.subtitle = subtitle)}>Supprimer</h2>
-                    <p>
-                        Voulez-vous vraiment supprimer l'image : "{this.props.name}" ?
-                    </p>
-                    <form>
-                        <button
-                            className="btn btn-success"
-                            onClick={this.handleDeleteClick.bind(this)}
-                        >
-                            Supprimer
-                        </button>
-                        <button className="btn btn-secondary right" onClick={this.closeModal}>
-                            Annuler
-                        </button>
-                    </form>
-                </Modal>
+                    close={this.closeModal}
+                    type="l'image"
+                    name={this.props.name}
+                    handleDeleteClick={this.handleDeleteClick.bind(this)}
+                />
 
                 <Link to={`/admin/update_picture/${this.props.id}`}>
                     <img
