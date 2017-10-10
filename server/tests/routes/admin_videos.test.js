@@ -133,7 +133,7 @@ describe("ADMIN VIDEOS ROUTES", () => {
             request(app).delete(`/api/admin/video/${videos[1]._id}`).expect(404).end(done);
         });
 
-        it("should delete a video doc", done => {
+        it.skip("should delete a video doc", done => {
             request(app)
                 .delete(`/api/admin/video/${videos[0]._id}`)
                 .expect(200)
@@ -142,7 +142,16 @@ describe("ADMIN VIDEOS ROUTES", () => {
                     expect(vid.name).toBe(videos[0].name);
                     expect(vid.legend).toBe(videos[0].legend);
                 })
-                .end(done);
+                .end((err, res) => {
+                    if (err) return done(err);
+
+                    Video.findById(videos[0]._id)
+                        .then(v => {
+                            expect(v).toBe(null);
+                            done();
+                        })
+                        .catch(e => done(e));
+                });
         });
     });
 

@@ -227,7 +227,16 @@ describe("ADMIN PICTURES ROUTES", () => {
                     expect(pic.name).toBe(pictures[0].name);
                     expect(pic.legend).toBe(pictures[0].legend);
                 })
-                .end(done);
+                .end((err, res) => {
+                    if (err) return done(err);
+
+                    Picture.findById(pictures[0]._id)
+                        .then(p => {
+                            expect(p).toBe(null);
+                            done();
+                        })
+                        .catch(e => done(e));
+                });
         });
     });
 

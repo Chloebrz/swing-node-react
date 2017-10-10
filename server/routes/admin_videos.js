@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const { ObjectID } = require("mongodb");
 const _ = require("lodash");
+const fs = require("mz/fs");
 
 const Video = mongoose.model("Video");
 const auth = require("../middlewares/auth");
@@ -99,15 +100,22 @@ module.exports = app => {
         if (!ObjectID.isValid(id)) return res.status(404).send();
 
         try {
-            // TODO: remove the file from /assets/uploads
+            // get the video
+            const video = await Video.findOne({
+                _id: id,
+                creatorId: req.user._id
+            });
+            if (!video) return res.status(404).send();
+
+            // remove the file from /assets/uploads
+            await fs.unlink(`public/assets/uploads/${video.url}`);
 
             // remove the video from the database
-            const video = await Video.findOneAndRemove({
+            await Video.remove({
                 _id: id,
                 creatorId: req.user._id
             });
 
-            if (!video) return res.status(404).send();
             res.send(video);
         } catch (err) {
             res.status(400).send(err);
