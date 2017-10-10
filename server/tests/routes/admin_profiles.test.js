@@ -20,7 +20,7 @@ describe("ADMIN PROFILES ROUTES", () => {
 
         it("should return 404 if profile not found", done => {
             request(app)
-                .get(`/api/admin/picture/${new ObjectID().toHexString()}`)
+                .get(`/api/admin/profile/${new ObjectID().toHexString()}`)
                 .expect(404)
                 .end(done);
         });

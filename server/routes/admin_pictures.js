@@ -67,8 +67,6 @@ module.exports = app => {
                 .skip(n * 6)
                 .limit(6);
 
-            if (!pictures) return res.status(404).send();
-
             // add the base64 data to each item
             pictures.forEach(picture => {
                 picture.img.res = new Buffer(picture.img.data).toString("base64");

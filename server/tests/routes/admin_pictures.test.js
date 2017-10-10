@@ -220,11 +220,10 @@ describe("ADMIN PICTURES ROUTES", () => {
 
         it("should delete a picture doc", done => {
             request(app)
-                .get(`/api/admin/picture/${pictures[0]._id}`)
+                .delete(`/api/admin/picture/${pictures[0]._id}`)
                 .expect(200)
                 .expect(res => {
                     const pic = res.body;
-                    expect(pic.img.res).toExist();
                     expect(pic.name).toBe(pictures[0].name);
                     expect(pic.legend).toBe(pictures[0].legend);
                 })
