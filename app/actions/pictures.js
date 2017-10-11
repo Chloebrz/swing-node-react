@@ -54,6 +54,8 @@ export const fetchPicture = payload => async dispatch => {
  * Send a POST request to /api/admin/picture and dispatch a POST_PICTURE_SUCCESS action when succeedded
  */
 export const postPicture = payload => async dispatch => {
+    dispatch({ type: types.POST_PICTURE });
+
     try {
         let res = await axios.post("/api/admin/picture", payload);
         dispatch({ type: types.POST_PICTURE_SUCCESS, payload: res.data });

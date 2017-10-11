@@ -12,7 +12,7 @@ class AddPicture extends Component {
     }
 
     submit(values) {
-        this.props.postPicture({
+        return this.props.postPicture({
             name: values.name,
             img: values.image,
             legend: values.legend

@@ -36,6 +36,8 @@ export const fetchProfile = payload => async dispatch => {
  * If error while creating the new user object dispatch the error data as payload of a SIGNUP_LOGIN_ERROR action
  */
 export const signupUser = payload => async dispatch => {
+    dispatch({ type: types.SIGNUP_LOGIN });
+
     const res = await axios.post("/api/auth/signup", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
     else dispatch({ type: types.SIGNUP_ERROR, payload: res.data.error });
@@ -47,6 +49,8 @@ export const signupUser = payload => async dispatch => {
  * If error while comparing the info dispatch the error data as payload of a SIGNUP_LOGIN_ERROR action
  */
 export const loginUser = payload => async dispatch => {
+    dispatch({ type: types.SIGNUP_LOGIN });
+
     const res = await axios.post("/api/auth/login", payload);
     if (res.data.success) dispatch({ type: types.SIGNUP_LOGIN_SUCCESS });
     else dispatch({ type: types.LOGIN_ERROR, payload: res.data.error });
@@ -57,6 +61,8 @@ export const loginUser = payload => async dispatch => {
  * Send a PATCH request to /api/admin/profile/:id and dispatch the result as payload of a UPDATE_PROFILE_SUCCESS action
  */
 export const updateProfile = payload => async dispatch => {
+    dispatch({ type: types.UPDATE_PROFILE });
+
     try {
         const res = await axios.patch(`/api/admin/profile/${payload.id}`, payload);
         dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data });

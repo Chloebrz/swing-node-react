@@ -12,7 +12,7 @@ class UpdateProfile extends Component {
     }
 
     submit(values) {
-        this.props.updateProfile({
+        return this.props.updateProfile({
             id: values.id,
             name: {
                 firstname: values.firstname,

@@ -3,6 +3,7 @@ import {
     FETCH_PICTURES_SUCCESS,
     FETCH_PICTURES,
     FETCH_PICTURES_DONE,
+    POST_PICTURE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS
@@ -16,7 +17,9 @@ import {
     UPDATE_VIDEO_SUCCESS
 } from "../constants/videos_types";
 import {
+    SIGNUP_LOGIN,
     SIGNUP_LOGIN_SUCCESS,
+    UPDATE_PROFILE,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_RESET,
     SEND_TOKEN,
@@ -40,6 +43,9 @@ export default function(state = {}, action) {
 
         case FETCH_PICTURES_DONE:
             return Object.assign({}, state, { fetch_pictures_done: true });
+
+        case POST_PICTURE:
+            return Object.assign({}, state, { post_picture_success: false });
 
         case POST_PICTURE_SUCCESS:
             return Object.assign({}, state, { post_picture_success: true });
@@ -72,8 +78,14 @@ export default function(state = {}, action) {
 
         /* Login & Signup */
 
+        case SIGNUP_LOGIN:
+            return Object.assign({}, state, { signup_login_success: false });
+
         case SIGNUP_LOGIN_SUCCESS:
             return Object.assign({}, state, { signup_login_success: true });
+
+        case UPDATE_PROFILE:
+            return Object.assign({}, state, { update_profile_success: false });
 
         case UPDATE_PROFILE_SUCCESS:
             return Object.assign({}, state, { update_profile_success: true });

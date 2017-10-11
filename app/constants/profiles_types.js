@@ -5,10 +5,12 @@ export const FETCH_PROFILE = "fetch_profile";
 export const FETCH_PROFILE_SUCCESS = "fetch_profile_success";
 export const FETCH_PROFILE_ERROR = "fetch_profile_error";
 
+export const SIGNUP_LOGIN = "signup_login";
 export const SIGNUP_LOGIN_SUCCESS = "signup_login_success";
 export const SIGNUP_ERROR = "signup_error";
 export const LOGIN_ERROR = "login_error";
 
+export const UPDATE_PROFILE = "update_profile";
 export const UPDATE_PROFILE_SUCCESS = "update_profile_success";
 export const UPDATE_PROFILE_ERROR = "update_profile_error";
 

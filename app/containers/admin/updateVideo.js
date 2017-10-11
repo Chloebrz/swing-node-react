@@ -16,7 +16,7 @@ class UpdateVideo extends Component {
     }
 
     submit(values) {
-        this.props.updateVideo({
+        return this.props.updateVideo({
             id: this.props.match.params.id,
             name: values.name,
             legend: values.legend

@@ -23,7 +23,7 @@ class UpdatePicture extends Component {
         };
 
         if (values.image.filename) picture.img = values.image;
-        this.props.updatePicture(picture);
+        return this.props.updatePicture(picture);
     }
 
     renderPictureForm() {

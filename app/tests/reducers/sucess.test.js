@@ -4,6 +4,7 @@ import {
     FETCH_PICTURES_SUCCESS,
     FETCH_PICTURES,
     FETCH_PICTURES_DONE,
+    POST_PICTURE,
     POST_PICTURE_SUCCESS,
     FETCH_PICTURE,
     UPDATE_PICTURE_SUCCESS
@@ -17,7 +18,9 @@ import {
     UPDATE_VIDEO_SUCCESS
 } from "../../constants/videos_types";
 import {
+    SIGNUP_LOGIN,
     SIGNUP_LOGIN_SUCCESS,
+    UPDATE_PROFILE,
     UPDATE_PROFILE_SUCCESS,
     SEND_TOKEN_RESET,
     SEND_TOKEN,
@@ -59,6 +62,16 @@ describe("SUCCESS REDUCER", () => {
                 type: FETCH_PICTURES_DONE
             })
         ).toEqual({ a_success: false, fetch_pictures_done: true });
+    });
+
+    it("should handle POST_PICTURE", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: POST_PICTURE
+            })
+        ).toEqual({ a_success: false, post_picture_success: false });
     });
 
     it("should handle POST_PICTURE_SUCCESS", () => {
@@ -161,6 +174,16 @@ describe("SUCCESS REDUCER", () => {
         ).toEqual({ a_success: false, update_video_success: true });
     });
 
+    it("should handle SIGNUP_LOGIN", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: SIGNUP_LOGIN
+            })
+        ).toEqual({ a_success: false, signup_login_success: false });
+    });
+
     it("should handle SIGNUP_LOGIN_SUCCESS", () => {
         const state = { a_success: false };
 
@@ -169,6 +192,16 @@ describe("SUCCESS REDUCER", () => {
                 type: SIGNUP_LOGIN_SUCCESS
             })
         ).toEqual({ a_success: false, signup_login_success: true });
+    });
+
+    it("should handle UPDATE_PROFILE", () => {
+        const state = { a_success: false };
+
+        expect(
+            success(state, {
+                type: UPDATE_PROFILE
+            })
+        ).toEqual({ a_success: false, update_profile_success: false });
     });
 
     it("should handle UPDATE_PROFILE_SUCCESS", () => {

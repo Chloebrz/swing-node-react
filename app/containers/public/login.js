@@ -15,7 +15,7 @@ class Login extends Component {
     }
 
     submit(values) {
-        this.props.loginUser({
+        return this.props.loginUser({
             email: values.email,
             password: values.password
         });

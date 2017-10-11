@@ -12,7 +12,7 @@ class AddVideo extends Component {
     }
 
     submit(values) {
-        this.props.postVideo({
+        return this.props.postVideo({
             name: values.name,
             legend: values.legend,
             file: values.file

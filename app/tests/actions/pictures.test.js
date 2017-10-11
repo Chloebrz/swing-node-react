@@ -170,24 +170,29 @@ describe("PICTURES ACTIONS", () => {
         it("should create POST_PICTURE_SUCCESS when posting picture has been done", () => {
             const payload = { id: 123 };
             const data = { id: 123, name: "abc" };
-            const expectedAction = [{ type: types.POST_PICTURE_SUCCESS, payload: data }];
+            const expectedActions = [
+                { type: types.POST_PICTURE },
+                { type: types.POST_PICTURE_SUCCESS, payload: data }
+            ];
 
             nock(host).post("/api/admin/picture", payload).reply(200, data);
 
             return store.dispatch(actions.postPicture(payload)).then(() => {
-                expect(store.getActions()).toEqual(expectedAction);
+                expect(store.getActions()).toEqual(expectedActions);
             });
         });
 
         it("should create POST_PICTURE_ERROR if error returned when posting picture", () => {
             const payload = { id: 123 };
+            const expectedAction = { type: types.POST_PICTURE };
             const err = "an_error";
 
             nock(host).post("/api/admin/picture", payload).reply(400, err);
 
             return store.dispatch(actions.postPicture(payload)).then(() => {
-                expect(store.getActions()[0].type).toBe(types.POST_PICTURE_ERROR);
-                expect(store.getActions()[0].payload.response.data).toBe(err);
+                expect(store.getActions()[0]).toEqual(expectedAction);
+                expect(store.getActions()[1].type).toBe(types.POST_PICTURE_ERROR);
+                expect(store.getActions()[1].payload.response.data).toBe(err);
             });
         });
     });

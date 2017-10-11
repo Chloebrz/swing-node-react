@@ -7,6 +7,7 @@ export const FETCH_PICTURE = "fetch_picture";
 export const FETCH_PICTURE_SUCCESS = "fetch_picture_success";
 export const FETCH_PICTURE_ERROR = "fetch_picture_error";
 
+export const POST_PICTURE = "post_picture";
 export const POST_PICTURE_SUCCESS = "post_picture_success";
 export const POST_PICTURE_ERROR = "post_picture_error";
 
