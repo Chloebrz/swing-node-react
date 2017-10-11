@@ -11,7 +11,12 @@ Authentication is handled with **PassportJS**:
  - Local strategy: admin can log in/sign up with an email address and a password
 
 ### MongoDB
-We use a **MongoDB** database to store the picture documents (image with legend), the video metadata documents and the users information.
+A **MongoDB** database is used to store website data:
+  - the picture documents (image with name and legend)
+  - the video metadata (name and legend)
+  - and the users information.
+
+To ease the use of the database, we use the **Mongoose** library.
 
 
 Folder structure

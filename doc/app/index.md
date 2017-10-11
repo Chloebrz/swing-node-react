@@ -1,27 +1,28 @@
 SWING APP
 =========
 
-The S'Wing application is implemented using **ReactJS**.
-Redux. Redux forms.
-Simple styling with **Bootstrap 4**.
-
-----------
-
-The S'Wing application is divided into two parts:
- - the public pages
- - and the private pages.
-
-
-Public pages
+Technologies
 ------------
 
-The public pages present the S'Wing project to visitors. Description, images, videos, contact.
+The S'Wing application is implemented using **ReactJS** together with **Redux**.
+
+A simple styling is added with **Bootstrap 4** and the **Font Awesome** font.
 
 
-Private pages
--------------
+Public and private pages
+------------------------
 
-The private pages are accessible after login. The admin (the S'Wing people), can upload new pictures and videos, edit and delete them.
+The S'Wing application is divided into two parts:
+ - the public pages, accessible to all users;
+ - and the private pages, for the admin.
+
+
+###Public pages
+The public pages describe the S'Wing project. Accessible to all users, it contains a description of the concept together with schemes, pictures and videos of the various prototypes and a contact page.
+
+
+###Private pages
+The private pages are accessible after login. The admin (the S'Wing people), can upload new pictures and videos, edit and delete them. Those pages allow the different members of the team to easily update the content of the website when the project evolve (new prototypes and tests for instance).
 
 
 Folder structure
