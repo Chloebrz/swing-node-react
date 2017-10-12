@@ -16,7 +16,7 @@ Authentication is handled with **PassportJS**:
  - Local strategy: admin can log in/sign up with an email address and a password
 
 ### MongoDB
-We use a **MongoDB** database to store the picture documents (image with legend) and the users information.
+We use a **MongoDB** database to store the picture documents (image with legend), the video metadata and the users information.
 
 ### ReactJS
 The front-end is built using **ReactJS**.

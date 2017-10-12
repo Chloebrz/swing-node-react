@@ -14,7 +14,8 @@ Authentication is handled with **PassportJS**:
 A **MongoDB** database is used to store website data:
   - the picture documents (image with name and legend)
   - the video metadata (name and legend)
-  - and the users information.
+  - the users information
+  - and the tokens data (to verify users email addresses).
 
 To ease the use of the database, we use the **Mongoose** library.
 
