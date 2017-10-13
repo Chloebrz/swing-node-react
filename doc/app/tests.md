@@ -17,7 +17,7 @@ Folder structure
 
 One test file is created for each action and reducer and named '_action_.test.js' (or '_reducer_.test.js').
 
-The test files are located in the `/app/tests` folder:
+The test files are located in the `app/tests` folder:
 ```
 |-- tests
     |-- actions

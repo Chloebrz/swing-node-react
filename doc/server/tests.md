@@ -30,7 +30,7 @@ Folder structure
 
 One test file is created for each middleware, model and route and named '_file_.test.js'.
 
-The test files in are located in the `/server/tests` folder:
+The test files in are located in the `server/tests` folder:
 ```
 |-- tests
     |-- middlewares
@@ -61,4 +61,4 @@ Server side, the tests are implemented using **Mocha**, **Sinon** and **Expect**
 
 The `tests/seed` folder contains functions adding and removing users, pictures and videos to the database. Those functions are used in the `beforeEach` of the routes tests and populate the database with useful data depending on the routes to test.
 
-(Until better solution) the `tests.routes/abefore.test.js` file contains a global `before` function in which the dependencies are stubbed using **Sinon** and **Proxyquire** (the auth middleware and the passport, nodemailer and multer packages).
+(Until better solution) the `tests/routes/abefore.test.js` file contains a global `before` function in which the dependencies are stubbed using **Sinon** and **Proxyquire** (the auth middleware and the passport, nodemailer and multer packages).
